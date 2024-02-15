@@ -17,6 +17,7 @@ public class ProjectileGun : MonoBehaviour
     public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
+    public float recoil = 50000000f;
 
     int _bulletsLeft, _bulletsShot;
 
@@ -36,6 +37,10 @@ public class ProjectileGun : MonoBehaviour
     // reload gun
     InputAction _reloadAction;
 
+    //parent GameObject and rigidbody
+    GameObject _player;
+    Rigidbody _playerRB;
+
     void Awake()
     {
         // input
@@ -45,9 +50,14 @@ public class ProjectileGun : MonoBehaviour
         // make sure magazine is full
         _bulletsLeft = magazineSize;
         _readyToShoot = true;
+
+        //get parent
+        _player = transform.parent.gameObject;
+        _playerRB = _player.GetComponent<Rigidbody>();
+
     }
 
-    void Update()
+    void FixedUpdate()
     {
         MyInput();
 
@@ -125,6 +135,8 @@ public class ProjectileGun : MonoBehaviour
         {
             Invoke("Shoot", timeBetweenShots);
         }
+
+        _playerRB.AddForce(-transform.forward * recoil * Time.deltaTime);
     }
 
     void ResetShot()

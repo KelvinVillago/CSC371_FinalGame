@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Projectiles.sln"
+    "dotnet.defaultSolution": "CSC371_FinalGame.sln"
 }
