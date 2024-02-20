@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
         {
             getTarget();
         }
-        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
         if(transform.position.x < _rightBoundary)
         {
             Destroy(gameObject);
