@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 // Shooting with Bullets + Custom projectiles, Dave/GameDevelopment
 // https://youtu.be/wZ2UUOC17AY
@@ -41,6 +42,9 @@ public class ProjectileGun : MonoBehaviour
     GameObject _player;
     Rigidbody _playerRB;
 
+    //Ammo Bar
+    public Slider ammoSlider;
+
     void Awake()
     {
         // input
@@ -54,6 +58,9 @@ public class ProjectileGun : MonoBehaviour
         //get parent
         _player = transform.parent.gameObject;
         _playerRB = _player.GetComponent<Rigidbody>();
+
+        //ammo
+        ammoSlider.maxValue = magazineSize;
 
     }
 
@@ -122,6 +129,7 @@ public class ProjectileGun : MonoBehaviour
 
         _bulletsLeft--;
         _bulletsShot++;
+        ammoSlider.value = _bulletsLeft;
 
         // invoke resetShot function (if not already invoked)
         if (allowInvoke)
@@ -156,5 +164,6 @@ public class ProjectileGun : MonoBehaviour
     {
         _reloading = false;
         _bulletsLeft = magazineSize;
+        ammoSlider.value = _bulletsLeft;
     }
 }
