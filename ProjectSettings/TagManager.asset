@@ -7,11 +7,12 @@ TagManager:
   - Enemy
   - Bullet
   - Sheep
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Placement
   - Water
   - UI
   - 

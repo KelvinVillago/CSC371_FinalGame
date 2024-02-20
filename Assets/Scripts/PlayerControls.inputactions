@@ -136,6 +136,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "GridTest",
+            "id": "6a027134-3665-49ce-8160-c27dbe066ce6",
+            "actions": [
+                {
+                    "name": "ShopSelect",
+                    "type": "Button",
+                    "id": "875a39db-cce4-42a7-8826-005d0db1f2c8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ExitShop",
+                    "type": "Button",
+                    "id": "6076c170-c7e5-4356-a285-06a8afa47549",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "07488619-d44f-4b0c-b80b-ce4928d3500e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShopSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e33caaae-d651-40d3-9dfe-dcd833c944a2",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitShop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
