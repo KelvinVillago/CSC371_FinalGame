@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Sheep
   - FxTemporaire
+  - CoinCounter
+  - AudioSource
   layers:
   - Default
   - TransparentFX
