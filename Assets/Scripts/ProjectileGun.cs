@@ -35,9 +35,6 @@ public class ProjectileGun : MonoBehaviour
     // bools
     bool _shooting, _readyToShoot, _reloading;
 
-    // reload gun
-    InputAction _reloadAction;
-
     //parent GameObject and rigidbody
     GameObject _player;
     Rigidbody _playerRB;
@@ -45,23 +42,28 @@ public class ProjectileGun : MonoBehaviour
     //Ammo Bar
     public Slider ammoSlider;
 
+    //Inputs 
+    private InputAction _reloadAction;
+    private InputAction _shootingAction;
+
+
     void Awake()
     {
-        // input
-        PlayerInput playerInput = GetComponent<PlayerInput>();
-        _reloadAction = playerInput.actions["reload"];
-
-        // make sure magazine is full
-        _bulletsLeft = magazineSize;
-        _readyToShoot = true;
-
         //get parent
         _player = transform.parent.gameObject;
         _playerRB = _player.GetComponent<Rigidbody>();
 
+        // input
+        PlayerInput playerInput = _player.GetComponent<PlayerInput>();
+        _reloadAction = playerInput.actions["reload"];
+        _shootingAction = playerInput.actions["Shoot"];
+    
+        // make sure magazine is full
+        _bulletsLeft = magazineSize;
+        _readyToShoot = true;
+
         //ammo
         ammoSlider.maxValue = magazineSize;
-
     }
 
     void FixedUpdate()
@@ -77,14 +79,23 @@ public class ProjectileGun : MonoBehaviour
 
     void MyInput()
     {
-        if (allowButtonHold) _shooting = Mouse.current.leftButton.isPressed;
-        else _shooting = Mouse.current.leftButton.wasPressedThisFrame;
+        if (allowButtonHold)
+        {
+            //_shooting = Mouse.current.leftButton.isPressed;
+            _shooting = _shootingAction.IsPressed();
+        }
+        else
+        {
+            //_shooting = Mouse.current.leftButton.wasPressedThisFrame;
+            _shooting = _shootingAction.WasPressedThisFrame();
+        }
 
         // reloading
         if (_reloadAction.triggered && _bulletsLeft < magazineSize && !_reloading)
         {
             Reload();
         }
+
         // autoreload if out of bullets
         if (_readyToShoot && _shooting && !_reloading && _bulletsLeft <= 0)
         {
