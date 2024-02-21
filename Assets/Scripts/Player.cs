@@ -5,7 +5,10 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     AudioSource _audioSource;
-
+    [Tooltip("Boundary in the positive and negative x direction for the player")]
+    [SerializeField] private float _boundX;
+    [Tooltip("Boundary in the positive and negative z direction for the player")]
+    [SerializeField] private float _boundZ;
 
     private void Awake()
     {
@@ -15,35 +18,24 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.z > 50 || transform.position.z < -50 || transform.position.x > 50 || transform.position.x < -50)
+        if (transform.position.z > _boundZ || transform.position.z < -_boundZ || transform.position.x > _boundX || transform.position.x < -_boundX)
         {
-            if (transform.position.z > 50)
+            if (transform.position.z > _boundZ)
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y, 50);
+                transform.position = new Vector3(transform.position.x, transform.position.y, _boundZ);
             }
-            if (transform.position.z < -50)
+            if (transform.position.z < -_boundZ)
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y, -50);
+                transform.position = new Vector3(transform.position.x, transform.position.y, -_boundZ);
             }
-            if (transform.position.x > 50)
+            if (transform.position.x > _boundX)
             {
-                transform.position = new Vector3(50, transform.position.y, transform.position.z);
+                transform.position = new Vector3(_boundX, transform.position.y, transform.position.z);
             }
-            if (transform.position.x < -50)
+            if (transform.position.x < -_boundX)
             {
-                transform.position = new Vector3(-50, transform.position.y, transform.position.z);
+                transform.position = new Vector3(-_boundX, transform.position.y, transform.position.z);
             }
         }
     }
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Enemy"))
-    //     {
-    //         _audioSource.PlayOneShot(_audioSource.clip);
-    //         GameManager.Instance.RemoveLife();
-    //         //AudioPause.audioInstance.RemoveLife();
-    //         Destroy(other.gameObject);
-    //     }
-    // }
 }

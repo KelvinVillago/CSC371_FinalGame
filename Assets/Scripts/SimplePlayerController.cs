@@ -8,7 +8,6 @@ public class SimplePlayerController : MonoBehaviour
     Camera _mainCamera;
     Rigidbody _rigidbody;
     InputAction _inputAction;
-    public Transform debugTransform;
 
     Vector3 _movement;
 
@@ -58,13 +57,11 @@ public class SimplePlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out var raycastHit, Mathf.Infinity))
         {
-            debugTransform.position = raycastHit.point - transform.position;
             direction = raycastHit.point - transform.position;
         }
         else
         {
-            debugTransform.position = raycastHit.point - transform.position;
-            direction = ray.GetPoint(150) - transform.position;
+            direction = ray.GetPoint(50) - transform.position;
         }
 
         direction = direction.normalized;
