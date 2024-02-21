@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1316,12 +1316,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281593757}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -960.00006, y: -441.97626, z: 0}
+  m_LocalScale: {x: 2.1197903, y: 2.1197903, z: 2.1197903}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 886263139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &281593761
 MonoBehaviour:
@@ -1511,7 +1511,8 @@ MonoBehaviour:
   spawn7: {fileID: 1365210471}
   spawn8: {fileID: 454524900}
   enemyPrefabs:
-  - {fileID: 1306699293224456501, guid: 16b835b4435222e429e6ec214982ad03, type: 3}
+  - {fileID: 2155518126998891275, guid: 2205fccddc5054e4ebcfcdd657c8ae3b, type: 3}
+  - {fileID: 175852, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
   spawnRate: 4
   canSpawn: 1
   timePassed: 0
@@ -2168,6 +2169,7 @@ RectTransform:
   - {fileID: 1917485942}
   - {fileID: 123877724}
   - {fileID: 267472358}
+  - {fileID: 281593760}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4306,7 +4308,6 @@ SceneRoots:
   - {fileID: 982606689}
   - {fileID: 1512638997976391760}
   - {fileID: 886263139}
-  - {fileID: 281593760}
   - {fileID: 315548697}
   - {fileID: 1036787099}
   - {fileID: 1432366982}

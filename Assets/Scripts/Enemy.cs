@@ -54,6 +54,12 @@ public class Enemy : MonoBehaviour
         if(GameObject.FindGameObjectWithTag("Sheep"))
         {
         target = GameObject.FindGameObjectWithTag("Sheep").transform;
+
+        Vector3 relativePos = target.position - transform.position;
+
+        // the second argument, upwards, defaults to Vector3.up
+        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+        transform.rotation = rotation;
         }
     }
 }
