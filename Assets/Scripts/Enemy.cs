@@ -1,13 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class Enemy : MonoBehaviour
 {
+    GameObject coin;
+    CoinCounter a;
+    //AudioSource audioPlayer;
+    public AudioClip coinClip;
+
     [SerializeField] float _speed;
     [SerializeField] float _rightBoundary;
     [SerializeField] float _leftBoundary;
     [SerializeField] float _topBoundary;
     [SerializeField] float _downBoundary;
+    [SerializeField] GameObject prefab;
     public Transform target;
+
+    void Start()
+    {
+        a = GameObject.FindGameObjectWithTag("CoinCounter").GetComponent<CoinCounter>();
+        //audioPlayer = GetComponent<AudioSource>();
+    }
+
 
     void Update()
     {
@@ -38,7 +55,11 @@ public class Enemy : MonoBehaviour
     {
         if(other.CompareTag("Bullet"))
         {
+            //audioPlayer.Play();
+            AudioSource.PlayClipAtPoint(coinClip, transform.position);
+            a.increaseNum();
             Destroy(this.gameObject);
+            Instantiate(prefab, transform.position, Quaternion.identity);
             // GameManager.Instance.AddKill();
         }
         // if(other.CompareTag("Sheep"))
