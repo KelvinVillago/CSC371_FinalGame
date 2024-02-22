@@ -16,6 +16,8 @@ public class PlacementSystem : MonoBehaviour
     [Tooltip("Toggle to turn off the grid")]
     [SerializeField] private GameObject _gridVisualization;
 
+
+
     private void Start()
     {
         StopPlacement();
