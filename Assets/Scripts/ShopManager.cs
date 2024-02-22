@@ -11,7 +11,7 @@ public class ShopManager : MonoBehaviour
     public GameObject pistol;
     public GameObject AR;
     public GameObject SMG;
-    public SelectionManager selectionManager;
+    public PlacementSystem placementSystem;
     // Game UI canvas variables
     public GameObject gameCanvas;
     public Button openShopBtn;
@@ -186,16 +186,17 @@ public class ShopManager : MonoBehaviour
             if (btnNo == 0)
             {
                 //unlock item 1
-                selectionManager.fenceCount += 1;
+                ;
             }
             else if (btnNo == 1)
             {
-                selectionManager.smallTurretCount += 1;
+                CloseShop();
+                placementSystem.StartPlacement(0);
                 // OpenShop();
             }
             else if (btnNo == 2)
             {
-                selectionManager.largeTurretCount += 1;
+                placementSystem.StartPlacement(1);
             }
         }
     }
