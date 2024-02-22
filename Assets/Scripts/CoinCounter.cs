@@ -7,7 +7,7 @@ using System;
 public class CoinCounter : MonoBehaviour
 {
     public TextMeshProUGUI text;
-    int num = 0;
+    public int num = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +18,15 @@ public class CoinCounter : MonoBehaviour
     public void increaseNum()
     {
         num += 10;
+    }
+
+    public int Count
+    {
+        get
+        {
+            // return the count of coins
+            return num;
+        }
     }
 
 

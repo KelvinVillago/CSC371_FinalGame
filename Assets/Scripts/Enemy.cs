@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class Enemy : MonoBehaviour
 {
     GameObject coin;
-    CoinCounter a;
+    public CoinCounter a;
     //AudioSource audioPlayer;
     public AudioClip coinClip;
 
