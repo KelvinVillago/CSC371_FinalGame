@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -17,6 +19,13 @@ public class SelectionManager : MonoBehaviour
     //Will return true or false if we are above the UI
     //This is a labda to set true or false. 
     public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
+
+    // Buttons and Text
+    public Button[] invBtns;
+    public TextMeshProUGUI[] invBtnTxts;
+    public int fenceCount = 0;
+    public int smallTurretCount = 0;
+    public int largeTurretCount = 0;
     private void Start()
     {
         //Clear the screen
@@ -30,7 +39,9 @@ public class SelectionManager : MonoBehaviour
         if (_inputs.openInventoryInput) {
             Time.timeScale = 0;
 
-            _inputs.ToggleActionMap(_inputs.itemMap);
+            UpdateInventoryUI();
+
+            _inputs.ToggleActionMap(_inputs.itemMap); //Activate grid map
             _inventoryCanvas.SetActive(true);
 
             if(_inputs.shopSelectInput)
@@ -70,5 +81,37 @@ public class SelectionManager : MonoBehaviour
             _lastPosition = hit.point;
         }
         return _lastPosition;
+    }
+
+    public void UpdateInventoryUI()
+    {
+        invBtnTxts[0].text = "Fences: " + fenceCount.ToString();
+        invBtnTxts[1].text = "Small Turrets: " + smallTurretCount.ToString();
+        invBtnTxts[2].text = "Large Turrets: " + largeTurretCount.ToString();
+
+        if (fenceCount == 0)
+        {
+            invBtns[0].interactable = false;
+        }
+        else
+        {
+            invBtns[0].interactable = true;
+        }
+        if (smallTurretCount == 0)
+        {
+            invBtns[1].interactable = false;
+        }
+        else
+        {
+            invBtns[1].interactable = true;
+        }
+        if (largeTurretCount == 0)
+        {
+            invBtns[2].interactable = false;
+        }
+        else
+        {
+            invBtns[2].interactable = true;
+        }
     }
 }
