@@ -192,7 +192,7 @@ public class ShopManager : MonoBehaviour
             {
                 CloseShop();
                 placementSystem.StartPlacement(0);
-                OpenShop();
+                // OpenShop();
             }
             else if (btnNo == 2)
             {
