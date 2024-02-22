@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
         livesText.text = "Sheep Count: " + numOfLives;
     }
 
-    // Update is called once per frame
     void Update()
     {
         timePassed += Time.deltaTime;
@@ -50,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         numOfLives -= num;
         livesText.text = "Sheep Count: " + numOfLives;
+        Debug.Log("You lost a life");
         // if(numOfLives == 1f)
         // {
         //     deathParticle.SetActive(true);
@@ -60,10 +60,10 @@ public class GameManager : MonoBehaviour
             tryAgainButton.SetActive(true);
             finalKills.text = "Kill Count: " + killCounter;
             gameOver.SetActive(true);
-            audioSource1.clip = audio1;
-            audioSource1.PlayOneShot(audioSource1.clip);
-            audiosource2.clip = audio2;
-            audiosource2.Pause();
+            // audioSource1.clip = audio1;
+            // audioSource1.PlayOneShot(audioSource1.clip);
+            // audiosource2.clip = audio2;
+            // audiosource2.Pause();
         }
     }
 

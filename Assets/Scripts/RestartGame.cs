@@ -8,6 +8,7 @@ public class RestartGame : MonoBehaviour
     public void RestartGame2()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
+        string currentScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentScene);
     }
 }
