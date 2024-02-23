@@ -51,6 +51,31 @@ public class PlacementSystem : MonoBehaviour
         //Create the game object 
         GameObject newObj = Instantiate(_database.objectsData[_selectedObjIndex].Prefab);
         newObj.transform.position = _grid.CellToWorld(_gridPosition);
+
+        // Decrement the count based on the selected object
+        if (_selectedObjIndex >= 0)
+        {
+            Debug.Log("Selected ID: " + _database.objectsData[_selectedObjIndex].ID);
+            int selectedID = _database.objectsData[_selectedObjIndex].ID;
+            if (selectedID == 0) // Fence ID
+            {
+                _selectionManager.fenceCount--;
+            }
+            else if (selectedID == 1) // Small Turret ID
+            {
+                _selectionManager.smallTurretCount--;
+            }
+            else if (selectedID == 2) // Large Turret ID
+            {
+                _selectionManager.largeTurretCount--;
+            }
+        }
+        // Update the inventory UI
+        _selectionManager.UpdateInventoryUI();
+
+        // Close the grid visualization
+        StopPlacement();
+
     }
 
     private void StopPlacement()
