@@ -13,13 +13,18 @@ MonoBehaviour:
   m_Name: Database
   m_EditorClassIdentifier: 
   objectsData:
-  - <Name>k__BackingField: Turrent Small
+  - <Name>k__BackingField: Fence
     <ID>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 5}
+    <Prefab>k__BackingField: {fileID: 1057573506917579428, guid: efb411d9e4014411bb9ecf49ddeddef7,
+      type: 3}
+  - <Name>k__BackingField: Turrent Small
+    <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 1847491648034095029, guid: 2c276ffed8ab94e4ebdf48fe3a735836,
       type: 3}
   - <Name>k__BackingField: Turrent Big
-    <ID>k__BackingField: 1
+    <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 2, y: 2}
     <Prefab>k__BackingField: {fileID: 1847491648034095029, guid: 2a41ad59b38be974eaf8e57252eb9bcd,
       type: 3}
