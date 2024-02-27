@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1437,7 +1437,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.015, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 12, y: 1, z: 12}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2905,6 +2905,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 687421478}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &698924572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6584823812124990759, guid: 1cf5765db158f41f2ae219d1c943a110,
+    type: 3}
+  m_PrefabInstance: {fileID: 917788599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &704862167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3486,6 +3492,7 @@ MonoBehaviour:
     m_Bits: 8
   _inventoryCanvas: {fileID: 1739453227}
   player: {fileID: 1045424318}
+  _shopPanel: {fileID: 698924572}
   invBtns:
   - {fileID: 653424042}
   - {fileID: 704862169}
@@ -4625,7 +4632,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 917788599}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 698924572}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a755565fa8b648bca3cf49c668de7af, type: 3}
@@ -4681,6 +4688,7 @@ MonoBehaviour:
   _grid: {fileID: 1266708150}
   _database: {fileID: 11400000, guid: 66bc4644dbc84d04f981d96a7cb7de40, type: 2}
   _gridVisualization: {fileID: 1816956429}
+  _rotationAngle: 0
 --- !u!1 &991296468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4882,12 +4890,12 @@ PrefabInstance:
     - target: {fileID: 6445775484680505735, guid: c0efc72675381a746a02cad7bbd8aef3,
         type: 3}
       propertyPath: _boundX
-      value: 20
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6445775484680505735, guid: c0efc72675381a746a02cad7bbd8aef3,
         type: 3}
       propertyPath: _boundZ
-      value: 20
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8233816314358771477, guid: c0efc72675381a746a02cad7bbd8aef3,
         type: 3}
@@ -4939,6 +4947,7 @@ MonoBehaviour:
   openInventoryInput: 0
   shopSelectInput: 0
   exitShopInput: 0
+  rotateInventoryInput: 0
   itemMap:
     m_Name: 
     m_Id: 
@@ -4965,6 +4974,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 5b80ed84-d562-4e36-a3c9-6596e851904f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  rotateInventoryAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a140d698-81cc-4c09-be25-604598ed0c14
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -5588,7 +5606,7 @@ GameObject:
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5615,7 +5633,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266708148}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 1}
+  m_CellSize: {x: 1, y: 0, z: 1}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
@@ -7352,7 +7370,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.015, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 12, y: 1, z: 12}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1356164645}
@@ -8401,13 +8419,13 @@ SceneRoots:
   - {fileID: 546686319}
   - {fileID: 2065957794}
   - {fileID: 1621641676}
+  - {fileID: 917788599}
+  - {fileID: 1739453231}
   - {fileID: 542526965}
   - {fileID: 794253619}
   - {fileID: 405575335}
   - {fileID: 1606235883}
   - {fileID: 139463336}
-  - {fileID: 917788599}
-  - {fileID: 1739453231}
   - {fileID: 1045424317}
   - {fileID: 592446451}
   - {fileID: 790717329}

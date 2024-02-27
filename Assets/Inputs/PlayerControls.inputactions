@@ -191,6 +191,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RotateInventory",
+                    "type": "Button",
+                    "id": "ae03b3bb-5507-4ce6-9031-db2583b17360",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ExitShop",
                     "type": "Button",
                     "id": "6076c170-c7e5-4356-a285-06a8afa47549",
@@ -220,6 +229,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ExitShop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da6b942d-47b4-49b5-a33e-964eed6d160d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
