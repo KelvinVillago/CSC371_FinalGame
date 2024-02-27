@@ -2905,6 +2905,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 687421478}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &698924572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6584823812124990759, guid: 1cf5765db158f41f2ae219d1c943a110,
+    type: 3}
+  m_PrefabInstance: {fileID: 917788599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &704862167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3486,6 +3492,7 @@ MonoBehaviour:
     m_Bits: 8
   _inventoryCanvas: {fileID: 1739453227}
   player: {fileID: 1045424318}
+  _shopPanel: {fileID: 698924572}
   invBtns:
   - {fileID: 653424042}
   - {fileID: 704862169}
@@ -4625,7 +4632,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 917788599}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 698924572}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a755565fa8b648bca3cf49c668de7af, type: 3}
@@ -4883,12 +4890,12 @@ PrefabInstance:
     - target: {fileID: 6445775484680505735, guid: c0efc72675381a746a02cad7bbd8aef3,
         type: 3}
       propertyPath: _boundX
-      value: 20
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6445775484680505735, guid: c0efc72675381a746a02cad7bbd8aef3,
         type: 3}
       propertyPath: _boundZ
-      value: 20
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8233816314358771477, guid: c0efc72675381a746a02cad7bbd8aef3,
         type: 3}
@@ -8412,13 +8419,13 @@ SceneRoots:
   - {fileID: 546686319}
   - {fileID: 2065957794}
   - {fileID: 1621641676}
+  - {fileID: 917788599}
+  - {fileID: 1739453231}
   - {fileID: 542526965}
   - {fileID: 794253619}
   - {fileID: 405575335}
   - {fileID: 1606235883}
   - {fileID: 139463336}
-  - {fileID: 917788599}
-  - {fileID: 1739453231}
   - {fileID: 1045424317}
   - {fileID: 592446451}
   - {fileID: 790717329}

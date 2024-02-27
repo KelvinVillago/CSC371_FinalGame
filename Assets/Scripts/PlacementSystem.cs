@@ -23,6 +23,9 @@ public class PlacementSystem : MonoBehaviour
     }
     public void StartPlacement(int ID)
     {
+        //Set the start rotation of the cursor indicator.
+        _rotationAngle = 0;
+        _cellIndicator.transform.rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
         //Prevent a bug where we automatically start placing the item. 
         StopPlacement();
         //The index of the data is returned if the findIndex data matches with the ID param.
@@ -45,14 +48,7 @@ public class PlacementSystem : MonoBehaviour
     }
     private void RotateItem()
     {
-        print("Left btn Clicked");
-        if(_rotationAngle == 360)
-        {
-            _rotationAngle = 0;
-        } 
-        _rotationAngle = _rotationAngle + 90.0f;
-
-        //_cellIndicator.transform.Rotate(Vector3.up, _rotationAngle);
+        _rotationAngle = (_rotationAngle == 270) ? 0f : _rotationAngle + 90.0f;
         _cellIndicator.transform.rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
     }
     private void PlaceStructure()
@@ -67,12 +63,11 @@ public class PlacementSystem : MonoBehaviour
         //Create the game object 
         GameObject newObj = Instantiate(_database.objectsData[_selectedObjIndex].Prefab);
         newObj.transform.position = _grid.CellToWorld(_gridPosition);
-
-
         //Change the rotation
-        //newObj.transform.Rotate(Vector3.up, _rotationAngle);
         if (_rotationAngle != 0)
             newObj.transform.rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
+        //Done using the rotation so reset it
+        _rotationAngle = 0;
 
         // Decrement the count based on the selected object
         if (_selectedObjIndex >= 0)
@@ -97,7 +92,6 @@ public class PlacementSystem : MonoBehaviour
 
         // Close the grid visualization
         StopPlacement();
-
     }
 
     private void StopPlacement()
@@ -107,8 +101,6 @@ public class PlacementSystem : MonoBehaviour
         //Trun off the grid, placement is no longer allowed. 
         _gridVisualization.SetActive(false);
         _cellIndicator.SetActive(false);
-        //Reset the rotation
-        _rotationAngle = 0f;
         //Stop listening to the events. 
         _selectionManager.OnClicked -= PlaceStructure;
         _selectionManager.OnRotate -= RotateItem;

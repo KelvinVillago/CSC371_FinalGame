@@ -15,6 +15,7 @@ public class SelectionManager : MonoBehaviour
     public event Action OnClicked, OnExit, OnRotate;
     private PlayerControllerInputs _inputs;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject _shopPanel;
   
     //Will return true or false if we are above the UI
     //This is a labda to set true or false. 
@@ -61,7 +62,9 @@ public class SelectionManager : MonoBehaviour
             if (_inputs.exitShopInput)
             {
                 _inputs.exitShopInput = false;
-                Time.timeScale = 1;
+                //Only turn time back on if the shop is closed
+                if (!_shopPanel.activeInHierarchy)
+                    Time.timeScale = 1;
                 //Debug.Log("ExitValue is true");
                 //Close the inventory
                 _inputs.openInventoryInput = false;
