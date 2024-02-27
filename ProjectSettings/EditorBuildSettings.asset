@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SimpleShooting.unity
     guid: e15bdd1ac8ecec2418750900652fcd0d
+  - enabled: 1
+    path: Assets/Scenes/Level-01.unity
+    guid: f16bfcc040b742e488015a3206baaefe
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a0b442f15c8b9b945b9877b700cc7e7a,
       type: 2}

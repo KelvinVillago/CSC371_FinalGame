@@ -17,7 +17,7 @@ public class CoinCounter : MonoBehaviour
 
     public void increaseNum()
     {
-        num += 10;
+        num += 50;
     }
 
     public int Count

@@ -50,10 +50,12 @@ public class GameManager : MonoBehaviour
         numOfLives -= num;
         livesText.text = "Sheep Count: " + numOfLives;
         Debug.Log("You lost a life");
+
         // if(numOfLives == 1f)
         // {
         //     deathParticle.SetActive(true);
         // }
+
         if(numOfLives <= 0f)
         {
             Time.timeScale = 0;
@@ -67,9 +69,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // public void AddKill(int num = 1)
-    // {
-    //     killCounter += 1;
-    //     killsText.text = "Kills: " + killCounter;  
-    // }
+    public void AddLives(int num = 1){
+        numOfLives += num;
+        livesText.text = "Sheep Count: " + numOfLives;
+        Debug.Log("You gained a life");
+    }
 }

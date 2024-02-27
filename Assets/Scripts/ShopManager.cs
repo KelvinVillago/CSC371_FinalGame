@@ -206,6 +206,7 @@ public class ShopManager : MonoBehaviour
         {
             coins -= shopItemsSO_Sheeps[btnNo].price;
             coinUI.text = "Coins: " + coins.ToString();
+            GameManager.Instance.AddLives(1);
             CheckPurchaseable_Sheeps();
             //unlock item
         }
