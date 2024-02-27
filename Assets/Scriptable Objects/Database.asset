@@ -14,35 +14,135 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectsData:
   - <ID>k__BackingField: 0
-    <Name>k__BackingField: Fence
+    <Name>k__BackingField: Basic Fence
     <Description>k__BackingField: 'A small fence '
+    <IsWeapon>k__BackingField: 0
+    <IsPlaceable>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 5}
-    <Prefab>k__BackingField: {fileID: 1965356168201470377, guid: 89ff494be055dc44cb1a4a2fba148fdf,
-      type: 3}
-    <IsAvalibleInShop>k__BackingField: 1
+    <IsBreakable>k__BackingField: 1
+    <Durability>k__BackingField: 100
     <BuyPrice>k__BackingField: 100
     <SellBackPrice>k__BackingField: 50
-    <ShopQuantity>k__BackingField: 100
     <InventoryQuantity>k__BackingField: 0
+    <Image>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 1965356168201470377, guid: 89ff494be055dc44cb1a4a2fba148fdf,
+      type: 3}
   - <ID>k__BackingField: 1
-    <Name>k__BackingField: Turrent Small
-    <Description>k__BackingField: 
+    <Name>k__BackingField: Small Turrent
+    <Description>k__BackingField: A small palceable defense that auto fires at enemies
+    <IsWeapon>k__BackingField: 0
+    <IsPlaceable>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}
+    <IsBreakable>k__BackingField: 0
+    <Durability>k__BackingField: 0
+    <BuyPrice>k__BackingField: 400
+    <SellBackPrice>k__BackingField: 0
+    <InventoryQuantity>k__BackingField: 0
+    <Image>k__BackingField: {fileID: 0}
     <Prefab>k__BackingField: {fileID: 1847491648034095029, guid: 2c276ffed8ab94e4ebdf48fe3a735836,
       type: 3}
-    <IsAvalibleInShop>k__BackingField: 0
-    <BuyPrice>k__BackingField: 0
-    <SellBackPrice>k__BackingField: 0
-    <ShopQuantity>k__BackingField: 0
-    <InventoryQuantity>k__BackingField: 0
   - <ID>k__BackingField: 2
-    <Name>k__BackingField: Turrent Big
-    <Description>k__BackingField: 
+    <Name>k__BackingField: Large Turrent
+    <Description>k__BackingField: A large palceable defense that auto fires at enemies
+    <IsWeapon>k__BackingField: 0
+    <IsPlaceable>k__BackingField: 1
     <Size>k__BackingField: {x: 2, y: 2}
+    <IsBreakable>k__BackingField: 0
+    <Durability>k__BackingField: 0
+    <BuyPrice>k__BackingField: 700
+    <SellBackPrice>k__BackingField: 0
+    <InventoryQuantity>k__BackingField: 0
+    <Image>k__BackingField: {fileID: 0}
     <Prefab>k__BackingField: {fileID: 1847491648034095029, guid: 2a41ad59b38be974eaf8e57252eb9bcd,
       type: 3}
-    <IsAvalibleInShop>k__BackingField: 0
+  - <ID>k__BackingField: 3
+    <Name>k__BackingField: Assult Rifle
+    <Description>k__BackingField: An strong and extremely rapid automatic-fire weapon
+    <IsWeapon>k__BackingField: 1
+    <IsPlaceable>k__BackingField: 0
+    <Size>k__BackingField: {x: 0, y: 0}
+    <IsBreakable>k__BackingField: 0
+    <Durability>k__BackingField: 0
+    <BuyPrice>k__BackingField: 700
+    <SellBackPrice>k__BackingField: 0
+    <InventoryQuantity>k__BackingField: 1
+    <Image>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 0}
+  - <ID>k__BackingField: 4
+    <Name>k__BackingField: Sheep
+    <Description>k__BackingField: An additional sheep for your farm
+    <IsWeapon>k__BackingField: 0
+    <IsPlaceable>k__BackingField: 1
+    <Size>k__BackingField: {x: 0, y: 0}
+    <IsBreakable>k__BackingField: 0
+    <Durability>k__BackingField: 0
+    <BuyPrice>k__BackingField: 500
+    <SellBackPrice>k__BackingField: 0
+    <InventoryQuantity>k__BackingField: 100
+    <Image>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 0}
+  - <ID>k__BackingField: 5
+    <Name>k__BackingField: Sword
+    <Description>k__BackingField: Increased Range and Damage
+    <IsWeapon>k__BackingField: 1
+    <IsPlaceable>k__BackingField: 0
+    <Size>k__BackingField: {x: 0, y: 0}
+    <IsBreakable>k__BackingField: 0
+    <Durability>k__BackingField: 0
+    <BuyPrice>k__BackingField: 100
+    <SellBackPrice>k__BackingField: 0
+    <InventoryQuantity>k__BackingField: 0
+    <Image>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 0}
+  - <ID>k__BackingField: 6
+    <Name>k__BackingField: Pistol
+    <Description>k__BackingField: A low-power single shot weapon to fire at enemies
+    <IsWeapon>k__BackingField: 1
+    <IsPlaceable>k__BackingField: 0
+    <Size>k__BackingField: {x: 0, y: 0}
+    <IsBreakable>k__BackingField: 0
+    <Durability>k__BackingField: 0
     <BuyPrice>k__BackingField: 0
     <SellBackPrice>k__BackingField: 0
-    <ShopQuantity>k__BackingField: 0
     <InventoryQuantity>k__BackingField: 0
+    <Image>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 0}
+  - <ID>k__BackingField: 7
+    <Name>k__BackingField: Shotgun
+    <Description>k__BackingField: Short Range Heavy Damage Weapon
+    <IsWeapon>k__BackingField: 1
+    <IsPlaceable>k__BackingField: 0
+    <Size>k__BackingField: {x: 0, y: 0}
+    <IsBreakable>k__BackingField: 0
+    <Durability>k__BackingField: 0
+    <BuyPrice>k__BackingField: 300
+    <SellBackPrice>k__BackingField: 0
+    <InventoryQuantity>k__BackingField: 0
+    <Image>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 0}
+  - <ID>k__BackingField: 8
+    <Name>k__BackingField: SMG
+    <Description>k__BackingField: A strong rapid-fire weapon
+    <IsWeapon>k__BackingField: 1
+    <IsPlaceable>k__BackingField: 0
+    <Size>k__BackingField: {x: 0, y: 0}
+    <IsBreakable>k__BackingField: 0
+    <Durability>k__BackingField: 0
+    <BuyPrice>k__BackingField: 400
+    <SellBackPrice>k__BackingField: 0
+    <InventoryQuantity>k__BackingField: 0
+    <Image>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 0}
+  - <ID>k__BackingField: 9
+    <Name>k__BackingField: Sniper
+    <Description>k__BackingField: Long Ranged Heavy Damage Weapon
+    <IsWeapon>k__BackingField: 1
+    <IsPlaceable>k__BackingField: 0
+    <Size>k__BackingField: {x: 0, y: 0}
+    <IsBreakable>k__BackingField: 0
+    <Durability>k__BackingField: 0
+    <BuyPrice>k__BackingField: 400
+    <SellBackPrice>k__BackingField: 0
+    <InventoryQuantity>k__BackingField: 0
+    <Image>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 0}

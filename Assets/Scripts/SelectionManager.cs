@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class SelectionManager : MonoBehaviour
     private PlayerControllerInputs _inputs;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject _shopPanel;
+    [SerializeField] private ObjectsDatabaseSO _itemDB;
   
     //Will return true or false if we are above the UI
     //This is a labda to set true or false. 
@@ -93,9 +95,23 @@ public class SelectionManager : MonoBehaviour
 
     public void UpdateInventoryUI()
     {
-        invBtnTxts[0].text = "Fences: " + fenceCount.ToString();
-        invBtnTxts[1].text = "Small Turrets: " + smallTurretCount.ToString();
-        invBtnTxts[2].text = "Large Turrets: " + largeTurretCount.ToString();
+        //We should update this to be the size of the list and generate the inventory cards.
+        ObjectData[] invItems = _itemDB.objectsData.FindAll(data => data.IsPlaceable && data.InventoryQuantity > 0).ToArray();
+        int buttonAmt = 3;
+        for (int i = 0; i < buttonAmt ; i++)
+        {
+            if(invItems.Length < buttonAmt)
+            {
+
+            }
+            //Remove this is we get generation
+            ObjectData item = invItems[i];
+            invBtnTxts[i].text = item.Name + " " + item.InventoryQuantity;
+        }
+
+        //invBtnTxts[0].text = "Fence: " + fenceCount.ToString();
+        //invBtnTxts[1].text = "Small Turrets: " + smallTurretCount.ToString();
+        //invBtnTxts[2].text = "Large Turrets: " + largeTurretCount.ToString();
 
         if (fenceCount == 0)
         {
