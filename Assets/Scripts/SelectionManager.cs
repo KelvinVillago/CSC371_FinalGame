@@ -12,7 +12,7 @@ public class SelectionManager : MonoBehaviour
     [Tooltip("Which layer will the input detection of the mouse listens too")]
     [SerializeField] LayerMask _placementLayerMask;
     [SerializeField] GameObject _inventoryCanvas;
-    public event Action OnClicked, OnExit;
+    public event Action OnClicked, OnExit, OnRotate;
     private PlayerControllerInputs _inputs;
     [SerializeField] private GameObject player;
   
@@ -51,8 +51,14 @@ public class SelectionManager : MonoBehaviour
                 //Debug.Log("Shop select activated");
                 OnClicked?.Invoke();
             }
-        
-            if(_inputs.exitShopInput)
+            if (_inputs.rotateInventoryInput)
+            {
+                //Reseting the value;
+                _inputs.rotateInventoryInput = false;
+                //Debug.Log("Shop select activated");
+                OnRotate?.Invoke();
+            }
+            if (_inputs.exitShopInput)
             {
                 _inputs.exitShopInput = false;
                 Time.timeScale = 1;
@@ -68,7 +74,6 @@ public class SelectionManager : MonoBehaviour
 
     public Vector3 GetSelectedMapPosition()
     {
-
         Vector3 mousePos = Mouse.current.position.ReadValue();
         //Only select objects rendered by the camera
         mousePos.z = _sceneCamera.nearClipPlane;

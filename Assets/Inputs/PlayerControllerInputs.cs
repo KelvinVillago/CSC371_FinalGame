@@ -11,11 +11,13 @@ public class PlayerControllerInputs : MonoBehaviour
     public bool openInventoryInput = false;
     public bool shopSelectInput = false;
     public bool exitShopInput = false;
+    public bool rotateInventoryInput = false;
     private PlayerInput _playerInput;
     [HideInInspector] public InputActionMap itemMap; 
     [HideInInspector] public InputActionMap mainMap;
     [HideInInspector] public InputAction selectInventoryAction; 
     [HideInInspector] public InputAction exitInventoryAction;
+    [HideInInspector] public InputAction rotateInventoryAction;
     [HideInInspector] public InputAction openInventoryAction;
     //public static event Action<InputActionMap> actionMapChange;
 
@@ -27,12 +29,17 @@ public class PlayerControllerInputs : MonoBehaviour
         openInventoryAction = mainMap.FindAction("OpenInventory");
         selectInventoryAction = itemMap.FindAction("ShopSelect");
         exitInventoryAction = itemMap.FindAction("ExitShop");
+        rotateInventoryAction = itemMap.FindAction("RotateInventory");
         _currentMapName = _playerInput.currentActionMap.name;
     }
 
     private void OnOpenInventory(InputValue value)
     {
         openInventoryInput = openInventoryAction.WasPressedThisFrame();
+    }
+    private void OnRotateInventory(InputValue value)
+    {
+        rotateInventoryInput = rotateInventoryAction.WasPressedThisFrame();
     }
     private void OnShopSelect(InputValue value)
     {

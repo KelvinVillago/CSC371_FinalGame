@@ -15,6 +15,7 @@ public class PlacementSystem : MonoBehaviour
     private int _selectedObjIndex = -1;
     [Tooltip("Toggle to turn off the grid")]
     [SerializeField] private GameObject _gridVisualization;
+    [SerializeField]private float _rotationAngle = 0;
 
     private void Start()
     {
@@ -31,14 +32,29 @@ public class PlacementSystem : MonoBehaviour
             Debug.LogError($"No ID found {ID}");
             return;
         }
+        ObjectData objectData = _database.objectsData[_selectedObjIndex];
         //if the item is in the database turn on the grid and allow placement.
         _gridVisualization.SetActive(true);
         _cellIndicator.SetActive(true);
+        //Update the cell indicator to be the size of the selected item.
+        _cellIndicator.transform.localScale = new Vector3 (objectData.Size.x, 1, objectData.Size.y);
         //Call the placeStructure method
         _selectionManager.OnClicked += PlaceStructure;
         _selectionManager.OnExit += StopPlacement;
+        _selectionManager.OnRotate += RotateItem;
     }
+    private void RotateItem()
+    {
+        print("Left btn Clicked");
+        if(_rotationAngle == 360)
+        {
+            _rotationAngle = 0;
+        } 
+        _rotationAngle = _rotationAngle + 90.0f;
 
+        //_cellIndicator.transform.Rotate(Vector3.up, _rotationAngle);
+        _cellIndicator.transform.rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
+    }
     private void PlaceStructure()
     {
         //Place the object if we are over the grid.
@@ -51,6 +67,12 @@ public class PlacementSystem : MonoBehaviour
         //Create the game object 
         GameObject newObj = Instantiate(_database.objectsData[_selectedObjIndex].Prefab);
         newObj.transform.position = _grid.CellToWorld(_gridPosition);
+
+
+        //Change the rotation
+        //newObj.transform.Rotate(Vector3.up, _rotationAngle);
+        if (_rotationAngle != 0)
+            newObj.transform.rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
 
         // Decrement the count based on the selected object
         if (_selectedObjIndex >= 0)
@@ -85,8 +107,11 @@ public class PlacementSystem : MonoBehaviour
         //Trun off the grid, placement is no longer allowed. 
         _gridVisualization.SetActive(false);
         _cellIndicator.SetActive(false);
+        //Reset the rotation
+        _rotationAngle = 0f;
         //Stop listening to the events. 
         _selectionManager.OnClicked -= PlaceStructure;
+        _selectionManager.OnRotate -= RotateItem;
         _selectionManager.OnExit -= StopPlacement;
     }
 
