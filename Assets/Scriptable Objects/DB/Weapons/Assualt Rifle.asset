@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3ad263a24767341a2ccdab258fed77, type: 3}
   m_Name: Assualt Rifle
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
+  <ID>k__BackingField: 1
   <Name>k__BackingField: Assult Rifle
   <Description>k__BackingField: An strong and extremely rapid automatic-fire weapon
   <IsBreakable>k__BackingField: 0

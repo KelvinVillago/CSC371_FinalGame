@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Large Turret
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 0
-  <Name>k__BackingField: 
-  <Description>k__BackingField: 
+  <Name>k__BackingField: Large Turret
+  <Description>k__BackingField: A large palceable defense that auto fires at enemies
   <Size>k__BackingField: {x: 1, y: 1}
   <IsBreakable>k__BackingField: 0
   <Durability>k__BackingField: 0
-  <BuyPrice>k__BackingField: 0
+  <BuyPrice>k__BackingField: 700
   <SellBackPrice>k__BackingField: 0
   <InventoryQuantity>k__BackingField: 0
   <Image>k__BackingField: {fileID: 0}
-  <Prefab>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 1847491648034095029, guid: 2a41ad59b38be974eaf8e57252eb9bcd,
+    type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3ad263a24767341a2ccdab258fed77, type: 3}
   m_Name: Long Sword
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
+  <ID>k__BackingField: 2
   <Name>k__BackingField: Long Sword
   <Description>k__BackingField: Increased Range and Damage
   <IsBreakable>k__BackingField: 0

@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Wall
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 0
-  <Name>k__BackingField: 
-  <Description>k__BackingField: 
+  <Name>k__BackingField: Strong Wall
+  <Description>k__BackingField: 'A strong wall '
   <Size>k__BackingField: {x: 1, y: 1}
   <IsBreakable>k__BackingField: 0
   <Durability>k__BackingField: 0
-  <BuyPrice>k__BackingField: 0
+  <BuyPrice>k__BackingField: 250
   <SellBackPrice>k__BackingField: 0
   <InventoryQuantity>k__BackingField: 0
   <Image>k__BackingField: {fileID: 0}
-  <Prefab>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 1057573506917579428, guid: efb411d9e4014411bb9ecf49ddeddef7,
+    type: 3}

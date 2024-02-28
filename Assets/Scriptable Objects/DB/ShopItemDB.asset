@@ -12,6 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a29c026665adf34386c6afebda6464f, type: 3}
   m_Name: ShopItemDB
   m_EditorClassIdentifier: 
-  WeaponsDB: []
-  DefenseDB: []
-  AnimalDB: []
+  WeaponsDB:
+  - {fileID: 11400000, guid: 5cf93022a4158464486e416c17a72a33, type: 2}
+  - {fileID: 11400000, guid: cbfd0740c2e6b85429ac5b84820fb40d, type: 2}
+  - {fileID: 11400000, guid: 30da337a74eca314badb290fc2b30c51, type: 2}
+  - {fileID: 11400000, guid: f6129a2e46fd52647b08eb3db11acc0f, type: 2}
+  - {fileID: 11400000, guid: 87df9004bec5ce9498b576640df4ba4b, type: 2}
+  - {fileID: 11400000, guid: 62d4400225bb31c4daaaf1f812972b97, type: 2}
+  DefenseDB:
+  - {fileID: 11400000, guid: 121a16841a4635a43988ca02615c86d2, type: 2}
+  - {fileID: 11400000, guid: aad49b49aa25d5142a345ed4a3e253f4, type: 2}
+  - {fileID: 11400000, guid: 6f676e44ff694874483ec7cd652132a0, type: 2}
+  - {fileID: 11400000, guid: fabbbcca3c880164c817ebe27e15a0d6, type: 2}
+  AnimalDB:
+  - {fileID: 11400000, guid: ce1f39a1a0df80142ac7866e619bd7f6, type: 2}
