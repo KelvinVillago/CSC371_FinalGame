@@ -95,6 +95,7 @@ public class SelectionManager : MonoBehaviour
 
     public void UpdateInventoryUI()
     {
+        /*
         //We should update this to be the size of the list and generate the inventory cards.
         ObjectData[] invItems = _itemDB.objectsData.FindAll(data => data.IsPlaceable && data.InventoryQuantity > 0).ToArray();
         int buttonAmt = 3;
@@ -108,10 +109,11 @@ public class SelectionManager : MonoBehaviour
             ObjectData item = invItems[i];
             invBtnTxts[i].text = item.Name + " " + item.InventoryQuantity;
         }
+        */
 
-        //invBtnTxts[0].text = "Fence: " + fenceCount.ToString();
-        //invBtnTxts[1].text = "Small Turrets: " + smallTurretCount.ToString();
-        //invBtnTxts[2].text = "Large Turrets: " + largeTurretCount.ToString();
+        invBtnTxts[0].text = "Fence: " + fenceCount.ToString();
+        invBtnTxts[1].text = "Small Turrets: " + smallTurretCount.ToString();
+        invBtnTxts[2].text = "Large Turrets: " + largeTurretCount.ToString();
 
         if (fenceCount == 0)
         {
