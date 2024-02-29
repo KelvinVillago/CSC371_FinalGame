@@ -33,7 +33,7 @@ public class CoinCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Coins: " + num.ToString();
+        text.text = num.ToString();
     }
 
 }

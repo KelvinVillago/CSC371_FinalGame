@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        livesText.text = "Sheep Count: " + numOfLives;
+        livesText.text = numOfLives.ToString();
     }
 
     void Update()
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     public void RemoveLife(int num = 1)
     {
         numOfLives -= num;
-        livesText.text = "Sheep Count: " + numOfLives;
+        livesText.text = numOfLives.ToString();
         Debug.Log("You lost a life");
 
         // if(numOfLives == 1f)
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     public void AddLives(int num = 1){
         numOfLives += num;
-        livesText.text = "Sheep Count: " + numOfLives;
+        livesText.text = numOfLives.ToString();
         Debug.Log("You gained a life");
     }
 }
