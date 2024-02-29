@@ -11,6 +11,7 @@ public class ShopManager : MonoBehaviour
     public GameObject pistol;
     public GameObject AR;
     public GameObject SMG;
+    public GameObject SR;
     public SelectionManager selectionManager;
     // Game UI canvas variables
     public GameObject gameCanvas;
@@ -165,6 +166,11 @@ public class ShopManager : MonoBehaviour
         {
             DeactivateWeapons();
             AR.SetActive(true);
+        }
+        else if (btnNo == 3)
+        {
+            DeactivateWeapons();
+            SR.SetActive(true);
         }
     }
 
