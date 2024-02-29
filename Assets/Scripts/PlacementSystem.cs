@@ -15,14 +15,35 @@ public class PlacementSystem : MonoBehaviour
     private int _selectedObjIndex = -1;
     [Tooltip("Toggle to turn off the grid")]
     [SerializeField] private GameObject _gridVisualization;
-    [SerializeField]private float _rotationAngle = 0;
+    [SerializeField] private float _rotationAngle = 0;
+
+    [SerializeField] private ItemsDatabaseSO _invDB;
 
     private void Start()
     {
         StopPlacement();
     }
-    public void StartPlacement(int ID)
+    public void StartPlacement(ItemSO itemSO)
     {
+        
+        int ID = itemSO.ID;
+        Type itemType = itemSO.GetType();
+
+        //Trying to place an animal?
+        if(itemType == typeof(AnimalItemSO))
+        {
+            print(itemSO.name +" :Animals cant be placed at night");
+        }
+        else if(itemType == typeof(DefenseItemSO))
+        {
+            print(itemSO.name + " Placing a defense, depending on the inventory keep going...");
+        }
+        else
+        {
+            print(itemSO.name + " Weapon, equipt it?");
+        }
+
+
         //Set the start rotation of the cursor indicator.
         _rotationAngle = 0;
         _cellIndicator.transform.rotation = Quaternion.Euler(0f, _rotationAngle, 0f);

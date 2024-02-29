@@ -15,11 +15,11 @@ MonoBehaviour:
   <ID>k__BackingField: 1
   <Name>k__BackingField: Assult Rifle
   <Description>k__BackingField: An strong and extremely rapid automatic-fire weapon
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: ffb2a57c161827d46bbe5437f2070968,
+    type: 3}
+  <Prefab>k__BackingField: {fileID: 0}
   <IsBreakable>k__BackingField: 0
   <Durability>k__BackingField: 0
   <BuyPrice>k__BackingField: 700
   <SellBackPrice>k__BackingField: 0
-  <ShopQuantity>k__BackingField: 1
-  <InventoryQuantity>k__BackingField: 0
-  <Image>k__BackingField: {fileID: 0}
-  <Prefab>k__BackingField: {fileID: 0}
+  <MagSize>k__BackingField: 0

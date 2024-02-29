@@ -15,6 +15,9 @@ MonoBehaviour:
   <ID>k__BackingField: 0
   <Name>k__BackingField: Sheep
   <Description>k__BackingField: An additional sheep for your farm
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: a02ff42c0835a59489083ea62254e951,
+    type: 3}
+  <Prefab>k__BackingField: {fileID: 0}
   <Size>k__BackingField: {x: 1, y: 1}
   <IsBreakable>k__BackingField: 0
   <Durability>k__BackingField: 0
@@ -22,5 +25,3 @@ MonoBehaviour:
   <SellBackPrice>k__BackingField: 0
   <ShopQuantity>k__BackingField: 0
   <InventoryQuantity>k__BackingField: 0
-  <Image>k__BackingField: {fileID: 0}
-  <Prefab>k__BackingField: {fileID: 0}
