@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ItemDatabaseSO", menuName = "Item Database SO / New Item Database OS", order = 1)]
+[CreateAssetMenu(fileName = "NewItemDatabaseSO", menuName = "Scribtable Objects / Database/ New Item DB", order = 1)]
 public class ItemsDatabaseSO : ScriptableObject
 {
     public List<WeaponItemSO> WeaponsDB;

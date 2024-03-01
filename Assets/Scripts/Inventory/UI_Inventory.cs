@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
+
 
 /*
  * The Inventory UI 
@@ -32,6 +32,7 @@ public class UI_Inventory : MonoBehaviour
     //Get a refrence to the Start Placement function
     PlacementSystem _placementSystem;
     private int _slotUsedCount = 0;
+    private Inventory inventory;
 
 
     private void Awake()
@@ -39,12 +40,13 @@ public class UI_Inventory : MonoBehaviour
         //Hide the templates on empty open.
         //_layoutContainerHor.gameObject.SetActive(false);
         _placementSystem = GameObject.Find("BuildingSystem").GetComponentInChildren<PlacementSystem>();
-         _scrollScript = _scrollView.GetComponent<PreventClickDrag>();
+        _scrollScript = _scrollView.GetComponent<PreventClickDrag>();
 
     }
     private void Start()
     {
         disableScroll();
+        /* Print everyting item in the database to the inventory.
         //Add the starter items, marked in the DB?
         CreateItemButton(_itemDB.AnimalDB[0]);
         foreach (var item in _itemDB.DefenseDB)
@@ -55,7 +57,30 @@ public class UI_Inventory : MonoBehaviour
         {
             CreateItemButton(item);
         }
+        */
     }
+
+    public void SetInventory(Inventory inventory)
+    {
+        this.inventory = inventory;
+        inventory.AddItem(_itemDB.DefenseDB[0]);
+        inventory.AddItem(_itemDB.DefenseDB[1]);
+        inventory.AddItem(_itemDB.DefenseDB[3]);
+        RefreshInventory();
+    }
+    private void RefreshInventory()
+    {
+        foreach (ItemSO item in inventory.GetItemsList())
+        {
+            CreateItemButton(item);
+        }
+    }
+
+
+
+
+
+
 
     private void CreateItemButton(ItemSO itemSO)
     {

@@ -3477,7 +3477,7 @@ GameObject:
   - component: {fileID: 549331091}
   - component: {fileID: 549331092}
   m_Layer: 5
-  m_Name: InventoryPanel
+  m_Name: UI_Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3529,6 +3529,7 @@ MonoBehaviour:
   - {fileID: 303662003}
   - {fileID: 1570815668}
   - {fileID: 1522523923}
+  _scrollView: {fileID: 1294904273}
   _defaultMissingSprite: {fileID: 21300000, guid: 08de2f5ce4af4a3459e359f9576003d8,
     type: 3}
 --- !u!1 &559748622
@@ -3755,7 +3756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &592446451
 Transform:
   m_ObjectHideFlags: 0
@@ -7873,6 +7874,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8538437255380820584, guid: c0efc72675381a746a02cad7bbd8aef3,
+        type: 3}
+      propertyPath: _uiInventory
+      value: 
+      objectReference: {fileID: 549331092}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -7884,11 +7890,7 @@ PrefabInstance:
         type: 3}
       insertIndex: 2
       addedObject: {fileID: 1159171776}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8233816314358771477, guid: c0efc72675381a746a02cad7bbd8aef3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1045424320}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0efc72675381a746a02cad7bbd8aef3, type: 3}
 --- !u!1 &1045424318 stripped
 GameObject:
@@ -7902,71 +7904,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1045424317}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1045424320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045424318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7122b908724274440b4ca8deb447ace7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentMapName: 
-  openInventoryInput: 0
-  shopSelectInput: 0
-  exitShopInput: 0
-  rotateInventoryInput: 0
-  itemMap:
-    m_Name: 
-    m_Id: 
-    m_Asset: {fileID: 0}
-    m_Actions: []
-    m_Bindings: []
-  mainMap:
-    m_Name: 
-    m_Id: 
-    m_Asset: {fileID: 0}
-    m_Actions: []
-    m_Bindings: []
-  selectInventoryAction:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 37174703-66ed-411e-ba78-2b7271f3d547
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  exitInventoryAction:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 5b80ed84-d562-4e36-a3c9-6596e851904f
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  rotateInventoryAction:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: a140d698-81cc-4c09-be25-604598ed0c14
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  openInventoryAction:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 828cb6ae-930a-40b9-a9bb-af96803588e4
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!1 &1045424321 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8852879671318557619, guid: c0efc72675381a746a02cad7bbd8aef3,
@@ -8809,7 +8746,7 @@ GameObject:
   - component: {fileID: 1273848837}
   - component: {fileID: 1273848836}
   m_Layer: 5
-  m_Name: InteractivePanel
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

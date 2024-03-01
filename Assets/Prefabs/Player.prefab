@@ -135,6 +135,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 0}
   ammunitionDisplay: {fileID: 0}
   allowInvoke: 1
+  ammoSlider: {fileID: 0}
 --- !u!114 &562804293900825486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,10 +219,12 @@ GameObject:
   - component: {fileID: 6306474605070023497}
   - component: {fileID: 4199745607481602929}
   - component: {fileID: 558747221497794593}
-  - component: {fileID: 4710222241208092749}
   - component: {fileID: 2565090724816804326}
   - component: {fileID: 5486627976244251386}
+  - component: {fileID: 1658258928999256225}
+  - component: {fileID: 4710222241208092749}
   - component: {fileID: 6445775484680505735}
+  - component: {fileID: 8538437255380820584}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -346,19 +349,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &4710222241208092749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8233816314358771477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebd73a8026d9e224f9efaa52ab0a27ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
 --- !u!114 &2565090724816804326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,6 +383,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 82037041-b555-4d94-ad64-45f59dbdf36b
     m_ActionName: main/reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e71fb2d5-ca60-4f6c-8164-519af208c2e6
+    m_ActionName: main/Shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e13f04f2-f46f-41c7-bc2d-e55a66849b4a
+    m_ActionName: main/OpenInventory[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 875a39db-cce4-42a7-8826-005d0db1f2c8
+    m_ActionName: GridTest/ShopSelect[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae03b3bb-5507-4ce6-9031-db2583b17360
+    m_ActionName: GridTest/RotateInventory[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6076c170-c7e5-4356-a285-06a8afa47549
+    m_ActionName: GridTest/ExitShop[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: main
@@ -494,6 +504,84 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1658258928999256225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8233816314358771477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7122b908724274440b4ca8deb447ace7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentMapName: 
+  openInventoryInput: 0
+  shopSelectInput: 0
+  exitShopInput: 0
+  rotateInventoryInput: 0
+  itemMap:
+    m_Name: 
+    m_Id: 
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
+  mainMap:
+    m_Name: 
+    m_Id: 
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
+  selectInventoryAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f82fc21b-08ab-4f03-81d0-750e020797ff
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  exitInventoryAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 49f2af2f-3b39-4755-8a60-47bdbdc3e8e9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  rotateInventoryAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3338e7d9-6ced-45d9-a21f-408ffeda0ae5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  openInventoryAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 718e5b0f-0fd8-44ec-b0ed-c9d9126a392d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+--- !u!114 &4710222241208092749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8233816314358771477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd73a8026d9e224f9efaa52ab0a27ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!114 &6445775484680505735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,6 +594,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338f1bf021faf4f41b3011300e1d7e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boundX: 60
+  _boundZ: 60
+--- !u!114 &8538437255380820584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8233816314358771477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996645fc6c7e67d488e86e845a442f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiInventory: {fileID: 0}
 --- !u!1 &8852879671318557619
 GameObject:
   m_ObjectHideFlags: 0
