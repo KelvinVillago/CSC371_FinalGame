@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 1658258928999256225}
   - component: {fileID: 4710222241208092749}
   - component: {fileID: 6445775484680505735}
-  - component: {fileID: 8538437255380820584}
+  - component: {fileID: -8378971808000574896}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -519,7 +519,7 @@ MonoBehaviour:
   _currentMapName: 
   openInventoryInput: 0
   shopSelectInput: 0
-  exitShopInput: 0
+  exitShopInput: 1
   rotateInventoryInput: 0
   itemMap:
     m_Name: 
@@ -596,7 +596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boundX: 60
   _boundZ: 60
---- !u!114 &8538437255380820584
+--- !u!114 &-8378971808000574896
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -608,7 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 996645fc6c7e67d488e86e845a442f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiInventory: {fileID: 0}
+  _invPanel: {fileID: 0}
 --- !u!1 &8852879671318557619
 GameObject:
   m_ObjectHideFlags: 0

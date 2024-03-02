@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c03c1be84c7db40ab572fc4e68d795, type: 3}
-  m_Name: New Objects Database SO
+  m_Script: {fileID: 11500000, guid: 5a29c026665adf34386c6afebda6464f, type: 3}
+  m_Name: PlayerStartingItemsDB
   m_EditorClassIdentifier: 
-  objectsData: []
+  WeaponsDB: []
+  DefenseDB: []
+  AnimalDB: []
+  MscItemsDB:
+  - {fileID: 11400000, guid: 4cd0544c6f1d7d743ac9b706fa318079, type: 2}

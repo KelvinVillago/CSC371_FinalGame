@@ -21,4 +21,7 @@ public class ItemSO : ScriptableObject
 
     [field: Tooltip("The refrence to the prefab of the object")]
     [field: SerializeField] public GameObject Prefab { get; private set; }
+
+    [field: Tooltip("How many can be stacked in the inventory")]
+    [field: SerializeField] public int StackAmount { get; private set; } = 1;
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92795a2988c584c438f778d18f8ef29c, type: 3}
+  m_Name: TestCollectableSO
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0
+  <Name>k__BackingField: TestCollectable
+  <Description>k__BackingField: collectable
+  <IconSprite>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 3931326013175162958, guid: 0b483c3e22eda6648822ba7cde757167,
+    type: 3}

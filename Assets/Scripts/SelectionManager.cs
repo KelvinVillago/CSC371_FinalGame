@@ -9,18 +9,20 @@ using System.Linq;
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private Camera _sceneCamera;
-    private Vector3 _lastPosition;
     [Tooltip("Which layer will the input detection of the mouse listens too")]
     [SerializeField] LayerMask _placementLayerMask;
-    [SerializeField] GameObject _inventoryCanvas;
-    public event Action OnClicked, OnExit, OnRotate;
-    private PlayerControllerInputs _inputs;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject _shopPanel;
-    [SerializeField] private ObjectsDatabaseSO _itemDB;
-  
+    //Refrences
+    private PlayerControllerInputs _inputs;
+    private PlayerInventory _playerInventory;
+    private Inventory _inventory;
+    private GameObject _inventoryUIPanel;
+    private Vector3 _lastPosition;
+    public event Action OnClicked, OnExit, OnRotate;
+    public PlayerInventory PlayerInventory { get { return _playerInventory; } }
+
     //Will return true or false if we are above the UI
-    //This is a labda to set true or false. 
     public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
 
     // Buttons and Text
@@ -29,23 +31,33 @@ public class SelectionManager : MonoBehaviour
     public int fenceCount = 0;
     public int smallTurretCount = 0;
     public int largeTurretCount = 0;
+    private void Awake()
+    {
+        _inputs = player.GetComponent<PlayerControllerInputs>();
+        //Save the refrence to the targetObjects inventory
+        _playerInventory = player.GetComponent<PlayerInventory>();
+        //Get access to the UI the targetObject is using.
+        _inventoryUIPanel = _playerInventory.GetInventoryPanel();
+    }
     private void Start()
     {
         //Clear the screen
-        _inputs = player.GetComponent<PlayerControllerInputs>();
-        _inventoryCanvas.SetActive(false);
+        _inventoryUIPanel.SetActive(false);
+        //Get the UI_inventory
+        _inventory = _playerInventory.Inventory;
+        
     }
 
     private void Update()
     {
         
         if (_inputs.openInventoryInput) {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
 
-            UpdateInventoryUI();
+            //UpdateInventoryUI();
 
             _inputs.ToggleActionMap(_inputs.itemMap); //Activate grid map
-            _inventoryCanvas.SetActive(true);
+            _inventoryUIPanel.SetActive(true);
 
             if(_inputs.shopSelectInput)
             {
@@ -66,11 +78,11 @@ public class SelectionManager : MonoBehaviour
                 _inputs.exitShopInput = false;
                 //Only turn time back on if the shop is closed
                 if (!_shopPanel.activeInHierarchy)
-                    Time.timeScale = 1;
+                    //Time.timeScale = 1;
                 //Debug.Log("ExitValue is true");
                 //Close the inventory
                 _inputs.openInventoryInput = false;
-                _inventoryCanvas.SetActive(false);
+                _inventoryUIPanel.SetActive(false);
                 _inputs.ToggleActionMap(_inputs.mainMap);
                 OnExit?.Invoke();
             }
@@ -110,7 +122,7 @@ public class SelectionManager : MonoBehaviour
             invBtnTxts[i].text = item.Name + " " + item.InventoryQuantity;
         }
         */
-
+        
         invBtnTxts[0].text = "Fence: " + fenceCount.ToString();
         invBtnTxts[1].text = "Small Turrets: " + smallTurretCount.ToString();
         invBtnTxts[2].text = "Large Turrets: " + largeTurretCount.ToString();
