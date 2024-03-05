@@ -18,11 +18,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] float _downBoundary;
     [SerializeField] GameObject prefab;
     public Transform target;
+    public Transform spawnPoint;
+    [SerializeField] private LineRenderer lineRenderer = null;
+
+    void Awake()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+    }
 
     void Start()
     {
         a = GameObject.FindGameObjectWithTag("CoinCounter").GetComponent<CoinCounter>();
         //audioPlayer = GetComponent<AudioSource>();
+        lineRenderer.positionCount = 2;
     }
 
 
@@ -33,22 +41,33 @@ public class Enemy : MonoBehaviour
             getTarget();
         }
         transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
-        if(transform.position.x < _rightBoundary)
+        // if(transform.position.x < _rightBoundary)
+        // {
+        //     Destroy(gameObject);
+        // }
+        // if (transform.position.x > _leftBoundary)
+        // {
+        //     Destroy(gameObject);
+        // }
+        // if (transform.position.y < _downBoundary)
+        // {
+        //     Destroy(gameObject);
+        // }
+        // if (transform.position.y > _topBoundary)
+        // {
+        //     Destroy(gameObject);
+        // }
+    }
+
+    void LateUpdate()
+    {
+        if(target == null)
         {
-            Destroy(gameObject);
+            return;
         }
-        if (transform.position.x > _leftBoundary)
-        {
-            Destroy(gameObject);
-        }
-        if (transform.position.y < _downBoundary)
-        {
-            Destroy(gameObject);
-        }
-        if (transform.position.y > _topBoundary)
-        {
-            Destroy(gameObject);
-        }
+
+        lineRenderer.SetPosition(0, spawnPoint.position);
+        lineRenderer.SetPosition(1, target.position);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -74,13 +93,13 @@ public class Enemy : MonoBehaviour
     {
         if(GameObject.FindGameObjectWithTag("Sheep"))
         {
-        target = GameObject.FindGameObjectWithTag("Sheep").transform;
+            target = GameObject.FindGameObjectWithTag("Sheep").transform;
 
-        Vector3 relativePos = target.position - transform.position;
+            Vector3 relativePos = target.position - transform.position;
 
-        // the second argument, upwards, defaults to Vector3.up
-        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-        transform.rotation = rotation;
+            // the second argument, upwards, defaults to Vector3.up
+            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+            transform.rotation = rotation;
         }
     }
 }
