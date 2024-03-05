@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52b687370e7944d8a98756f0dba3015, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: 
-  title: Sniper
+  title: Sniper Rifle
   description: Long Ranged Heavy Damage Weapon
   price: 400

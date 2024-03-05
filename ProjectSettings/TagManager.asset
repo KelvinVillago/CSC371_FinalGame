@@ -10,6 +10,8 @@ TagManager:
   - FxTemporaire
   - CoinCounter
   - AudioSource
+  - Coin
+  - Sniper Camera
   layers:
   - Default
   - TransparentFX

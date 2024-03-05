@@ -1835,6 +1835,7 @@ MonoBehaviour:
   pistol: {fileID: 0}
   AR: {fileID: 0}
   SMG: {fileID: 0}
+  SR: {fileID: 0}
   selectionManager: {fileID: 0}
   gameCanvas: {fileID: 0}
   openShopBtn: {fileID: 0}

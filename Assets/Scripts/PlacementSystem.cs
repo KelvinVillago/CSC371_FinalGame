@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 
 public class PlacementSystem : MonoBehaviour
@@ -14,6 +16,7 @@ public class PlacementSystem : MonoBehaviour
     //[SerializeField] private ObjectsDatabaseSO _database;
     [Tooltip("Toggle to turn off the grid")]
     [SerializeField] private GameObject _gridVisualization;
+
     [SerializeField] private float _rotationAngle = 0;
     //[SerializeField] private ItemsDatabaseSO _invDB;
     private Inventory _inventory;
@@ -22,6 +25,8 @@ public class PlacementSystem : MonoBehaviour
 
     Vector3Int _gridPosition;
     Vector3 mousePosition;
+
+    public NavMeshSurface surface;
 
     private void Start()
     {
@@ -102,6 +107,9 @@ public class PlacementSystem : MonoBehaviour
         _selectionManager.OnClicked -= PlaceStructure;
         _selectionManager.OnRotate -= RotateItem;
         _selectionManager.OnExit -= StopPlacement;
+
+        //Update NavMesh
+        surface.BuildNavMesh();
     }
 
     private void Update()

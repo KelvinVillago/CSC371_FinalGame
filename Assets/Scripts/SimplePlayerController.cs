@@ -7,6 +7,11 @@ public class SimplePlayerController : MonoBehaviour
     Camera _mainCamera;
     Rigidbody _rigidbody;
     InputAction _inputAction;
+
+
+    public GameObject sniperRifle;
+    public Camera sniperCamera;
+
     Vector3 _movement;
 
 
@@ -22,6 +27,15 @@ public class SimplePlayerController : MonoBehaviour
     {
         //GetUserInput();
         RotateTowardsMouse();
+        
+        if(sniperRifle.activeInHierarchy){
+            sniperCamera.enabled = true;
+            _mainCamera.enabled = false;
+        }
+        else{
+            sniperCamera.enabled = false;
+            _mainCamera.enabled = true;
+        }
     }
 
     void FixedUpdate()
