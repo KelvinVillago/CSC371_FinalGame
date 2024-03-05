@@ -24,4 +24,19 @@ public class Item
         return potentialDescendant.IsSubclassOf(potentialBase)
                || potentialDescendant == potentialBase;
     }
+    public T GetItemSO<T>() where T : ItemSO
+    {
+        if(type == typeof(T))
+        {
+            return (T)itemSO;
+        }
+        Debug.LogError("GetItemSO: Cannot Get SO, not of correct type");
+        return null;
+    }
+    public string AmountSting()
+    {
+        return amount.ToString();
+    }
+
+
 }

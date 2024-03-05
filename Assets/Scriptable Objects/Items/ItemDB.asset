@@ -16,6 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e930121f027492748b3ea4a461ac04b9, type: 2}
   DefenseDB:
   - {fileID: 11400000, guid: f5c7daeb353c2444485e83c0adc667ab, type: 2}
-  AnimalDB: []
+  AnimalDB:
+  - {fileID: 11400000, guid: 1b43a20ebd7df0948a0193b55718dd14, type: 2}
   MscItemsDB:
   - {fileID: 11400000, guid: 4cd0544c6f1d7d743ac9b706fa318079, type: 2}

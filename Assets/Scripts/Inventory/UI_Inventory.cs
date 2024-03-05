@@ -27,7 +27,6 @@ public class UI_Inventory : MonoBehaviour
     [SerializeField] private Transform _scrollView;
     [SerializeField] private Sprite _defaultMissingSprite;
     private PreventClickDrag _scrollScript;
-    private Item _item;
     private int _slotUsedCount = 0;
     //Get a refrence to the Start Placement function
     private Inventory _inventory;
@@ -44,21 +43,6 @@ public class UI_Inventory : MonoBehaviour
     private void Start()
     {
         disableScroll();
-        /* Print everyting item in the database to the inventory.
-        //Add the starter items, marked in the DB?
-        CreateItemButton(_itemDB.AnimalDB[0]);
-        foreach (var item in _itemDB.DefenseDB)
-        {
-            CreateItemButton(item);
-        }
-        foreach(var item in _itemDB.WeaponsDB)
-        {
-            CreateItemButton(item);
-        }
-        */
-       
-        //ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0]), new Vector3(4, 1, 4));
-        //ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0]), new Vector3(10, 1, 4));
     }
 
     private void OnDisable()
@@ -69,18 +53,23 @@ public class UI_Inventory : MonoBehaviour
     {
         //Starting inventory
         this._inventory = inventory;
-        Item tempItem = new Item(_itemDB.DefenseDB[0]);
-        inventory.AddItem(tempItem);
-        inventory.AddItem(tempItem);
-        inventory.AddItem(tempItem);
-        inventory.AddItem(tempItem);
-        inventory.AddItem(tempItem);
-        inventory.AddItem(tempItem);
+        //Set the same inventory for the grid placement system to check
+        _placementSystem.SetInventory(inventory);
+
+        //Test code
+        inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
+        inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
+        inventory.AddItem(new Item(_itemDB.AnimalDB[0]));
+        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
+        inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
+        inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
+        inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
+
         //Build UI for starting inventory
         RefreshInventory();
+        
         //Start listening for new changes
         inventory.OnInventoryChanged += OnInventoryChanged;
-        
     }
 
     private void OnInventoryChanged(Item newItem, bool IsRemoving)
@@ -103,8 +92,6 @@ public class UI_Inventory : MonoBehaviour
 
     private void CreateItemButton(Item item)
     {
-        
-        _item = item;
         int indexVert;
         Transform lastCol = null;
         Transform newItemSlot;
@@ -122,7 +109,7 @@ public class UI_Inventory : MonoBehaviour
                     {
                         print("Creating a new button in the quick bar");
                         //This slot is empty
-                        CustomizeButton(_hotKeySlots[indexSlots]);
+                        CustomizeButton(_hotKeySlots[indexSlots], item);
                         //Increase used count
                         _slotUsedCount++;
                         //stop creating
@@ -157,46 +144,46 @@ public class UI_Inventory : MonoBehaviour
         //Create the new item slot.
         newItemSlot = Instantiate(_itemSlotTemplate, lastCol);
 
-        CustomizeButton(newItemSlot);
+        CustomizeButton(newItemSlot, item);
     }
 
-    void CustomizeButton(Transform newItemSlot)
+    void CustomizeButton(Transform newItemSlot, Item item)
     {
-        //Pull information from the SO
-        ItemSO itemSO = _item.itemSO;
-        Type itemType = _item.type;
-        Sprite iconSprite = itemSO.IconSprite;
-        int itemID = itemSO.ID;
 
         //Customize the new item slot.
-        if (iconSprite == null)
+        if (item.itemSO.IconSprite == null)
         {
             newItemSlot.Find("Icon").GetComponent<Image>().sprite = _defaultMissingSprite;
         }
         else
         {
-            newItemSlot.Find("Icon").GetComponent<Image>().sprite = itemSO.IconSprite;
+            newItemSlot.Find("Icon").GetComponent<Image>().sprite = item.itemSO.IconSprite;
         }
         //newItemSlot.Find("Icon").GetComponent<Image>().color = Color.white;
 
         //Set the text
-        newItemSlot.Find("AmountText").GetComponent<TextMeshProUGUI>().text = _item.amount.ToString();
+        newItemSlot.Find("AmountText").GetComponent<TextMeshProUGUI>().text = item.AmountSting();
 
         //Create a new action to listen to the buttonclick.
-        if (itemType == typeof(DefenseItemSO))
+        if (item.type == typeof(DefenseItemSO))
         {  
             //TODO: find out if I need to remove listener at some point is so find out how. 
-            newItemSlot.GetComponent<Button>().onClick.AddListener(delegate { _placementSystem.StartPlacement(_item); });
+            newItemSlot.GetComponent<Button>().onClick.AddListener(delegate { _placementSystem.StartPlacement(item); });
         }
         //TODO: Make an action for weapons
     }
     
-    void handelOnclick()
+
+
+
+    /*USING FOR DEBUGGING*/
+    void handelOnclick(Item item)
     {
         /*Testing with a delegate*/
         PlacementSystem placementSystem = new PlacementSystem();
-        placementSystem.StartPlacement(_item);
+        placementSystem.StartPlacement(item);
     }
+
     private void disableScroll()
     {
         //_scrollScript.vertical = false;

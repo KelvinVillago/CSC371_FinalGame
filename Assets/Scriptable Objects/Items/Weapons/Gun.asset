@@ -17,8 +17,9 @@ MonoBehaviour:
   <Description>k__BackingField: pistol
   <IconSprite>k__BackingField: {fileID: 21300000, guid: ffb2a57c161827d46bbe5437f2070968,
     type: 3}
-  <Prefab>k__BackingField: {fileID: 321689085158545930, guid: aa39dbc2b04ebcd4a8fea847b545f9e0,
+  <Prefab>k__BackingField: {fileID: 3931326013175162958, guid: 0b483c3e22eda6648822ba7cde757167,
     type: 3}
+  <StackAmount>k__BackingField: 1
   <BuyPrice>k__BackingField: 100
   <SellBackPrice>k__BackingField: 50
   <ShopQuantity>k__BackingField: 1

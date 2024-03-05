@@ -20,38 +20,44 @@ public class PlacementSystem : MonoBehaviour
     private Item _item;
     private int _selectedObjIndex = -1;
 
+    Vector3Int _gridPosition;
+    Vector3 mousePosition;
+
     private void Start()
     {
         StopPlacement();
-        _inventory = _selectionManager.PlayerInventory.Inventory;
+    }
+
+    public void SetInventory(Inventory inventory){
+
+        _inventory = inventory;
     }
 
     public void StartPlacement(Item item)
     {
         _item = item;
-        ItemSO itemSO = item.itemSO;
-        int itemID = itemSO.ID;
-    
+        DefenseItemSO defenseItem = item.GetItemSO<DefenseItemSO>();
+
         //Set the start rotation of the cursor indicator.
         _rotationAngle = 0;
         _cellIndicator.transform.rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
         //Prevent a bug where we automatically start placing the item. 
         StopPlacement();
         //The index of the data is returned if the findIndex data matches with the ID param.
-        _selectedObjIndex = _inventory.GetItemsList().FindIndex(data => data.itemSO == itemSO);
+        _selectedObjIndex = _inventory.GetItemsList().FindIndex(data => data.itemSO == defenseItem);
         if(_selectedObjIndex < 0)
         {
-            Debug.LogError($"No matching SO found: {itemSO}");
+            Debug.LogError($"No matching SO found: {defenseItem}");
             return;
         }
-        //Placeable object found
-        DefenseItemSO dISO = (DefenseItemSO) itemSO;
-        //ObjectData objectData = _database.objectsData[_selectedObjIndex];
+
         //if the item is in the database turn on the grid and allow placement.
         _gridVisualization.SetActive(true);
         _cellIndicator.SetActive(true);
+
         //Update the cell indicator to be the size of the selected item.
-        _cellIndicator.transform.localScale = new Vector3 (dISO.Size.x, 1, dISO.Size.y);
+        _cellIndicator.transform.localScale = new Vector3 (defenseItem.Size.x, 1, defenseItem.Size.y);
+
         //Call the placeStructure method
         _selectionManager.OnClicked += PlaceStructure;
         _selectionManager.OnExit += StopPlacement;
@@ -69,6 +75,48 @@ public class PlacementSystem : MonoBehaviour
         {
             return;
         }
+
+        //Create the game object 
+        Vector3 pos = _grid.CellToWorld(_gridPosition);
+        Quaternion rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
+        GameObject newObj = Instantiate(_item.itemSO.Prefab, pos ,rotation);
+
+        //Done using the rotation so reset it
+        _rotationAngle = 0;
+
+        // Decrement the count based on the selected object
+        _inventory.RemoveItem(_item);
+
+        // Close the grid visualization
+        StopPlacement();
+    }
+
+    private void StopPlacement()
+    {
+        //Rest the selected item
+        _selectedObjIndex = -1;
+        //Trun off the grid, placement is no longer allowed. 
+        _gridVisualization.SetActive(false);
+        _cellIndicator.SetActive(false);
+        //Stop listening to the events. 
+        _selectionManager.OnClicked -= PlaceStructure;
+        _selectionManager.OnRotate -= RotateItem;
+        _selectionManager.OnExit -= StopPlacement;
+    }
+
+    private void Update()
+    {
+        //If we are not in the placement mode, dont do anything!
+        if (_selectedObjIndex < 0)
+            return;
+         mousePosition = _selectionManager.GetSelectedMapPosition();
+         _gridPosition = _grid.WorldToCell(mousePosition);
+        _mouseIndicator.transform.position = mousePosition;
+        _cellIndicator.transform.position = _grid.CellToWorld(_gridPosition);
+    }
+
+    private void PlaceWorldItem()
+    {
         Vector3 mousePosition = _selectionManager.GetSelectedMapPosition();
         Vector3Int _gridPosition = _grid.WorldToCell(mousePosition);
         //Create the game object 
@@ -93,33 +141,10 @@ public class PlacementSystem : MonoBehaviour
         //_selectionManager.UpdateInventoryUI();
 
         // Close the grid visualization
-        StopPlacement();
     }
 
-    private void StopPlacement()
-    {
-        //Rest the selected item
-        _selectedObjIndex = -1;
-        //Trun off the grid, placement is no longer allowed. 
-        _gridVisualization.SetActive(false);
-        _cellIndicator.SetActive(false);
-        //Stop listening to the events. 
-        _selectionManager.OnClicked -= PlaceStructure;
-        _selectionManager.OnRotate -= RotateItem;
-        _selectionManager.OnExit -= StopPlacement;
-    }
 
-    private void Update()
-    {
-        //If we are not in the placement mode, dont do anything!
-        if (_selectedObjIndex < 0)
-            return;
-        Vector3 mousePosition = _selectionManager.GetSelectedMapPosition();
-        Vector3Int _gridPosition = _grid.WorldToCell(mousePosition);
-        _mouseIndicator.transform.position = mousePosition;
-        //Debug.Log("Mouse Position" + mousePosition);
-        _cellIndicator.transform.position = _grid.CellToWorld(_gridPosition);
-    }
+
 }
 /**
  * Note:
