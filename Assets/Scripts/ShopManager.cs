@@ -179,6 +179,7 @@ public class ShopManager : MonoBehaviour
         pistol.SetActive(false);
         AR.SetActive(false);
         SMG.SetActive(false);
+        SR.SetActive(false);
     }
     
     public void PurchaseItem_Defenses(int btnNo)
