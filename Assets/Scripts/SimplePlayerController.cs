@@ -9,6 +9,9 @@ public class SimplePlayerController : MonoBehaviour
     Rigidbody _rigidbody;
     InputAction _inputAction;
 
+    public GameObject sniperRifle;
+    public Camera sniperCamera;
+
     Vector3 _movement;
 
     // Start is called before the first frame update
@@ -25,6 +28,15 @@ public class SimplePlayerController : MonoBehaviour
     {
         //GetUserInput();
         RotateTowardsMouse();
+        
+        if(sniperRifle.activeInHierarchy){
+            sniperCamera.enabled = true;
+            _mainCamera.enabled = false;
+        }
+        else{
+            sniperCamera.enabled = false;
+            _mainCamera.enabled = true;
+        }
     }
 
     void FixedUpdate()
