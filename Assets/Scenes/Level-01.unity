@@ -6103,7 +6103,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 47
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -9420,6 +9420,11 @@ PrefabInstance:
       objectReference: {fileID: 1815458107}
     - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
         type: 3}
+      propertyPath: radius
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
       propertyPath: spawn1
       value: 
       objectReference: {fileID: 1421565966}
@@ -9458,6 +9463,11 @@ PrefabInstance:
       propertyPath: spawn8
       value: 
       objectReference: {fileID: 1298357886}
+    - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
+      propertyPath: sheepLocation
+      value: 
+      objectReference: {fileID: 790717329}
     - target: {fileID: 5340569263556484019, guid: 0e98436a24632c449b92e6eac17b5cb7,
         type: 3}
       propertyPath: m_LocalPosition.x

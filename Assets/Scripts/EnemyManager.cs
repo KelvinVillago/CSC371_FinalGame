@@ -1,31 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public Transform spawn1;
-    public Transform spawn2;
-    public Transform spawn3;
-    public Transform spawn4;
-    public Transform spawn5;
-    public Transform spawn6;
-    public Transform spawn7;
-    public Transform spawn8;
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float spawnRate;
     [SerializeField] private bool canSpawn = true;
     public float timePassed = 0f;
-
-    [SerializeField] private GameObject[] wave1;
-    [SerializeField] private GameObject[] wave2;
-    [SerializeField] private GameObject[] wave3;
-    [SerializeField] private GameObject[] wave4;
-    [SerializeField] private GameObject[] wave5;
-    [SerializeField] private GameObject[] wave6;
-    [SerializeField] private GameObject[] wave7;
-    [SerializeField] private GameObject[] wave8;
-
+    [SerializeField] private float radius;
+    public Transform sheepLocation;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,53 +32,23 @@ public class EnemyManager : MonoBehaviour
     void SpawnEnemy()
     {
         GameObject gameObject;
-        int choice = Random.Range(0, 8);
         int rand = Random.Range(0, enemyPrefabs.Length);
         GameObject enemySpawned = enemyPrefabs[rand];
-        switch(choice)
-        {
-            case 0:
-                gameObject = Instantiate(enemySpawned, spawn1.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
 
-            case 1:
-                gameObject = Instantiate(enemySpawned, spawn2.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
+        //Spawning in radius around sheep
+        Vector3 spawnDir = Random.onUnitSphere;
+        spawnDir.y = 0;
+        spawnDir.Normalize();
+        Vector3 point = sheepLocation.position;
+        var spawnPosition = point + spawnDir * radius;
+        gameObject = Instantiate(enemySpawned, spawnPosition, Quaternion.identity);
 
-            case 2:
-                gameObject = Instantiate(enemySpawned, spawn3.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
+    }
 
-            case 3:
-                gameObject = Instantiate(enemySpawned, spawn4.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
-            
-            case 4:
-                gameObject = Instantiate(enemySpawned, spawn5.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
-            
-            case 5:
-                gameObject = Instantiate(enemySpawned, spawn6.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
-            
-            case 6:
-                gameObject = Instantiate(enemySpawned, spawn7.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
-            
-            case 7:
-                gameObject = Instantiate(enemySpawned, spawn8.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
-
-        }
-
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(sheepLocation.position, radius);
     }
 
     // Using Coroutines
