@@ -9,7 +9,16 @@ public class EnemyManager : MonoBehaviour
     public float timePassed = 0f;
     [SerializeField] private float radius;
     public Transform sheepLocation;
-    // Start is called before the first frame update
+    
+    [SerializeField] private GameObject[] wave1;
+    [SerializeField] private GameObject[] wave2;
+    [SerializeField] private GameObject[] wave3;
+    [SerializeField] private GameObject[] wave4;
+    [SerializeField] private GameObject[] wave5;
+    [SerializeField] private GameObject[] wave6;
+    [SerializeField] private GameObject[] wave7;
+    [SerializeField] private GameObject[] wave8;
+
     void Start()
     {
         // Using Coroutines
