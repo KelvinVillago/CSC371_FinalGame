@@ -25,7 +25,6 @@ public class Coin : MonoBehaviour
             chickenController.AddCoin(this.gameObject);
         }
     }
-
     // Update is called once per frame
     void Update()
     {
