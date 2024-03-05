@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -15,6 +16,15 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float spawnRate;
     [SerializeField] private bool canSpawn = true;
     public float timePassed = 0f;
+
+    [SerializeField] private GameObject[] wave1;
+    [SerializeField] private GameObject[] wave2;
+    [SerializeField] private GameObject[] wave3;
+    [SerializeField] private GameObject[] wave4;
+    [SerializeField] private GameObject[] wave5;
+    [SerializeField] private GameObject[] wave6;
+    [SerializeField] private GameObject[] wave7;
+    [SerializeField] private GameObject[] wave8;
 
     // Start is called before the first frame update
     void Start()
