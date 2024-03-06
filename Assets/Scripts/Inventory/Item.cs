@@ -3,6 +3,7 @@ using UnityEngine;
 //Changing properties of SO's does not keep changes after building.
 //Here we are saving properties of items that can change
 
+[Serializable]
 public class Item 
 {
     public ItemSO itemSO;

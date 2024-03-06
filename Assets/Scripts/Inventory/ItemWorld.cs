@@ -16,6 +16,13 @@ public class ItemWorld : MonoBehaviour
         //Return the itemWorld for other functions to refrence.
         return itemWorld;
     }
+
+    public static ItemWorld DropItem(Item item, Vector3 pos)
+    {
+        //spawn the item infront of the player a short distance away.
+        pos += new Vector3(5, 0, 0);
+        return SpawnItemWorld(item, pos);
+    }
     public void DestroySelf()
     {
         //Prevent error is something else tryed to destroy it first. 

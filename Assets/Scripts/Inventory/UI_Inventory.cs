@@ -32,6 +32,7 @@ public class UI_Inventory : MonoBehaviour
     private Inventory _inventory;
     private PlacementSystem _placementSystem;
     private TextMeshProUGUI _amountText;
+    private PlayerInventory _player;
 
     private void Awake()
     {
@@ -44,7 +45,10 @@ public class UI_Inventory : MonoBehaviour
     {
         disableScroll();
     }
-
+    public void SetPlayer(PlayerInventory player)
+    {
+        _player = player;
+    }
     public void SetInventory(Inventory inventory)
     {
         //Starting inventory
@@ -192,11 +196,23 @@ public class UI_Inventory : MonoBehaviour
         if (item.type == typeof(DefenseItemSO))
         {  
             //TODO: find out if I need to remove listener at some point is so find out how. 
-            newItemSlot.GetComponent<Button>().onClick.AddListener(delegate { _placementSystem.StartPlacement(item); });
+            newItemSlot.GetComponent<Button>().onClick.AddListener(delegate { _placementSystem.StartPlacement(item);});
+        }
+        if(item.itemSO.Prefab.GetComponent<ItemWorld>() != null)
+        {
+            //This is a drop-able world item.
+            //Call without using delegate. https://docs.unity3d.com/2018.3/Documentation/ScriptReference/UI.Button-onClick.html
+            newItemSlot.GetComponent<Button>().onClick.AddListener(()=>DropItemHandler(item));
         }
         //TODO: Make an action for weapons
     }
-
+    
+    public ItemWorld DropItemHandler(Item item)
+    {
+        Item removeOne = new Item(item.itemSO, 1);
+        _inventory.RemoveItem(removeOne);
+        return ItemWorld.DropItem(removeOne, _player.GetPos());
+    }
 
     private void OnDestroy()
     {
@@ -204,13 +220,6 @@ public class UI_Inventory : MonoBehaviour
     }
 
     /*USING FOR DEBUGGING*/
-    void handelOnclick(Item item)
-    {
-        /*Testing with a delegate*/
-        PlacementSystem placementSystem = new PlacementSystem();
-        placementSystem.StartPlacement(item);
-    }
-
     private void disableScroll()
     {
         //_scrollScript.vertical = false;

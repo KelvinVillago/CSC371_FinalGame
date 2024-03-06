@@ -19,6 +19,7 @@ public class PlayerInventory : MonoBehaviour
     {
         _inventory = new Inventory();
         _uiInventory.SetInventory(_inventory);
+        _uiInventory.SetPlayer(this);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,5 +37,9 @@ public class PlayerInventory : MonoBehaviour
     public GameObject GetInventoryPanel()
     {
         return _invPanel;
+    }
+    public Vector3 GetPos()
+    {
+        return gameObject.transform.position;
     }
 }

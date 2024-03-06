@@ -89,8 +89,9 @@ public class PlacementSystem : MonoBehaviour
         //Done using the rotation so reset it
         _rotationAngle = 0;
 
-        // Decrement the count based on the selected object
-        _inventory.RemoveItem(_item);
+        // Decrement the count based on the selected object (Defense objects should have a decrement of 1)
+        Item removeItem = new Item(_item.itemSO, 1);
+        _inventory.RemoveItem(removeItem);
 
         // Close the grid visualization
         StopPlacement();

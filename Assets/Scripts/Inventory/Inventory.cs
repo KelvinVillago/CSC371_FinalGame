@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 //This will not be a monobehavior it is a simple class
@@ -46,7 +47,39 @@ public class Inventory
     }
     public void RemoveItem(Item removedItem)
     {
-        OnInventoryChanged?.Invoke();
+        bool removed = false;
+            // Check if its already in the inventory
+        foreach (Item inventoryItem in _items)
+        {
+            if (removedItem.itemSO == inventoryItem.itemSO)
+            {
+                Debug.Log("RemoveItem: RemovedItem.Amount = " + removedItem.amount);
+                //Already exists.
+                if (inventoryItem.amount < removedItem.amount)
+                {
+                    removedItem.amount = -inventoryItem.amount;
+                    _items.Remove(inventoryItem);
+                    //Keep looking for another stack to remove from.
+                }
+                else if (inventoryItem.amount == removedItem.amount)
+                {
+                    _items.Remove(inventoryItem);
+                    removed = true;
+                    //no more to remove leave the loop;
+                    break;
+                }
+                else
+                {
+                    inventoryItem.amount -= removedItem.amount;
+                    removed = true;
+                }
+            }
+        }
+        if(removed == true)
+        {
+            OnInventoryChanged?.Invoke();
+            Debug.Log(_items.Count);
+        }
     }
     public List<Item> GetItemsList() 
     {
