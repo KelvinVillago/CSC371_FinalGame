@@ -857,6 +857,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   moveSpeed: 7
+  a: {fileID: 0}
 --- !u!135 &209414182
 SphereCollider:
   m_ObjectHideFlags: 0
