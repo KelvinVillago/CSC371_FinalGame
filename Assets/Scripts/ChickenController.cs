@@ -7,11 +7,13 @@ public class ChickenController : MonoBehaviour
     private Rigidbody rb;
     private GameObject targetCoin;
     private List<GameObject> coins;
+    public CoinCounter a;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         coins = new List<GameObject>();
+        a = GameObject.FindGameObjectWithTag("CoinCounter").GetComponent<CoinCounter>();
     }
 
     void Update()
@@ -33,6 +35,7 @@ public class ChickenController : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
+            a.increaseNum();
             coins.Remove(other.gameObject); // Remove collected coin from the list
             Destroy(other.gameObject); // Collect the coin
             // Optionally, you can play a sound, increase score, etc.

@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class Enemy : MonoBehaviour
 {
     GameObject coin;
-    public CoinCounter a;
     //AudioSource audioPlayer;
     public AudioClip coinClip;
 
@@ -24,8 +23,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        a = GameObject.FindGameObjectWithTag("CoinCounter").GetComponent<CoinCounter>();
-        //audioPlayer = GetComponent<AudioSource>();
+      //audioPlayer = GetComponent<AudioSource>();
         lineRenderer.positionCount = 2;
     }
 
@@ -56,7 +54,6 @@ public class Enemy : MonoBehaviour
         {
             //audioPlayer.Play();
             AudioSource.PlayClipAtPoint(coinClip, transform.position);
-            a.increaseNum();
             Destroy(this.gameObject);
             Instantiate(prefab, transform.position, Quaternion.identity);
             // GameManager.Instance.AddKill();
