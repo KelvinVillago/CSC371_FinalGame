@@ -67,26 +67,16 @@ public class UI_Inventory : MonoBehaviour
         inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
         inventory.AddItem(new Item(_itemDB.AnimalDB[0]));
         inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
-        inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
-        inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
-        inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
-        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
-        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
-        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
-        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
-        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
-        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
-        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
         //Build UI for starting inventory
         RefreshInventory();
         
         //Start listening for new changes
         inventory.OnInventoryChanged += OnInventoryChanged;
+        inventory.EquipItemAction += EquipItemHandler;
     }
 
     private void OnInventoryChanged()
     {
-        print("Inventory changed...");
         //Need to delet everything because we are using columns and rows it would be difficult to move each item up by 1.
         //Delete the items in the currenty inventory
         foreach (Transform child in _layoutContainerVert)
@@ -106,7 +96,6 @@ public class UI_Inventory : MonoBehaviour
     {
         foreach (Item item in _inventory.GetItemsList())
         {
-            print($"Creating item{item.itemSO.name}");
             CreateItemButton(item);
         }
     }
@@ -121,7 +110,7 @@ public class UI_Inventory : MonoBehaviour
 
 
 
-        /*
+        
         //Debugging inventory amount placement without the quickbar
         //Add weapon to weapon slots if avalible
         if (item.IsSameOrSubclass(typeof(WeaponItemSO)))
@@ -132,8 +121,8 @@ public class UI_Inventory : MonoBehaviour
                 for (indexSlots = 0; indexSlots < _maxSlotCount; indexSlots++)
                 {
                     if (_hotKeySlots[indexSlots].Find("Icon").GetComponent<Image>().sprite == null)
-                    {
-                        print("Creating a new button in the quick bar");
+                    {   //Set a refrence for later.
+                        _hotKeySlots[indexSlots].GetComponent<EquiptSlot>().Item = item;
                         //This slot is empty
                         CustomizeButton(_hotKeySlots[indexSlots], item);
                         //Increase used count
@@ -144,11 +133,7 @@ public class UI_Inventory : MonoBehaviour
                 }
             }
         }
-        */
-
-
-    
-
+        
         //Check whats in the verticle layout container
         indexVert = _layoutContainerVert.childCount - 1;
         //Get the last column of the vert container
@@ -162,7 +147,6 @@ public class UI_Inventory : MonoBehaviour
    
         if (indexVert < 0 || lastCol == null || (indexSlots = lastCol.childCount) >= _maxSlotCount)
         {
-            print("NWEASDFASDFas");
             //Create a new column, which will be the hori container
             lastCol = Instantiate(_layoutContainerHor, _layoutContainerVert);
             if (indexVert > 1)
@@ -198,15 +182,33 @@ public class UI_Inventory : MonoBehaviour
             //TODO: find out if I need to remove listener at some point is so find out how. 
             newItemSlot.GetComponent<Button>().onClick.AddListener(delegate { _placementSystem.StartPlacement(item);});
         }
-        if(item.itemSO.Prefab.GetComponent<ItemWorld>() != null)
+        else if(item.itemSO.Prefab.GetComponent<ItemWorld>() != null)
         {
             //This is a drop-able world item.
             //Call without using delegate. https://docs.unity3d.com/2018.3/Documentation/ScriptReference/UI.Button-onClick.html
             newItemSlot.GetComponent<Button>().onClick.AddListener(()=>DropItemHandler(item));
         }
+        else if (item.type == typeof(ProjectileWeaponOS))
+        {
+            newItemSlot.GetComponent<Button>().onClick.AddListener(()=> _inventory.EquipItem(newItemSlot));
+        }
+        else
+        {
+            print(item.type);
+            //button calls useitem from inventory. When inventory useItem is called the player is listening.
+            newItemSlot.GetComponent<Button>().onClick.AddListener(() => _inventory.UseItem(item));
+        }
         //TODO: Make an action for weapons
     }
     
+    private void EquipItemHandler(Transform slot)
+    {
+        print("EventHandler");
+        //Update the UI for the Hotkey slots
+        Image activeSlot = slot.GetComponent<Image>();
+        activeSlot.color = Color.yellow;
+    }
+
     public ItemWorld DropItemHandler(Item item)
     {
         Item removeOne = new Item(item.itemSO, 1);

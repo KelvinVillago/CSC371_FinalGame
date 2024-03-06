@@ -13,15 +13,13 @@ public class Item
 
     public Item(ItemSO item)
     {
-        Debug.Log("Item: ItemType:" + item.GetType());
         type = item.GetType();
         itemSO = item;
         amount = 1;
         currentShopAmt = 0;
     }
     public Item(ItemSO item, int amount)
-    {
-        Debug.Log("Item: ItemType:" + item.GetType());
+    { 
         type = item.GetType();
         itemSO = item;
         this.amount = amount;
@@ -33,6 +31,8 @@ public class Item
         return potentialDescendant.IsSubclassOf(potentialBase)
                || potentialDescendant == potentialBase;
     }
+
+
     public T GetItemSO<T>() where T : ItemSO
     {
         if(type == typeof(T))
@@ -46,6 +46,4 @@ public class Item
     {
         return amount.ToString();
     }
-
-
 }

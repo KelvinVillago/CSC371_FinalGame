@@ -50,7 +50,7 @@ public class ProjectileGun : MonoBehaviour
     void Awake()
     {
         //get parent
-        _player = transform.parent.gameObject;
+        _player = transform.parent.parent.gameObject;
         _playerRB = _player.GetComponent<Rigidbody>();
 
         // input
