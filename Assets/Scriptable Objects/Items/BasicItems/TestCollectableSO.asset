@@ -18,3 +18,4 @@ MonoBehaviour:
   <IconSprite>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 3931326013175162958, guid: 0b483c3e22eda6648822ba7cde757167,
     type: 3}
+  <StackAmount>k__BackingField: 5

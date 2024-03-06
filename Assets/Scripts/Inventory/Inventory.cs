@@ -6,7 +6,7 @@ using UnityEngine;
 public class Inventory 
 {
     private List<Item> _items;
-    public event Action<Item, bool> OnInventoryChanged;
+    public event Action OnInventoryChanged;
         
     public Inventory() 
     {
@@ -16,13 +16,15 @@ public class Inventory
 
     public void AddItem(Item newItem)
     {
+        //If the item is stackable....
         if(newItem.itemSO.StackAmount > 1)
         {
             bool isAlreadyInInventory = false;
-            //If it is stackable, check if its already in the inventory
+            // Check if its already in the inventory
             foreach(Item inventoryItem in _items)
             {
-                if(newItem.itemSO == inventoryItem.itemSO)
+                if(newItem.itemSO == inventoryItem.itemSO 
+                    && inventoryItem.amount + newItem.amount <= inventoryItem.itemSO.StackAmount)
                 {
                     Debug.Log("AddItem: NewItem.Amount = " + newItem.amount);
                     //Already exists.
@@ -39,12 +41,12 @@ public class Inventory
         {
             _items.Add(newItem);
         }
-        OnInventoryChanged?.Invoke(newItem, false);
+        OnInventoryChanged?.Invoke();
         Debug.Log(_items.Count);
     }
     public void RemoveItem(Item removedItem)
     {
-        OnInventoryChanged?.Invoke(removedItem, true);
+        OnInventoryChanged?.Invoke();
     }
     public List<Item> GetItemsList() 
     {

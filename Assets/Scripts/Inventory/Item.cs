@@ -18,6 +18,14 @@ public class Item
         amount = 1;
         currentShopAmt = 0;
     }
+    public Item(ItemSO item, int amount)
+    {
+        Debug.Log("Item: ItemType:" + item.GetType());
+        type = item.GetType();
+        itemSO = item;
+        this.amount = amount;
+        currentShopAmt = 0;
+    }
     public bool IsSameOrSubclass(Type potentialBase)
     {
         Type potentialDescendant = this.type;

@@ -45,16 +45,18 @@ public class UI_Inventory : MonoBehaviour
         disableScroll();
     }
 
-    private void OnDisable()
-    {
-        _inventory.OnInventoryChanged -= OnInventoryChanged;
-    }
     public void SetInventory(Inventory inventory)
     {
         //Starting inventory
         this._inventory = inventory;
         //Set the same inventory for the grid placement system to check
         _placementSystem.SetInventory(inventory);
+
+        //Test objects
+        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 5), new Vector3(1, 1, 1));
+        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 5), new Vector3(5, 1, 1));
+        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 3), new Vector3(15, 1, 1));
+
 
         //Test code
         inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
@@ -64,7 +66,13 @@ public class UI_Inventory : MonoBehaviour
         inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
         inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
         inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
-
+        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
+        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
+        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
+        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
+        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
+        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
+        inventory.AddItem(new Item(_itemDB.WeaponsDB[0]));
         //Build UI for starting inventory
         RefreshInventory();
         
@@ -72,20 +80,29 @@ public class UI_Inventory : MonoBehaviour
         inventory.OnInventoryChanged += OnInventoryChanged;
     }
 
-    private void OnInventoryChanged(Item newItem, bool IsRemoving)
+    private void OnInventoryChanged()
     {
-        if (IsRemoving)
+        print("Inventory changed...");
+        //Need to delet everything because we are using columns and rows it would be difficult to move each item up by 1.
+        //Delete the items in the currenty inventory
+        foreach (Transform child in _layoutContainerVert)
         {
-            //RemoveButton
-            print("Removing item" + newItem);
+            Destroy(child.gameObject);
         }
-        CreateItemButton(newItem);
+
+        //To update the inventory, deleted children might still be active,
+        //to prevent destroying the new inventory start a new row. 
+        Instantiate(_layoutContainerHor, _layoutContainerVert);
+        
+        //Display the updated inventory
+        RefreshInventory();
     }
 
     private void RefreshInventory()
     {
         foreach (Item item in _inventory.GetItemsList())
         {
+            print($"Creating item{item.itemSO.name}");
             CreateItemButton(item);
         }
     }
@@ -97,6 +114,11 @@ public class UI_Inventory : MonoBehaviour
         Transform newItemSlot;
         int indexSlots;
 
+
+
+
+        /*
+        //Debugging inventory amount placement without the quickbar
         //Add weapon to weapon slots if avalible
         if (item.IsSameOrSubclass(typeof(WeaponItemSO)))
         {
@@ -118,8 +140,11 @@ public class UI_Inventory : MonoBehaviour
                 }
             }
         }
+        */
 
-        print("Creating a button");
+
+    
+
         //Check whats in the verticle layout container
         indexVert = _layoutContainerVert.childCount - 1;
         //Get the last column of the vert container
@@ -133,8 +158,7 @@ public class UI_Inventory : MonoBehaviour
    
         if (indexVert < 0 || lastCol == null || (indexSlots = lastCol.childCount) >= _maxSlotCount)
         {
-   
-            print("vert index: " + indexVert + "creating new column");
+            print("NWEASDFASDFas");
             //Create a new column, which will be the hori container
             lastCol = Instantiate(_layoutContainerHor, _layoutContainerVert);
             if (indexVert > 1)
@@ -172,9 +196,12 @@ public class UI_Inventory : MonoBehaviour
         }
         //TODO: Make an action for weapons
     }
-    
 
 
+    private void OnDestroy()
+    {
+        _inventory.OnInventoryChanged -= OnInventoryChanged;
+    }
 
     /*USING FOR DEBUGGING*/
     void handelOnclick(Item item)
