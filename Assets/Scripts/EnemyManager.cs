@@ -62,6 +62,7 @@ public class EnemyManager : MonoBehaviour
         }
         if(canSpawn)
         {
+            StopCoroutine(EnemyDefeat());
             StartCoroutine(SpawnEnemyWave(currentWave));
         }
     }
@@ -121,7 +122,34 @@ public class EnemyManager : MonoBehaviour
             yield return new WaitForSeconds(spawnRate);
             SpawnEnemyPrefab(wave[i]);
         }
-        
         waveNum++;
+        yield return StartCoroutine(EnemyDefeat());
+    }
+
+    IEnumerator EnemyDefeat()
+    {
+        while(canSpawn == false)
+        {
+            bool check1 = false;
+            bool check2 = false;
+            GameObject[] enemiesRemaining;
+            enemiesRemaining = GameObject.FindGameObjectsWithTag("Enemy");
+            if(enemiesRemaining.Length == 0){
+                check1 = true;
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+            enemiesRemaining = GameObject.FindGameObjectsWithTag("Enemy");
+            if(enemiesRemaining.Length == 0){
+                check2 = true;
+            }
+
+            if(check1 == true && check2 == true){
+                canSpawn = true;
+            }
+
+        }
+        
     }
 }
