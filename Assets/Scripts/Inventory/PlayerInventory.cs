@@ -6,36 +6,61 @@ public class PlayerInventory : MonoBehaviour
 {
     //[SerializeField] private GameObject _inventoryUIPanel;
     [Tooltip("The UI_Inventory panel the player will use to display their inventory")]
-    [SerializeField] private GameObject _invPanel;
+    [SerializeField] private GameObject _playerUI;
     private UI_Inventory _uiInventory;
     private Inventory _inventory;
-    [SerializeField] public Transform _gunSlot;
+    private Transform _gunSlot;
     public Inventory Inventory {  get { return _inventory; } }
 
 
     private void Awake()
     {
-        _uiInventory = _invPanel.GetComponent<UI_Inventory>();
-       
+        _uiInventory = _playerUI.GetComponentInChildren<UI_Inventory>();
+        _gunSlot = transform.Find("GunSlot");
     }
     private void Start()
     {
         _inventory = new Inventory(UseItem);
+        _inventory.EquipItemAction += EquipWeapon;
         _uiInventory.SetInventory(_inventory);
         _uiInventory.SetPlayer(this);
-        _inventory.EquipItemAction += EquipWeapon;
     }
+    
+
+
 
     private void EquipWeapon(Transform slot)
     {
         print("Equipting item");
-        //Remove the current weapon.
-        //Destroy(_gunSlot.GetChild(0).gameObject, 1);
-        //Equipt the Weapon.
         Item item = slot.GetComponent<EquiptSlot>().Item;
-        //Check for current upgrades?
-        print (Instantiate(item.itemSO, _gunSlot));
+        GameObject newGun = null;
         
+        //Currently no weapons equipt
+        if (_gunSlot.childCount < 1)
+        {
+            print("No children found");
+             newGun = Instantiate(item.itemSO.Prefab, _gunSlot);
+            newGun.name = item.itemSO.Name;
+            return;
+        }
+
+        //Get the equiped item
+        Transform currentGun = _gunSlot.GetChild(0);
+        
+        //Check if trying to equipt the same item
+        print($"Current child: {currentGun.name}");
+        if (currentGun.name == item.itemSO.Name)
+        {
+            print($"{currentGun.name} Already created");
+            //Already Equipt dont remake.
+            return;
+        }
+
+        //Remove the current weapon.
+        Destroy(_gunSlot.GetChild(0).gameObject);
+        //Equipt the new Weapon
+        newGun = Instantiate(item.itemSO.Prefab, _gunSlot);
+        newGun.name = item.itemSO.Name;
     }
 
     private void UseItem(Item item)
@@ -68,7 +93,7 @@ public class PlayerInventory : MonoBehaviour
     }
     public GameObject GetInventoryPanel()
     {
-        return _invPanel;
+        return _uiInventory.gameObject;
     }
     public Vector3 GetPos()
     {

@@ -53,13 +53,16 @@ public class UI_Inventory : MonoBehaviour
     {
         //Starting inventory
         this._inventory = inventory;
+        //Start listening to the equipts
+        inventory.EquipItemAction += EquipItemHandler;
+
         //Set the same inventory for the grid placement system to check
         _placementSystem.SetInventory(inventory);
 
         //Test objects
-        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 5), new Vector3(1, 1, 1));
-        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 5), new Vector3(5, 1, 1));
-        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 3), new Vector3(15, 1, 1));
+        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 5), new Vector3(10, 1, 5));
+        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 5), new Vector3(5, 1, 10));
+        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 3), new Vector3(15, 1, 15));
 
 
         //Test code
@@ -72,7 +75,7 @@ public class UI_Inventory : MonoBehaviour
         
         //Start listening for new changes
         inventory.OnInventoryChanged += OnInventoryChanged;
-        inventory.EquipItemAction += EquipItemHandler;
+        
     }
 
     private void OnInventoryChanged()
@@ -106,10 +109,6 @@ public class UI_Inventory : MonoBehaviour
         Transform lastCol = null;
         Transform newItemSlot;
         int indexSlots;
-
-
-
-
         
         //Debugging inventory amount placement without the quickbar
         //Add weapon to weapon slots if avalible
@@ -121,12 +120,23 @@ public class UI_Inventory : MonoBehaviour
                 for (indexSlots = 0; indexSlots < _maxSlotCount; indexSlots++)
                 {
                     if (_hotKeySlots[indexSlots].Find("Icon").GetComponent<Image>().sprite == null)
-                    {   //Set a refrence for later.
+                    {
+                        print("Adding new hotkey");
+                        //Set a refrence for later.
                         _hotKeySlots[indexSlots].GetComponent<EquiptSlot>().Item = item;
+                     
                         //This slot is empty
-                        CustomizeButton(_hotKeySlots[indexSlots], item);
+                        Transform newHotKey = CustomizeButton(_hotKeySlots[indexSlots], item);
+                        
+                        //Activate the hotkey if its the first one.
+                        if(indexSlots == 0)
+                        {
+                            _inventory.EquipItem(newHotKey);
+                        }
+                        
                         //Increase used count
                         _slotUsedCount++;
+              
                         //stop creating
                         return;
                     }
@@ -159,7 +169,7 @@ public class UI_Inventory : MonoBehaviour
         CustomizeButton(newItemSlot, item);
     }
 
-    void CustomizeButton(Transform newItemSlot, Item item)
+    Transform CustomizeButton(Transform newItemSlot, Item item)
     {
 
         //Customize the new item slot.
@@ -194,19 +204,25 @@ public class UI_Inventory : MonoBehaviour
         }
         else
         {
-            print(item.type);
             //button calls useitem from inventory. When inventory useItem is called the player is listening.
             newItemSlot.GetComponent<Button>().onClick.AddListener(() => _inventory.UseItem(item));
         }
-        //TODO: Make an action for weapons
+        return newItemSlot;
     }
     
     private void EquipItemHandler(Transform slot)
-    {
-        print("EventHandler");
+    { 
         //Update the UI for the Hotkey slots
-        Image activeSlot = slot.GetComponent<Image>();
-        activeSlot.color = Color.yellow;
+        foreach (Transform hotKeySlot in _hotKeySlots)
+        {
+            //Remove color from other slots
+            Image activeSlot = hotKeySlot.GetComponent<Image>();
+            activeSlot.color = Color.white;
+            if (slot == hotKeySlot)
+            {
+                activeSlot.color = Color.yellow;
+            }
+        }
     }
 
     public ItemWorld DropItemHandler(Item item)

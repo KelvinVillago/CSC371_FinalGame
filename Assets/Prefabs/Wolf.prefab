@@ -923,12 +923,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d836f9406af06e747b3c974db3d8c09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a: {fileID: 0}
   coinClip: {fileID: 8300000, guid: af2435b78ba5d44beab25e91ad49efb7, type: 3}
   _speed: 4
   _rightBoundary: -60

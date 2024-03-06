@@ -582,6 +582,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  sniperRifle: {fileID: 0}
+  sniperCamera: {fileID: 0}
 --- !u!114 &6445775484680505735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,6 +611,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _invPanel: {fileID: 0}
+  _gunSlot: {fileID: 0}
+  _playerBase: {fileID: 7831777396847413143}
 --- !u!1 &8852879671318557619
 GameObject:
   m_ObjectHideFlags: 0
