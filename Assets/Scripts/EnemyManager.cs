@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -19,7 +21,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject[] wave7;
     [SerializeField] private GameObject[] wave8;
     private int waveNum = 1;
-
+    public TextMeshProUGUI waveText;
+    
     void Start()
     {
         // Using Coroutines
@@ -117,12 +120,16 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator SpawnEnemyWave(GameObject[] wave)
     {
+        waveText.text = "Wave: " + waveNum.ToString() + "/8";
         canSpawn = false;
         for(int i = 0; i < wave.Length; i++){
             yield return new WaitForSeconds(spawnRate);
             SpawnEnemyPrefab(wave[i]);
         }
         waveNum++;
+        if(waveNum > 8){
+            waveNum = 1;
+        }
         yield return StartCoroutine(EnemyDefeat());
     }
 
