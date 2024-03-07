@@ -8,23 +8,19 @@ using TMPro;
 public class ShopManager : MonoBehaviour
 {
     [Header("Shop Item Properties")]
-    [SerializeField] public  ItemsDatabaseSO _itemsDB;
-    [SerializeField] public GameObject _uiPanel;
+    [SerializeField] private  ItemsDatabaseSO _itemsDB;
+    [SerializeField] private GameObject _uiPanel;
+    [SerializeField] private Transform _layoutHori_Weapons;
+    [SerializeField] private Transform _layoutHori_Defenses;
+    [SerializeField] private Transform _layoutHori_Animals;
+    [SerializeField] private Transform _itemTemplatePrefab;
+
+    public SelectionManager selectionManager;
     private List<Item> _weaponItems;
     private List<Item> _defenseItems;
     private List<Item> _animalItems;
-   
-
     private int _level = 1;
    
-    // Purchase references
-    public GameObject pistol;
-    public GameObject AR;
-    public GameObject SMG;
-    public GameObject SR;
-    public SelectionManager selectionManager;
-
-
     // Game UI canvas variables
     public GameObject gameCanvas;
     public Button openShopBtn;
@@ -65,26 +61,27 @@ public class ShopManager : MonoBehaviour
         _uiPanel.SetActive(false);
 
         coins = coinReference.num;
+        /*
         isItemPurchased_Sheeps = new bool[9];
         isItemPurchased_Defenses = new bool[9];
         isItemPurchased_Weapons = new bool[9];
         isItemPurchased_Weapons[0] = true;
+
         Debug.Log("initailized");
+
         for (int i = 0; i < shopItemsSO_Weapons.Length; i++)
         {
             shopPanelsGO_Weapons[i].SetActive(true);
         }
+        */
         coinUI.text = "Coins: " + coins.ToString();
+        /*
         LoadPanels_Weapons();
         CheckPurchaseable_Weapons();
-
+        */
         //Dreas Testing Database
         SetUpShopInventory();
-    }
-
-    private void UseItem()
-    {
-
+        LoadWeapons();
     }
 
     private void SetUpShopInventory()
@@ -123,7 +120,32 @@ public class ShopManager : MonoBehaviour
             _weaponItems.Add(new Item(animal, animal.ShopQuantity));
         }
     }
+    private void LoadWeapons()
+    {
+        //if(_itemTemplatePrefab == null)
+        //{
+        //    Debug.LogErrorFormat($"Item template prefab not created.");
+        //    return;
+        //}
 
+        foreach (Item item in _weaponItems)
+        {
+            Transform shopCard = Instantiate(_itemTemplatePrefab, _layoutHori_Weapons);
+            //Title Txt
+            shopCard.GetChild(0).GetComponent<TextMeshProUGUI>().text = item.itemSO.Name;
+            //Description Txt
+            shopCard.GetChild(1).GetComponent<TextMeshProUGUI>().text = item.itemSO.Description;
+            //Cost
+            shopCard.GetChild(2).GetComponent<TextMeshProUGUI>().text = item.GetItemSO<ShopItemSO2>().BuyPrice.ToString();
+            //Button
+            shopCard.GetChild(3).GetComponent<Button>().onClick.AddListener(() => BuyButttonHandler(item));
+        }
+    }
+
+    private void BuyButttonHandler(Item item)
+    {
+        print($"Buy button clicked for item {item.itemSO.Name}");
+    }
 
 
 
@@ -197,6 +219,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    /*
     public void PurchaseItem_Weapons(int btnNo)
     {
         if (isItemPurchased_Weapons[btnNo] == true) //already bought item
@@ -357,6 +380,8 @@ public class ShopManager : MonoBehaviour
 
     public void OpenSheepShop()
     {
+        
+
         // Hide Weapons
         for (int i = 0; i < shopItemsSO_Weapons.Length; i++)
         {
@@ -389,6 +414,9 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShop()
     {
+        //Turn off the inventory panels if they are open
+        _uiPanel.SetActive(false);
+
         if (!firstTimeOpenShop)
         {
             Start();
@@ -396,9 +424,11 @@ public class ShopManager : MonoBehaviour
         }
         coins = coinReference.num;
         coinUI.text = "Coins: " + coins.ToString();
+        /*
         CheckPurchaseable_Weapons();
         CheckPurchaseable_Defenses();
         CheckPurchaseable_Sheeps();
+        */
         gameObject.SetActive(true);
         Time.timeScale = 0;
         if (gameCanvas != null) 

@@ -33,7 +33,8 @@ public class Item
 
     public T GetItemSO<T>() where T : ItemSO
     {
-        if(type == typeof(T))
+        //if(type == typeof(T))
+        if(IsSameOrSubclass(typeof(T)))
         {
             return (T)itemSO;
         }
