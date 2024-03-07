@@ -75,6 +75,7 @@ public class ShopManager : MonoBehaviour
     {
         coins += 50;
         coinUI.text = "Coins: " + coins.ToString();
+        coinReference.num = coins;
         CheckPurchaseable_Weapons();
         CheckPurchaseable_Defenses();
         CheckPurchaseable_Sheeps();
@@ -146,6 +147,7 @@ public class ShopManager : MonoBehaviour
         {
             coins -= shopItemsSO_Weapons[btnNo].price;
             coinUI.text = "Coins: " + coins.ToString();
+            coinReference.num = coins;
             isItemPurchased_Weapons[btnNo] = true;
             curWeaponIndex = btnNo;
             CheckPurchaseable_Weapons();
@@ -188,6 +190,7 @@ public class ShopManager : MonoBehaviour
         {
             coins -= shopItemsSO_Defenses[btnNo].price;
             coinUI.text = "Coins: " + coins.ToString();
+            coinReference.num = coins;
             CheckPurchaseable_Defenses();
             //unlock item
             if (btnNo == 0)
@@ -213,6 +216,7 @@ public class ShopManager : MonoBehaviour
         {
             coins -= shopItemsSO_Sheeps[btnNo].price;
             coinUI.text = "Coins: " + coins.ToString();
+            coinReference.num = coins;
             GameManager.Instance.AddLives(1);
             CheckPurchaseable_Sheeps();
             //unlock item
@@ -331,6 +335,7 @@ public class ShopManager : MonoBehaviour
         }
         coins = coinReference.num;
         coinUI.text = "Coins: " + coins.ToString();
+        coinReference.num = coins;
         CheckPurchaseable_Weapons();
         CheckPurchaseable_Defenses();
         CheckPurchaseable_Sheeps();
