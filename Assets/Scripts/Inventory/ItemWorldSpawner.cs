@@ -8,6 +8,11 @@ public class ItemWorldSpawner : MonoBehaviour
 
     private void Awake()
     {
+        if(item.type == null)
+        {
+            //If the spawn was made from the inspector it may not generate the type. 
+            item = new Item(item.itemSO, item.amount);
+        }
         ItemWorld.SpawnItemWorld(item, transform.position);
         Destroy(gameObject);
     }

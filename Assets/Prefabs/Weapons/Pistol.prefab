@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3842667231071371537}
   - component: {fileID: 1804894054848943065}
   - component: {fileID: 3363694346300272994}
-  - component: {fileID: 5759086416284357162}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -130,70 +129,12 @@ MonoBehaviour:
   magazineSize: 15
   bulletsPerTap: 1
   allowButtonHold: 0
-  recoil: 10000000
+  recoil: 100
   attackPoint: {fileID: 5983349607107236301}
   muzzleFlash: {fileID: 0}
   ammunitionDisplay: {fileID: 0}
   allowInvoke: 1
-  ammoSlider: {fileID: 0}
---- !u!114 &5759086416284357162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4115037691850077048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: 0}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 711a2eb8-6c6f-47f3-9a69-30e3562301b4
-    m_ActionName: main/movement[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 82037041-b555-4d94-ad64-45f59dbdf36b
-    m_ActionName: main/reload[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e71fb2d5-ca60-4f6c-8164-519af208c2e6
-    m_ActionName: main/Shoot[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e13f04f2-f46f-41c7-bc2d-e55a66849b4a
-    m_ActionName: main/OpenInventory[/Keyboard/i]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 875a39db-cce4-42a7-8826-005d0db1f2c8
-    m_ActionName: GridTest/ShopSelect[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6076c170-c7e5-4356-a285-06a8afa47549
-    m_ActionName: GridTest/ExitShop[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ae03b3bb-5507-4ce6-9031-db2583b17360
-    m_ActionName: GridTest/RotateInventory[/Mouse/rightButton]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: main
-  m_SplitScreenIndex: 1
-  m_Camera: {fileID: 0}
+  ammoBar: {fileID: 0}
 --- !u!1 &8532085361807793504
 GameObject:
   m_ObjectHideFlags: 0

@@ -181,7 +181,8 @@ public class ShopManager : MonoBehaviour
         SMG.SetActive(false);
         SR.SetActive(false);
     }
-    
+
+    /*
     public void PurchaseItem_Defenses(int btnNo)
     {
         if (coins >= shopItemsSO_Defenses[btnNo].price)
@@ -206,6 +207,7 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
+    */
 
     public void PurchaseItem_Sheeps(int btnNo)
     {

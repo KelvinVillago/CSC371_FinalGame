@@ -18,14 +18,22 @@ using UnityEngine.UI;
 
 public class UI_Inventory : MonoBehaviour
 {
+    [Header("Inventory Properties")]
     [SerializeField] private Transform _layoutContainerVert;
     [SerializeField] private Transform _layoutContainerHor;
     [SerializeField] private Transform _itemSlotTemplate;
     [SerializeField] private int _maxSlotCount;
-    [SerializeField] private ItemsDatabaseSO _itemDB;
-    [SerializeField] private Transform[] _hotKeySlots;
     [SerializeField] private Transform _scrollView;
     [SerializeField] private Sprite _defaultMissingSprite;
+
+    [Header("Quickbar Properties")]
+    [SerializeField] private Transform[] _hotKeySlots;
+
+    [Header("Testing Database")]
+    [SerializeField] private ItemsDatabaseSO _itemDB;
+
+
+
     private PreventClickDrag _scrollScript;
     private int _slotUsedCount = 0;
     //Get a refrence to the Start Placement function
@@ -36,9 +44,8 @@ public class UI_Inventory : MonoBehaviour
 
     private void Awake()
     {
-        //Hide the templates on empty open.
-        //_layoutContainerHor.gameObject.SetActive(false);
-        _placementSystem = GameObject.Find("BuildingSystem").GetComponentInChildren<PlacementSystem>();
+        GameObject buildingManager = GameObject.Find("BuildingSystem");
+        _placementSystem = buildingManager.GetComponentInChildren<PlacementSystem>();
         _scrollScript = _scrollView.GetComponent<PreventClickDrag>();
     }
     private void Start()
@@ -58,12 +65,6 @@ public class UI_Inventory : MonoBehaviour
 
         //Set the same inventory for the grid placement system to check
         _placementSystem.SetInventory(inventory);
-
-        //Test objects
-        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 5), new Vector3(10, 1, 5));
-        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 5), new Vector3(5, 1, 10));
-        ItemWorld.SpawnItemWorld(new Item(_itemDB.MscItemsDB[0], 3), new Vector3(15, 1, 15));
-
 
         //Test code
         inventory.AddItem(new Item(_itemDB.DefenseDB[0]));
@@ -119,9 +120,13 @@ public class UI_Inventory : MonoBehaviour
             {
                 for (indexSlots = 0; indexSlots < _maxSlotCount; indexSlots++)
                 {
+                    if (_hotKeySlots[indexSlots].GetComponent<EquiptSlot>().Item == item)
+                    {
+                        //Item already in hot bar
+                        return;
+                    }
                     if (_hotKeySlots[indexSlots].Find("Icon").GetComponent<Image>().sprite == null)
                     {
-                        print("Adding new hotkey");
                         //Set a refrence for later.
                         _hotKeySlots[indexSlots].GetComponent<EquiptSlot>().Item = item;
                      
@@ -184,8 +189,10 @@ public class UI_Inventory : MonoBehaviour
         //newItemSlot.Find("Icon").GetComponent<Image>().color = Color.white;
 
         //Set the text
-        newItemSlot.Find("AmountText").GetComponent<TextMeshProUGUI>().text = item.AmountSting();
-
+        if (item.amount > 1)
+        {
+            newItemSlot.Find("AmountText").GetComponent<TextMeshProUGUI>().text = item.AmountSting();
+        }
         //Create a new action to listen to the buttonclick.
         if (item.type == typeof(DefenseItemSO))
         {  

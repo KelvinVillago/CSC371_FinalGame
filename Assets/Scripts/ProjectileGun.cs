@@ -69,6 +69,9 @@ public class ProjectileGun : MonoBehaviour
         ammoBar = GameObject.Find("AmmoBar");
         ammoSlider = ammoBar.GetComponent<Slider>();
         ammoSlider.maxValue = magazineSize;
+        ammunitionDisplay = GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>();
+        if (ammunitionDisplay == null)
+            print("Amo bar null");
     }
 
     void FixedUpdate()
@@ -79,6 +82,7 @@ public class ProjectileGun : MonoBehaviour
         if (ammunitionDisplay != null)
         {
             ammunitionDisplay.SetText(_bulletsLeft / bulletsPerTap + " / " + magazineSize / bulletsPerTap);
+            //ammunitionDisplay.text = _bulletsLeft.ToString();
         }
     }
 

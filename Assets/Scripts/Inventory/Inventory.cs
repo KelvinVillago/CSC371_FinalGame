@@ -55,32 +55,24 @@ public class Inventory
         {
             if (removedItem.itemSO == inventoryItem.itemSO)
             {
-                Debug.Log("RemoveItem: RemovedItem.Amount = " + removedItem.amount);
+                //Debug.Log("RemoveItem: RemovedItem.Amount = " + removedItem.amount);
                 //Already exists.
-                if (inventoryItem.amount < removedItem.amount)
+                if(inventoryItem.amount > 0)
                 {
-                    removedItem.amount = -inventoryItem.amount;
-                    _items.Remove(inventoryItem);
-                    //Keep looking for another stack to remove from.
-                }
-                else if (inventoryItem.amount == removedItem.amount)
-                {
-                    _items.Remove(inventoryItem);
+                    inventoryItem.amount -= 1;
                     removed = true;
-                    //no more to remove leave the loop;
+
+                    if (inventoryItem.amount == 0)
+                    {
+                        _items.Remove(inventoryItem);
+                    }
                     break;
-                }
-                else
-                {
-                    inventoryItem.amount -= removedItem.amount;
-                    removed = true;
                 }
             }
         }
         if(removed == true)
         {
             OnInventoryChanged?.Invoke();
-            //Debug.Log(_items.Count);
         }
     }
 
@@ -96,7 +88,6 @@ public class Inventory
 
     internal void EquipItem(Transform slot)
     {
-        Debug.Log("Inventory Equipt");
         EquipItemAction?.Invoke(slot);
     }
 }

@@ -5,7 +5,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
 
-
+/**
+ * PlacementSyste: Turns on the grid and placeses Defence items. 
+ * 
+ * Note:
+ * On the Grid Object the cell size is 1,1,1.
+ * If you want two cells per unity unit (box size), change the cell size to (0.5, 0.50, 0.50)
+ * Then change the  Grid shader Material (called shader Graph) size value to (2,2)
+ */
 public class PlacementSystem : MonoBehaviour
 {
     [SerializeField] private GameObject _mouseIndicator;
@@ -155,9 +162,3 @@ public class PlacementSystem : MonoBehaviour
 
 
 }
-/**
- * Note:
- * On the Grid Object the cell size is 1,1,1.
- * If you want two cells per unity unit (box size), change the cell size to (0.5, 0.50, 0.50)
- * Then change the  Grid shader Material (called shader Graph) size value to (2,2)
- */

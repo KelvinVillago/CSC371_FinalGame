@@ -1,44 +1,38 @@
 using System;
 using UnityEngine;
 
-
+/***
+ *  PlayerInventory: Sets the players inventory, Handles how player interacts with inventory items.
+ */
 public class PlayerInventory : MonoBehaviour
 {
-    //[SerializeField] private GameObject _inventoryUIPanel;
     [Tooltip("The UI_Inventory panel the player will use to display their inventory")]
     [SerializeField] private GameObject _playerUI;
     private UI_Inventory _uiInventory;
     private Inventory _inventory;
     private Transform _gunSlot;
     public Inventory Inventory {  get { return _inventory; } }
-
-
     private void Awake()
     {
         _uiInventory = _playerUI.GetComponentInChildren<UI_Inventory>();
         _gunSlot = transform.Find("GunSlot");
+        _uiInventory.SetPlayer(this);
     }
     private void Start()
     {
         _inventory = new Inventory(UseItem);
         _inventory.EquipItemAction += EquipWeapon;
         _uiInventory.SetInventory(_inventory);
-        _uiInventory.SetPlayer(this);
     }
     
-
-
-
     private void EquipWeapon(Transform slot)
     {
-        print("Equipting item");
         Item item = slot.GetComponent<EquiptSlot>().Item;
         GameObject newGun = null;
         
         //Currently no weapons equipt
         if (_gunSlot.childCount < 1)
         {
-            print("No children found");
              newGun = Instantiate(item.itemSO.Prefab, _gunSlot);
             newGun.name = item.itemSO.Name;
             return;
@@ -91,10 +85,12 @@ public class PlayerInventory : MonoBehaviour
             itemWorld.DestroySelf();
         }
     }
+
     public GameObject GetInventoryPanel()
     {
         return _uiInventory.gameObject;
     }
+
     public Vector3 GetPos()
     {
         return gameObject.transform.position;

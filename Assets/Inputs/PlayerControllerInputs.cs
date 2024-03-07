@@ -1,83 +1,105 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+
+public enum ActionMapName_Enum {main, GridMap};
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerControllerInputs : MonoBehaviour
 {
+    //Refrences to the input for other scripts to access. 
+    public bool OpenInventoryInput { get; set; }
+    public bool SelectInventoryInput { get; set; }
+    public bool ExitInventoryInput { get; set; }
+    public bool RotateInventoryInput { get; set; }
+    
+    [Header("READ ONLY - Debugging values")]
     [SerializeField] private string _currentMapName;
-    public bool openInventoryInput = false;
-    public bool shopSelectInput = false;
-    public bool exitShopInput = false;
-    public bool rotateInventoryInput = false;
+
+    //Actions to look for presses
+    private InputAction selectInventoryAction; 
+    private InputAction exitInventoryAction;
+    private InputAction rotateInventoryAction;
+    private InputAction openInventoryAction;
+
     private PlayerInput _playerInput;
-    [HideInInspector] public InputActionMap itemMap; 
-    [HideInInspector] public InputActionMap mainMap;
-    [HideInInspector] public InputAction selectInventoryAction; 
-    [HideInInspector] public InputAction exitInventoryAction;
-    [HideInInspector] public InputAction rotateInventoryAction;
-    [HideInInspector] public InputAction openInventoryAction;
-    //public static event Action<InputActionMap> actionMapChange;
+    private InputActionAsset _actions;
 
     private void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
-        itemMap = _playerInput.actions.FindActionMap("GridTest");
-        mainMap = _playerInput.actions.FindActionMap("main");
-        openInventoryAction = mainMap.FindAction("OpenInventory");
-        selectInventoryAction = itemMap.FindAction("ShopSelect");
-        exitInventoryAction = itemMap.FindAction("ExitShop");
-        rotateInventoryAction = itemMap.FindAction("RotateInventory");
+        _actions = _playerInput.actions;
+        openInventoryAction = _actions["OpenInventory"];
+        selectInventoryAction = _actions["ShopSelect"];
+        exitInventoryAction = _actions["ExitShop"];
+        rotateInventoryAction = _actions["RotateInventory"];
         _currentMapName = _playerInput.currentActionMap.name;
     }
-
+   
+ 
+    /*-----------------------Inputs for Main Map ------------------------------*/
     private void OnOpenInventory(InputValue value)
     {
-        openInventoryInput = openInventoryAction.WasPressedThisFrame();
+        OpenInventoryInput = openInventoryAction.WasPressedThisFrame();
     }
+
+    /*-----------------------Inputs for Grid Map ------------------------------*/
     private void OnRotateInventory(InputValue value)
     {
-        rotateInventoryInput = rotateInventoryAction.WasPressedThisFrame();
+        RotateInventoryInput = rotateInventoryAction.WasPressedThisFrame();
+       
     }
     private void OnShopSelect(InputValue value)
     {
-        shopSelectInput = selectInventoryAction.WasPressedThisFrame();
+        SelectInventoryInput = selectInventoryAction.WasPressedThisFrame();
     }
 
     private void OnExitShop()
     {
-        exitShopInput = exitInventoryAction.WasPressedThisFrame();
+        ExitInventoryInput = exitInventoryAction.WasPressedThisFrame();
     }
 
-    public void SwitchActionMap(InputActionMap actionMap)
+    /*-----------------------Input Action Maps ------------------------------*/
+    public void ToggleActionMap(ActionMapName_Enum actionMapName)
     {
-        _playerInput.SwitchCurrentActionMap(actionMap.name);
-    }
-
-    public void ToggleActionMap(InputActionMap actionMap)
-    {
+        //get the action map using the enum index
+        InputActionMap actionMap = _actions.actionMaps[(int)actionMapName];
+        
+        //if its already turned on stop.
         if (actionMap.enabled && _currentMapName == actionMap.name)
             return;
+
         //Disable all the maps
         DisableAllMaps();
-        //actionMapChange?.Invoke(actionMap);
+        
         //Enable the correct map
         actionMap.Enable();
         _playerInput.currentActionMap = actionMap;
         _currentMapName = _playerInput.currentActionMap.name;
     }
 
-    private void EnableAllMaps()
-    {
-        itemMap.Enable();
-        mainMap.Enable();
-    }
     private void DisableAllMaps()
     {
-        itemMap.Disable();
-        mainMap.Disable();
+        foreach (var map in _actions.actionMaps)
+        {
+            map.Disable();
+        }
     }
+
+
+    /*-----------------------Still testing these functions ------------------------------*/
+    public void SwitchActionMap(InputActionMap actionMap)
+    {
+        _playerInput.SwitchCurrentActionMap(actionMap.name);
+    }
+    private void EnableAllMaps()
+    {
+        foreach(var map in _actions.actionMaps)
+        {
+            map.Enable();
+        }
+    }
+   
     
 }

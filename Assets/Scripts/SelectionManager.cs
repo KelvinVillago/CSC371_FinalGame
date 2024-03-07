@@ -2,93 +2,77 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using TMPro;
-using System.Linq;
+
+/*Use player input to trigger the placement manager*/
 
 public class SelectionManager : MonoBehaviour
 {
+    [Header("Grid Selection properties")]
     [SerializeField] private Camera _sceneCamera;
     [Tooltip("Which layer will the input detection of the mouse listens too")]
-    [SerializeField] LayerMask _placementLayerMask;
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject _shopPanel;
-    //Refrences
-    private PlayerControllerInputs _inputs;
-    private PlayerInventory _playerInventory;
-    private Inventory _inventory;
-    private GameObject _inventoryUIPanel;
+    [SerializeField] private LayerMask _placementLayerMask;
+    [SerializeField] private GameObject _player;
+   
+    //PlayerInventory Information
     private Vector3 _lastPosition;
-    public event Action OnClicked, OnExit, OnRotate;
-    public PlayerInventory PlayerInventory { get { return _playerInventory; } }
+    private PlayerControllerInputs _playerInputs;
+    private GameObject _inventoryPanel;
 
-    //Will return true or false if we are above the UI
-    public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
+    //Properties for the placement system.
+    [HideInInspector] public event Action OnClicked, OnExit, OnRotate;
+    [HideInInspector] public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
 
-    // Buttons and Text
-    public Button[] invBtns;
-    public TextMeshProUGUI[] invBtnTxts;
-    public int fenceCount = 0;
-    public int smallTurretCount = 0;
-    public int largeTurretCount = 0;
-    private void Awake()
-    {
-        _inputs = player.GetComponent<PlayerControllerInputs>();
-        //Save the refrence to the targetObjects inventory
-        _playerInventory = player.GetComponent<PlayerInventory>();
-        //Get access to the UI the targetObject is using.
-        _inventoryUIPanel = _playerInventory.GetInventoryPanel();
-    }
+
     private void Start()
     {
-        //Clear the screen
-        _inventoryUIPanel.SetActive(false);
-        //Get the UI_inventory
-        _inventory = _playerInventory.Inventory;
-        
+        _playerInputs = _player.GetComponent<PlayerControllerInputs>();
+        _inventoryPanel = GameObject.Find("UI/UI_Inventory");
+        _inventoryPanel.SetActive(false);
+    }
+
+    public void OpenHandler()
+    {
+        _playerInputs.OpenInventoryInput = true;
     }
 
     private void Update()
     {
-        
-        if (_inputs.openInventoryInput) {
-            //Time.timeScale = 0;
+        if (_playerInputs.OpenInventoryInput)
+        {
+            //Activate grid map
+            _playerInputs.ToggleActionMap(ActionMapName_Enum.GridMap);
+            _inventoryPanel.SetActive(true);
 
-            //UpdateInventoryUI();
-
-            _inputs.ToggleActionMap(_inputs.itemMap); //Activate grid map
-            _inventoryUIPanel.SetActive(true);
-
-            if(_inputs.shopSelectInput)
+            if (_playerInputs.SelectInventoryInput)
             {
                 //Reseting the value;
-                _inputs.shopSelectInput = false;
+                _playerInputs.SelectInventoryInput = false;
                 //Debug.Log("Shop select activated");
                 OnClicked?.Invoke();
             }
-            if (_inputs.rotateInventoryInput)
+            if (_playerInputs.RotateInventoryInput)
             {
                 //Reseting the value;
-                _inputs.rotateInventoryInput = false;
+                _playerInputs.RotateInventoryInput = false;
                 //Debug.Log("Shop select activated");
                 OnRotate?.Invoke();
             }
-            if (_inputs.exitShopInput)
+            if (_playerInputs.ExitInventoryInput)
             {
-                _inputs.exitShopInput = false;
+                _playerInputs.ExitInventoryInput = false;
                 //Only turn time back on if the shop is closed
-                if (!_shopPanel.activeInHierarchy)
-                    //Time.timeScale = 1;
+                //if (!_shopPanel.activeInHierarchy)
+                //Time.timeScale = 1;
                 //Debug.Log("ExitValue is true");
                 //Close the inventory
-                _inputs.openInventoryInput = false;
-                _inventoryUIPanel.SetActive(false);
-                _inputs.ToggleActionMap(_inputs.mainMap);
+                _playerInputs.OpenInventoryInput = false;
+                _inventoryPanel.SetActive(false);
+                _playerInputs.ToggleActionMap(ActionMapName_Enum.main);
                 OnExit?.Invoke();
             }
         }
     }
-
+   
     public Vector3 GetSelectedMapPosition()
     {
         Vector3 mousePos = Mouse.current.position.ReadValue();
@@ -103,53 +87,5 @@ public class SelectionManager : MonoBehaviour
             _lastPosition = hit.point;
         }
         return _lastPosition;
-    }
-
-    public void UpdateInventoryUI()
-    {
-        /*
-        //We should update this to be the size of the list and generate the inventory cards.
-        ObjectData[] invItems = _itemDB.objectsData.FindAll(data => data.IsPlaceable && data.InventoryQuantity > 0).ToArray();
-        int buttonAmt = 3;
-        for (int i = 0; i < buttonAmt ; i++)
-        {
-            if(invItems.Length < buttonAmt)
-            {
-
-            }
-            //Remove this is we get generation
-            ObjectData item = invItems[i];
-            invBtnTxts[i].text = item.Name + " " + item.InventoryQuantity;
-        }
-        */
-        
-        invBtnTxts[0].text = "Fence: " + fenceCount.ToString();
-        invBtnTxts[1].text = "Small Turrets: " + smallTurretCount.ToString();
-        invBtnTxts[2].text = "Large Turrets: " + largeTurretCount.ToString();
-
-        if (fenceCount == 0)
-        {
-            invBtns[0].interactable = false;
-        }
-        else
-        {
-            invBtns[0].interactable = true;
-        }
-        if (smallTurretCount == 0)
-        {
-            invBtns[1].interactable = false;
-        }
-        else
-        {
-            invBtns[1].interactable = true;
-        }
-        if (largeTurretCount == 0)
-        {
-            invBtns[2].interactable = false;
-        }
-        else
-        {
-            invBtns[2].interactable = true;
-        }
     }
 }
