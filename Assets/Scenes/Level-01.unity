@@ -9561,6 +9561,11 @@ PrefabInstance:
       objectReference: {fileID: 1815458107}
     - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
         type: 3}
+      propertyPath: radius
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
       propertyPath: spawn1
       value: 
       objectReference: {fileID: 1421565966}
@@ -9604,6 +9609,11 @@ PrefabInstance:
       propertyPath: waveText
       value: 
       objectReference: {fileID: 86009411}
+    - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
+      propertyPath: sheepLocation
+      value: 
+      objectReference: {fileID: 790717329}
     - target: {fileID: 5340569263556484019, guid: 0e98436a24632c449b92e6eac17b5cb7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9658,6 +9668,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992689446741448867, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
