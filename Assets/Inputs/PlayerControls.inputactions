@@ -2,7 +2,7 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "main",
+            "name": "Main",
             "id": "1315deed-604f-442b-86f3-98222a13367d",
             "actions": [
                 {
@@ -36,6 +36,15 @@
                     "name": "OpenInventory",
                     "type": "Button",
                     "id": "e13f04f2-f46f-41c7-bc2d-e55a66849b4a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ExitShop",
+                    "type": "Button",
+                    "id": "8c285c20-d029-4b4a-b250-18787fdcc382",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -174,15 +183,26 @@
                     "action": "OpenInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b20b40f-1b30-4bb8-acdf-5b5c9b27935d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitShop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "GridTest",
+            "name": "Placement",
             "id": "6a027134-3665-49ce-8160-c27dbe066ce6",
             "actions": [
                 {
-                    "name": "ShopSelect",
+                    "name": "ItemSelect",
                     "type": "Button",
                     "id": "875a39db-cce4-42a7-8826-005d0db1f2c8",
                     "expectedControlType": "Button",
@@ -200,7 +220,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ExitShop",
+                    "name": "ExitInventory",
                     "type": "Button",
                     "id": "6076c170-c7e5-4356-a285-06a8afa47549",
                     "expectedControlType": "Button",
@@ -217,7 +237,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ShopSelect",
+                    "action": "ItemSelect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -228,7 +248,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ExitShop",
+                    "action": "ExitInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

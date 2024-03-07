@@ -40,7 +40,7 @@ public class SelectionManager : MonoBehaviour
         if (_playerInputs.OpenInventoryInput)
         {
             //Activate grid map
-            _playerInputs.ToggleActionMap(ActionMapName_Enum.GridMap);
+            _playerInputs.ToggleActionMap(ActionMapName_Enum.Placement);
             _inventoryPanel.SetActive(true);
 
             if (_playerInputs.SelectInventoryInput)
@@ -67,7 +67,7 @@ public class SelectionManager : MonoBehaviour
                 //Close the inventory
                 _playerInputs.OpenInventoryInput = false;
                 _inventoryPanel.SetActive(false);
-                _playerInputs.ToggleActionMap(ActionMapName_Enum.main);
+                _playerInputs.ToggleActionMap(ActionMapName_Enum.Main);
                 OnExit?.Invoke();
             }
         }

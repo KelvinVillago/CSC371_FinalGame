@@ -7,12 +7,24 @@ using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
+    [Header("Shop Item Properties")]
+    [SerializeField] public  ItemsDatabaseSO _itemsDB;
+    [SerializeField] public GameObject _uiPanel;
+    private List<Item> _weaponItems;
+    private List<Item> _defenseItems;
+    private List<Item> _animalItems;
+   
+
+    private int _level = 1;
+   
     // Purchase references
     public GameObject pistol;
     public GameObject AR;
     public GameObject SMG;
     public GameObject SR;
     public SelectionManager selectionManager;
+
+
     // Game UI canvas variables
     public GameObject gameCanvas;
     public Button openShopBtn;
@@ -32,7 +44,6 @@ public class ShopManager : MonoBehaviour
     private int curWeaponIndex = 0;
 
     // Defesne Shop Variables
-
     public ShopItemSO[] shopItemsSO_Defenses;
     public GameObject[] shopPanelsGO_Defenses;
     public ShopTemplate[] shopPanels_Defenses;
@@ -50,6 +61,9 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
+        //Turn off the inventory panels if they are open
+        _uiPanel.SetActive(false);
+
         coins = coinReference.num;
         isItemPurchased_Sheeps = new bool[9];
         isItemPurchased_Defenses = new bool[9];
@@ -63,7 +77,55 @@ public class ShopManager : MonoBehaviour
         coinUI.text = "Coins: " + coins.ToString();
         LoadPanels_Weapons();
         CheckPurchaseable_Weapons();
+
+        //Dreas Testing Database
+        SetUpShopInventory();
     }
+
+    private void UseItem()
+    {
+
+    }
+
+    private void SetUpShopInventory()
+    {
+        _weaponItems = new List<Item>();
+        _defenseItems = new List<Item>();
+        _animalItems = new List<Item>();
+
+        foreach (WeaponItemSO weapon in _itemsDB.WeaponsDB)
+        {
+            if (weapon.AvailableLevel == 0 || weapon.AvailableLevel > _level)
+            {
+                //Item is not ready to be added to the shop skip it. 
+                continue;
+            }
+            _weaponItems.Add(new Item(weapon, weapon.ShopQuantity));
+        }
+
+        foreach (DefenseItemSO defense in _itemsDB.DefenseDB)
+        {
+            if (defense.AvailableLevel == 0 || defense.AvailableLevel > _level)
+            {
+                //Item is not ready to be added to the shop skip it. 
+                continue;
+            }
+            _weaponItems.Add(new Item(defense, defense.ShopQuantity));
+        }
+
+        foreach (AnimalItemSO animal in _itemsDB.AnimalDB)
+        {
+            if (animal.AvailableLevel == 0 || animal.AvailableLevel > _level)
+            {
+                //Item is not ready to be added to the shop skip it. 
+                continue;
+            }
+            _weaponItems.Add(new Item(animal, animal.ShopQuantity));
+        }
+    }
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -322,6 +384,7 @@ public class ShopManager : MonoBehaviour
         {
             gameCanvas.SetActive(true); 
         }
+        _uiPanel.SetActive(true);
     }
 
     public void OpenShop()

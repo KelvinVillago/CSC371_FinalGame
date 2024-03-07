@@ -25,7 +25,7 @@ public class UI_Inventory : MonoBehaviour
     [SerializeField] private int _maxSlotCount;
     [SerializeField] private Transform _scrollView;
     [SerializeField] private Sprite _defaultMissingSprite;
-
+    [SerializeField] private Transform _defaultMissingPrefab;
     [Header("Quickbar Properties")]
     [SerializeField] private Transform[] _hotKeySlots;
 
@@ -79,6 +79,10 @@ public class UI_Inventory : MonoBehaviour
         
     }
 
+    public void AddItem(Item item)
+    {
+
+    }
     private void OnInventoryChanged()
     {
         //Need to delet everything because we are using columns and rows it would be difficult to move each item up by 1.
@@ -205,8 +209,9 @@ public class UI_Inventory : MonoBehaviour
             //Call without using delegate. https://docs.unity3d.com/2018.3/Documentation/ScriptReference/UI.Button-onClick.html
             newItemSlot.GetComponent<Button>().onClick.AddListener(()=>DropItemHandler(item));
         }
-        else if (item.type == typeof(ProjectileWeaponOS))
+        else if (item.type == typeof(ProjectileWeaponSO))
         {
+            //SWORDS do not live here?
             newItemSlot.GetComponent<Button>().onClick.AddListener(()=> _inventory.EquipItem(newItemSlot));
         }
         else

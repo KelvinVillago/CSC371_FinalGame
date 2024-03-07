@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed35d83a6f9657d468555bbb8466011d, type: 3}
-  m_Name: Fence
+  m_Name: LargeTurret
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 0
-  <Name>k__BackingField: Fence
-  <Description>k__BackingField: 'A small fence '
+  <Name>k__BackingField: Large Turret
+  <Description>k__BackingField: A large palceable defense that auto fires at enemies
   <IconSprite>k__BackingField: {fileID: 0}
-  <Prefab>k__BackingField: {fileID: 1965356168201470377, guid: 89ff494be055dc44cb1a4a2fba148fdf,
+  <Prefab>k__BackingField: {fileID: 1847491648034095029, guid: 2a41ad59b38be974eaf8e57252eb9bcd,
     type: 3}
-  <StackAmount>k__BackingField: 50
-  <BuyPrice>k__BackingField: 100
-  <SellBackPrice>k__BackingField: 10
-  <ShopQuantity>k__BackingField: 100
+  <StackAmount>k__BackingField: 1
+  <BuyPrice>k__BackingField: 700
+  <SellBackPrice>k__BackingField: 0
+  <ShopQuantity>k__BackingField: 10
   <AvailableLevel>k__BackingField: 1
-  <Size>k__BackingField: {x: 1, y: 5}
-  <Durability>k__BackingField: 100
+  <Size>k__BackingField: {x: 2, y: 2}
+  <Durability>k__BackingField: 0

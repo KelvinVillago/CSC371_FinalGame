@@ -50,9 +50,9 @@ public class ProjectileGun : MonoBehaviour
 
     void Awake()
     {
-        //get parent
-        Transform _gunSlot = transform.parent;
-        _player = _gunSlot.parent.gameObject;
+        //Transform _gunSlot = transform.parent;
+        //_player = _gunSlot.parent.gameObject;
+        _player = GameObject.Find("Player");
         _playerRB = _player.GetComponent<Rigidbody>();
 
         // input
@@ -69,9 +69,6 @@ public class ProjectileGun : MonoBehaviour
         ammoBar = GameObject.Find("AmmoBar");
         ammoSlider = ammoBar.GetComponent<Slider>();
         ammoSlider.maxValue = magazineSize;
-        ammunitionDisplay = GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>();
-        if (ammunitionDisplay == null)
-            print("Amo bar null");
     }
 
     void FixedUpdate()

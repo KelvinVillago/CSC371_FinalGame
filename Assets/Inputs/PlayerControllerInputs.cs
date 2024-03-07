@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public enum ActionMapName_Enum {main, GridMap};
+public enum ActionMapName_Enum {Main, Placement};
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerControllerInputs : MonoBehaviour
@@ -31,8 +31,11 @@ public class PlayerControllerInputs : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
         _actions = _playerInput.actions;
         openInventoryAction = _actions["OpenInventory"];
-        selectInventoryAction = _actions["ShopSelect"];
-        exitInventoryAction = _actions["ExitShop"];
+        
+
+        //GridTest
+        selectInventoryAction = _actions["ItemSelect"];
+        exitInventoryAction = _actions["ExitInventory"];
         rotateInventoryAction = _actions["RotateInventory"];
         _currentMapName = _playerInput.currentActionMap.name;
     }
@@ -43,19 +46,24 @@ public class PlayerControllerInputs : MonoBehaviour
     {
         OpenInventoryInput = openInventoryAction.WasPressedThisFrame();
     }
-
-    /*-----------------------Inputs for Grid Map ------------------------------*/
-    private void OnRotateInventory(InputValue value)
+    
+    private void OnExitShop(InputValue value)
     {
-        RotateInventoryInput = rotateInventoryAction.WasPressedThisFrame();
-       
+
     }
-    private void OnShopSelect(InputValue value)
+
+    /*-----------------------Inputs for Placement Map ------------------------------*/
+
+    private void OnItemSelect(InputValue value)
     {
         SelectInventoryInput = selectInventoryAction.WasPressedThisFrame();
     }
+    private void OnRotateInventory(InputValue value)
+    {
+        RotateInventoryInput = rotateInventoryAction.WasPressedThisFrame();
 
-    private void OnExitShop()
+    }
+    private void OnExitInventory()
     {
         ExitInventoryInput = exitInventoryAction.WasPressedThisFrame();
     }

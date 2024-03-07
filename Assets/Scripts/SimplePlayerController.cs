@@ -8,7 +8,6 @@ public class SimplePlayerController : MonoBehaviour
     Rigidbody _rigidbody;
     InputAction _inputAction;
 
-
     public GameObject sniperRifle;
     public Camera sniperCamera;
 
@@ -28,7 +27,7 @@ public class SimplePlayerController : MonoBehaviour
         //GetUserInput();
         RotateTowardsMouse();
         
-        if(sniperRifle.activeInHierarchy){
+        if(sniperRifle != null && sniperRifle.activeInHierarchy){
             sniperCamera.enabled = true;
             _mainCamera.enabled = false;
         }

@@ -27,6 +27,12 @@ public class PlayerInventory : MonoBehaviour
     
     private void EquipWeapon(Transform slot)
     {
+        if(_gunSlot == null)
+        {
+            //For testing some items are not nested in the game object. 
+            return;
+        }
+
         Item item = slot.GetComponent<EquiptSlot>().Item;
         GameObject newGun = null;
         
