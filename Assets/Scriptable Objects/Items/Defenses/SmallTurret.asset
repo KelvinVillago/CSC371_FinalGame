@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed35d83a6f9657d468555bbb8466011d, type: 3}
   m_Name: SmallTurret
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
+  <ID>k__BackingField: 22
   <Name>k__BackingField: Small Turret
   <Description>k__BackingField: A small palceable defense that auto fires at enemies
   <IconSprite>k__BackingField: {fileID: 0}

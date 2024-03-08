@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed35d83a6f9657d468555bbb8466011d, type: 3}
   m_Name: Wall
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
+  <ID>k__BackingField: 23
   <Name>k__BackingField: Wall
   <Description>k__BackingField: 'A strong wall '
   <IconSprite>k__BackingField: {fileID: 0}

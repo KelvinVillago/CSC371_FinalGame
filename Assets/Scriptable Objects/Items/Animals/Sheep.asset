@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08cdcad730480e848ba1536647b7a248, type: 3}
   m_Name: Sheep
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
+  <ID>k__BackingField: 3
   <Name>k__BackingField: Sheep
   <Description>k__BackingField: An additional sheep for your farm
   <IconSprite>k__BackingField: {fileID: 21300000, guid: a02ff42c0835a59489083ea62254e951,

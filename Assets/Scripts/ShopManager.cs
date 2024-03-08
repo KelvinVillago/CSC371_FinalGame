@@ -7,6 +7,7 @@ using System;
 using UnityEngine.InputSystem.HID;
 using static UnityEditor.Progress;
 using UnityEditor.ShaderGraph.Internal;
+using UnityEditor;
 
 public enum Menu_Enum {Weapon = 0, Defense = 1, Animal = 2}
 public class ShopManager : MonoBehaviour
@@ -64,172 +65,111 @@ public class ShopManager : MonoBehaviour
     private bool IsLoaded_Animals, IsLoaded_Defenses, IsLoaded_Weapons = false;
 
     List<Transform> shopCards = new List<Transform>();
+    GameObject weaponMenu;
+    GameObject animalMenu;
+    GameObject defenseMenu;
+    int weaponIndex = -1;
+    int animalIndex = -1;
+    int defenseIndex = -1;
     private void Awake()
     {
         _inventory = _playerInventory.Inventory;
     }
+    
     void Start()
     {
         //Turn off the inventory panels if they are open
         _uiPanel.SetActive(false);
+        
+        //Init the money
         coins = coinReference.num;
-        /*
-        isItemPurchased_Sheeps = new bool[9];
-        isItemPurchased_Defenses = new bool[9];
-        isItemPurchased_Weapons = new bool[9];
-        isItemPurchased_Weapons[0] = true;
-
-        Debug.Log("initailized");
-
-        for (int i = 0; i < shopItemsSO_Weapons.Length; i++)
-        {
-            shopPanelsGO_Weapons[i].SetActive(true);
-        }
-        */
         coinUI.text = "Coins: " + coins.ToString();
-        /*
-        LoadPanels_Weapons();
-        CheckPurchaseable_Weapons();
-        */
-        //Dreas Testing Database
+
+        //Init the shop data
         _weaponItems = new List<Item>();
         _defenseItems = new List<Item>();
         _animalItems = new List<Item>();
-        SetUpShopInventory();
+        weaponMenu = _layoutHori_Weapons.gameObject;
+        animalMenu = _layoutHori_Animals.gameObject;
+        defenseMenu = _layoutHori_Defenses.gameObject;
+        SetShopInventory();
+        LoadItems();
+
+        //Set the starting weapons dynamically, (add it to players invntory)
+        foreach(Transform child in _layoutHori_Weapons)
+        {
+            ShopTemplate shopCard = child.GetComponent<ShopTemplate>();
+            Item weaponItem = _weaponItems[shopCard.PositionInMenu];
+            ShopItemSO2 shopItem = weaponItem.GetItemSO<ShopItemSO2>();
+            if (CheckPlayerInventory(_weaponItems[shopCard.PositionInMenu]) != -1)
+            {
+                shopCard.PurchasedButton();
+                continue;
+            }
+        }
     }
 
-    private void SetUpShopInventory()
+    private void SetShopInventory( )
     {
+        weaponIndex = _weaponItems.Count;
         foreach (WeaponItemSO weapon in _itemsDB.WeaponsDB)
         {
-            if (weapon.AvailableLevel == 0 || weapon.AvailableLevel > _level)
+            if (weapon.AvailableLevel == _level)
             {
-                //Item is not ready to be added to the shop skip it. 
-                continue;
+                _weaponItems.Add(new Item(weapon, weapon.ShopQuantity));
             }
-            _weaponItems.Add(new Item(weapon, weapon.ShopQuantity));
         }
 
+        defenseIndex = _defenseItems.Count;
         foreach (DefenseItemSO defense in _itemsDB.DefenseDB)
         {
-            if (defense.AvailableLevel == 0 || defense.AvailableLevel > _level)
+            if (defense.AvailableLevel == _level)
             {
-                //Item is not ready to be added to the shop skip it. 
-                continue;
+                _defenseItems.Add(new Item(defense, defense.ShopQuantity));
             }
-            _defenseItems.Add(new Item(defense, defense.ShopQuantity));
         }
 
+        animalIndex = _animalItems.Count;
         foreach (AnimalItemSO animal in _itemsDB.AnimalDB)
         {
-            if (animal.AvailableLevel == 0 || animal.AvailableLevel > _level)
+            if (animal.AvailableLevel == _level)
             {
-                //Item is not ready to be added to the shop skip it. 
-                continue;
+                _animalItems.Add(new Item(animal, animal.ShopQuantity));
             }
-            _animalItems.Add(new Item(animal, animal.ShopQuantity));
         }
     }
 
-    public void OpenShop()
+    private void LoadItems()
     {
-        //Turn off the inventory panels if they are open
-        _uiPanel.SetActive(false);
+       LoadPanels_Weapons();
+       LoadPanels_Defenses();
+       LoadPanels_Animals();
+    }
 
-        if (!firstTimeOpenShop)
+    public void LoadPanels_Weapons()
+    {
+        //Load the card for each item
+        for (; weaponIndex < _weaponItems.Count; weaponIndex++)
         {
-            Start();
-            firstTimeOpenShop = true;
-        }
-
-        coins = coinReference.num;
-        coinUI.text = "Coins: " + coins.ToString();
-        //Load shop icons
-        LoadItems(Menu_Enum.Weapon);
-        /*
-        CheckPurchaseable_Weapons();
-        CheckPurchaseable_Defenses();
-        CheckPurchaseable_Sheeps();
-        */
-        gameObject.SetActive(true);
-        Time.timeScale = 0;
-        if (gameCanvas != null)
-        {
-            gameCanvas.SetActive(false);
+            CustomizeCard(_weaponItems[weaponIndex], _layoutHori_Weapons);
         }
     }
 
-    public void SelectMenu(int num)
+    public void LoadPanels_Defenses()
     {
-        //Button on click wont accept enums
-        LoadItems((Menu_Enum)num);
+        //Load the card for each item
+        for (; defenseIndex < _defenseItems.Count; defenseIndex++)
+        {
+            CustomizeCard(_defenseItems[defenseIndex], _layoutHori_Defenses);
+        }
     }
 
-    private void LoadItems(Menu_Enum menu)
+    public void LoadPanels_Animals()
     {
-        List<Item> itemList = null;
-        Transform layout = null;
-        Type menuType = null;
-
-        switch (menu)
+        //Load the card for each item
+        for (; animalIndex < _animalItems.Count; animalIndex++)
         {
-            case Menu_Enum.Weapon:
-                _layoutHori_Weapons.gameObject.SetActive(true);
-                _layoutHori_Animals.gameObject.SetActive(false);
-                _layoutHori_Defenses.gameObject.SetActive(false);
-                //Ignore if its alerady loaded.
-                if (IsLoaded_Weapons)
-                {
-                    //Turn off the button if it is to broke
-                    SetButton_Purchasable(menu);
-                    return;
-                }
-                itemList = _weaponItems;
-                layout = _layoutHori_Weapons;
-                menuType = typeof(WeaponItemSO);
-                IsLoaded_Weapons = true;
-                break;
-            case Menu_Enum.Animal:
-                _layoutHori_Animals.gameObject.SetActive(true);
-                _layoutHori_Weapons.gameObject.SetActive(false);
-                _layoutHori_Defenses.gameObject.SetActive(false);
-                if (IsLoaded_Animals)
-                {
-                    //Turn off the button if it is to broke
-                    SetButton_Purchasable(menu);
-                    return;
-                }
-                itemList = _animalItems;
-                layout = _layoutHori_Animals;
-                menuType = typeof(AnimalItemSO);
-                IsLoaded_Animals = true;
-                break;
-            case Menu_Enum.Defense:
-                _layoutHori_Defenses.gameObject.SetActive(true);
-                _layoutHori_Animals.gameObject.SetActive(false);
-                _layoutHori_Weapons.gameObject.SetActive(false);
-                if (IsLoaded_Defenses)
-                {
-                    //Turn off the button if it is to broke
-                    SetButton_Purchasable(menu);
-                    return;
-                }
-                itemList = _defenseItems;
-                layout = _layoutHori_Defenses;
-                menuType = typeof(DefenseItemSO);
-                IsLoaded_Defenses = true;
-                break;
-        }
-
-        if (itemList == null || layout == null)
-        {
-            Debug.LogError("itemlist or layout was not set correctly");
-        }
-
-        //Build the card for each item
-        foreach (Item item in itemList)
-        {
-            CustomizeCard(item, layout);
+            CustomizeCard(_animalItems[animalIndex], _layoutHori_Animals);
         }
     }
 
@@ -263,81 +203,13 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private int CheckPlayerInventory(Item item)
-    {
-        int index = -1;
-        //Get the players Inventory
-        List<Item> inventory = _inventory.GetItemsList();
-
-        //Look for the item
-        index = _inventory.GetItemsList().FindIndex(data => data.itemSO == item.itemSO);
-        if (index < 0)
-        {
-            Debug.LogError($"No matching SO found: {item.itemSO}");
-        }
-        return index;
-    }
-
-    private void Weapon_BuyButttonHandler(ShopTemplate shopCard, Item item)
-    {
-        print($"Buy button clicked for item {item.itemSO.Name}");
-        //Remove one from the shops inventory
-        item.amount--;
-
-        //Buying adds one to inventory.
-        Item boughtItem = new Item(item.itemSO, 1);
-
-        //inventory and UI take care of updating the inventory.
-        _inventory.AddItem(item);
-
-        //Update shop button
-        shopCard.PurchasedButton();
-    }
-
-    private void Defense_BuyButttonHandler(Item item)
-    {
-        print($"Buy button clicked for item {item.itemSO.Name}");
-        //Remove one from the shops inventory
-        item.amount--;
-
-        //Buying adds one to inventory.
-        Item boughtItem = new Item(item.itemSO, 1);
-        
-        //inventory and UI take care of updating the inventory.
-        _inventory.AddItem(item);
-    }
-
-    private void Animal_BuyButttonHandler(Item item)
-    {
-        print($"Buy button clicked for item {item.itemSO.Name}");
-        int buyPrice = item.GetItemSO<ShopItemSO2>().BuyPrice;
-
-        //Check if it can be purchased.
-        if (coins >= buyPrice)
-        {
-            coins -= buyPrice;
-            coinUI.text = "Coins: " + coins.ToString();
-            GameManager.Instance.AddLives(1);
-            SetButton_Purchasable(Menu_Enum.Animal);
-        }
-
-        //Remove one from the shops inventory
-        item.amount--;
-
-        //Buying adds one to inventory.
-        Item boughtItem = new Item(item.itemSO, 1);
-
-        //inventory and UI take care of updating the inventory.
-        _inventory.AddItem(item);
-    }
-
-
-
-    private void SetButton_Purchasable(Menu_Enum menu)
+    private void SetButton_Purchasable()
     {
         Transform layout = null;
         List<Item> list = null;
 
+        //Get the active menu
+        Menu_Enum menu = GetActiveMenuName();
         switch (menu)
         {
             case Menu_Enum.Weapon:
@@ -354,7 +226,8 @@ public class ShopManager : MonoBehaviour
                 break;
         }
 
-        foreach(Transform child in layout)
+        //Update the buttons for the active menu
+        foreach (Transform child in layout)
         {
             ShopTemplate shopCard = child.GetComponent<ShopTemplate>();
             Item item = list[shopCard.PositionInMenu];
@@ -365,13 +238,6 @@ public class ShopManager : MonoBehaviour
                 if(shopCard.Button.interactable == false)
                 {
                     //Already purchased.
-                    continue;
-                }
-
-                //if the weapon is already in the inventory change the button
-                if (CheckPlayerInventory(list[shopCard.PositionInMenu]) != -1)
-                {
-                    shopCard.PurchasedButton();
                     continue;
                 }
             }
@@ -386,105 +252,154 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void AddCoins()
+
+    private void HideAllMenus()
     {
-        coins += 50;
+        if (weaponMenu.activeInHierarchy)
+            weaponMenu.SetActive(false);
+        if (animalMenu.gameObject.activeInHierarchy)
+            animalMenu.SetActive(false);
+        if (defenseMenu.gameObject.activeInHierarchy)
+            defenseMenu.SetActive(false);
+    }
+
+    private Menu_Enum GetActiveMenuName()
+    {
+        if (weaponMenu.activeInHierarchy)
+            return Menu_Enum.Weapon;
+        if (animalMenu.gameObject.activeInHierarchy)
+            return Menu_Enum.Animal;
+        if (defenseMenu.gameObject.activeInHierarchy)
+            return Menu_Enum.Defense;
+        Debug.LogError("No menu was active: Using Default");
+        return 0;
+    }
+
+    public void UpdateCoins(int amount)
+    {
+        //Update the coins
+        coins += amount;
         coinUI.text = "Coins: " + coins.ToString();
-        SetButton_Purchasable(Menu_Enum.Weapon);
-        SetButton_Purchasable(Menu_Enum.Defense);
-        SetButton_Purchasable(Menu_Enum.Animal);
-    }
-
-
-
-    public void LoadPanels_Weapons()
-    {
-        for (int i = 0; i < shopItemsSO_Weapons.Length; i++)
-        {
-            shopPanels_Weapons[i].TitleText.text = shopItemsSO_Weapons[i].title;
-            shopPanels_Weapons[i].DescriptionText.text = shopItemsSO_Weapons[i].description;
-            shopPanels_Weapons[i].PriceText.text = "Coins: " + shopItemsSO_Weapons[i].price.ToString();
-        }
-    }
-
-    public void LoadPanels_Defenses()
-    {
-        for (int i = 0; i < shopItemsSO_Defenses.Length; i++)
-        {
-            shopPanels_Defenses[i].TitleText.text = shopItemsSO_Defenses[i].title;
-            shopPanels_Defenses[i].DescriptionText.text = shopItemsSO_Defenses[i].description;
-            shopPanels_Defenses[i].PriceText.text = "Coins: " + shopItemsSO_Defenses[i].price.ToString();
-        }
-    }
-
-    public void LoadPanels_Sheeps()
-    {
-        for (int i = 0; i < shopItemsSO_Sheeps.Length; i++)
-        {
-            shopPanels_Sheeps[i].TitleText.text = shopItemsSO_Sheeps[i].title;
-            shopPanels_Sheeps[i].DescriptionText.text = shopItemsSO_Sheeps[i].description;
-            shopPanels_Sheeps[i].PriceText.text = "Coins: " + shopItemsSO_Sheeps[i].price.ToString();
-        }
-    }
-
-    public void OpenWeaponShop()
-    {
-        // Hide Defenses
-        for (int i = 0; i < shopItemsSO_Defenses.Length; i++)
-        {
-            shopPanelsGO_Defenses[i].SetActive(false);
-        }
-        // Hide Sheep
-        for (int i = 0; i < shopItemsSO_Sheeps.Length; i++)
-        {
-            shopPanelsGO_Sheeps[i].SetActive(false);
-        }
-        // Show Weapons
-        for (int i = 0; i < shopItemsSO_Weapons.Length; i++)
-        {
-            shopPanelsGO_Weapons[i].SetActive(true);
-        }
-        LoadPanels_Weapons();
-        CheckPurchaseable_Weapons();
-    }
-
-    public void OpenDefenseShop()
-    {
-        // Hide Weapons
-        for (int i = 0; i < shopItemsSO_Weapons.Length; i++)
-        {
-            shopPanelsGO_Weapons[i].SetActive(false);
-        }
-        // Hide Sheep
-        for (int i = 0; i < shopItemsSO_Sheeps.Length; i++)
-        {
-            shopPanelsGO_Sheeps[i].SetActive(false);
-        }
-        // Show Defenses
-        for (int i = 0; i < shopItemsSO_Defenses.Length; i++)
-        {
-            shopPanelsGO_Defenses[i].SetActive(true);
-        }
-        LoadPanels_Defenses();
-        CheckPurchaseable_Defenses();
-    }
-
-    public void OpenAnimalMenu()
-    {
-        // Hide Weapons
-
-        // Hide Defenses
-
-        // Show Defenses
-
-        LoadPanels_Sheeps();
+        //Update the buttons
         SetButton_Purchasable();
     }
 
-    public void CloseShop()
+    //------------------------------------Called Through Buttons-------------//
+    private void Weapon_BuyButttonHandler(ShopTemplate shopCard, Item item)
     {
-        //Desolve the shop
-        DestroyMenus();
+        print($"Buy button clicked for item {item.itemSO.Name}");
+        int buyPrice = item.GetItemSO<ShopItemSO2>().BuyPrice;
+        if (coins >= buyPrice)
+        {
+            //Subtract the cost from the coins.
+            UpdateCoins(-buyPrice);
+        }
+
+        //Remove one from the shops inventory
+        item.amount--;
+
+        //Buying adds one to inventory.
+        Item boughtItem = new Item(item.itemSO, 1);
+
+        //inventory and UI take care of updating the inventory.
+        _inventory.AddItem(boughtItem);
+
+        //Update shop button
+        shopCard.PurchasedButton();
+    }
+
+    private void Defense_BuyButttonHandler(Item item)
+    {
+        print($"Buy button clicked for item {item.itemSO.Name}");
+        int buyPrice = item.GetItemSO<ShopItemSO2>().BuyPrice;
+        //Check if it can be purchased.
+        if (coins >= buyPrice)
+        {
+            //Subtract the cost from the coins.
+            UpdateCoins(-buyPrice);
+        }
+
+        //Remove one from the shops inventory
+        item.amount--;
+
+        //Buying adds one to inventory.
+        Item boughtItem = new Item(item.itemSO, 1);
+
+        //inventory and UI take care of updating the inventory.
+        _inventory.AddItem(boughtItem);
+    }
+
+    private void Animal_BuyButttonHandler(Item item)
+    {
+        print($"Buy button clicked for item {item.itemSO.Name}");
+        int buyPrice = item.GetItemSO<ShopItemSO2>().BuyPrice;
+
+        //Check if it can be purchased.
+        if (coins >= buyPrice)
+        {
+            //Subtract the cost from the coins.
+            UpdateCoins(-buyPrice);
+            GameManager.Instance.AddLives(1);
+        }
+
+        //Remove one from the shops inventory
+        item.amount--;
+
+        //Buying adds one to inventory.
+        Item boughtItem = new Item(item.itemSO, 1);
+
+        //inventory and UI take care of updating the inventory.
+        _inventory.AddItem(boughtItem);
+    }
+
+    public void OpenMenu_Handler(int menu)
+    {   
+        //Set the layout
+        switch (menu)
+        {
+            case (int)Menu_Enum.Animal:
+                animalMenu.gameObject.SetActive(false);
+                LoadPanels_Animals();
+                break;
+            case (int)Menu_Enum.Weapon: 
+                weaponMenu.gameObject.SetActive(false);
+                LoadPanels_Weapons();
+                break;
+            case (int)Menu_Enum.Defense:
+                defenseMenu.gameObject.SetActive(false);
+                LoadPanels_Defenses();
+                break;
+        }
+
+        //Load the panels into the menu
+        SetButton_Purchasable();
+    }
+    
+    public void OpenShop_Handler()
+    {
+        //Turn off the inventory panels if they are open
+        _uiPanel.SetActive(false);
+
+        //Load Items into the menu
+        OpenMenu_Handler(0);
+
+        //Turn on the ShopUI
+        gameObject.SetActive(true);
+
+        //Turn on the default menu 
+        weaponMenu.SetActive(true);
+
+        //Pause the game
+        Time.timeScale = 0;
+        if (gameCanvas != null)
+        {
+            gameCanvas.SetActive(false);
+        }
+    }
+
+    public void CloseShop_Handler()
+    {
+        HideAllMenus();
         gameObject.SetActive(false);
         Time.timeScale = 1;
         if (gameCanvas != null) 
@@ -493,6 +408,10 @@ public class ShopManager : MonoBehaviour
         }
         _uiPanel.SetActive(true);
     }
+
+
+    /*Not using these functions rn ------------------------------------------------------*/
+
     private void DestroyMenus()
     {
         //Reset Everything
@@ -514,5 +433,61 @@ public class ShopManager : MonoBehaviour
         IsLoaded_Weapons = false;
     }
 
-    
+    public void OpenWeaponMenu()
+    {
+        // Hide Defenses
+        _layoutHori_Defenses.gameObject.SetActive(false);
+        // Show Animal
+        _layoutHori_Animals.gameObject.SetActive(false);
+        // Show Weapons
+        _layoutHori_Weapons.gameObject.SetActive(true);
+
+        LoadPanels_Weapons();
+        SetButton_Purchasable(Menu_Enum.Animal);
+    }
+
+    public void OpenDefenseMenu()
+    {
+        // Hide Weapons
+        _layoutHori_Weapons.gameObject.SetActive(true);
+        // Hide Animal
+        _layoutHori_Animals.gameObject.SetActive(false);
+        // Show Defenses
+        _layoutHori_Defenses.gameObject.SetActive(false);
+        LoadPanels_Defenses();
+        SetButton_Purchasable(Menu_Enum.Animal);
+    }
+
+    public void OpenAnimalMenu()
+    {
+        // Hide Weapons
+        _layoutHori_Weapons.gameObject.SetActive(true);
+
+        // Hide Defenses
+        _layoutHori_Defenses.gameObject.SetActive(false);
+
+        // Show Animal
+        _layoutHori_Animals.gameObject.SetActive(false);
+
+        LoadPanels_Animals();
+        SetButton_Purchasable(Menu_Enum.Animal);
+    }
+
+    private int CheckPlayerInventory(Item item)
+    {
+        int index = -1;
+        //Get the players Inventory
+        List<Item> inventory = _inventory.GetItemsList();
+
+        //Look for the item
+        index = _inventory.GetItemsList().FindIndex(data => data.itemSO == item.itemSO);
+        if (index < 0)
+        {
+            Debug.LogError($"No matching SO found: {item.itemSO}");
+        }
+        return index;
+    }
+
+
+
 }

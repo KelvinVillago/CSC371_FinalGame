@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d8cf8628f164e459ef4f0bce7acc6b, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
+  <ID>k__BackingField: 10
   <Name>k__BackingField: Pistol
   <Description>k__BackingField: A low-power single shot weapon to fire at enemies
   <IconSprite>k__BackingField: {fileID: 21300000, guid: ffb2a57c161827d46bbe5437f2070968,

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92795a2988c584c438f778d18f8ef29c, type: 3}
   m_Name: TestCollectableSO
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
+  <ID>k__BackingField: 1000
   <Name>k__BackingField: TestCollectable
   <Description>k__BackingField: collectable
   <IconSprite>k__BackingField: {fileID: 0}

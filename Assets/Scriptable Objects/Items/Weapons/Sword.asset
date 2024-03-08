@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3ad263a24767341a2ccdab258fed77, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 0
+  <ID>k__BackingField: 15
   <Name>k__BackingField: Sword
   <Description>k__BackingField: Increased Range and Damage
   <IconSprite>k__BackingField: {fileID: 0}
