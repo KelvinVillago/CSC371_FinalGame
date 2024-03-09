@@ -79,10 +79,6 @@ public class UI_Inventory : MonoBehaviour
         
     }
 
-    public void AddItem(Item item)
-    {
-
-    }
     private void OnInventoryChanged()
     {
         //Need to delet everything because we are using columns and rows it would be difficult to move each item up by 1.

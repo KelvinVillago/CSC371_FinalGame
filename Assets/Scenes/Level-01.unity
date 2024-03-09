@@ -927,7 +927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &209414180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10843,7 +10843,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3184406056006365986}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: SelectMenu
+        m_MethodName: OpenMenu_Handler
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12974,7 +12974,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3184406056006365986}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: OpenShop
+        m_MethodName: OpenShop_Handler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14226,7 +14226,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3184406056006365986}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: SelectMenu
+        m_MethodName: OpenMenu_Handler
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14416,121 +14416,9 @@ MonoBehaviour:
     type: 3}
   selectionManager: {fileID: 848849779}
   gameCanvas: {fileID: 794253615}
-  openShopBtn: {fileID: 0}
   coinReference: {fileID: 1257212486}
   coins: 0
   coinUI: {fileID: 1450045742634862945}
-  shopItemsSO_Weapons:
-  - {fileID: 11400000, guid: 7742e3842e2af4f148bbf4082762f692, type: 2}
-  - {fileID: 11400000, guid: 345d9326b5cb64ab0bb295ef27eb99b4, type: 2}
-  - {fileID: 11400000, guid: 51543ad7a65aa4991ac516d1f82c76b3, type: 2}
-  - {fileID: 11400000, guid: f2b3f030a42c3437d9e05cc82e451d77, type: 2}
-  shopPanelsGO_Weapons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  shopPanels_Weapons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  myPurchaseBtns_Weapons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  buttonTexts_Weapons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  shopItemsSO_Defenses:
-  - {fileID: 11400000, guid: a1331353d121d4b719b70cba8668391e, type: 2}
-  - {fileID: 11400000, guid: 45d68198e1bcb4baa8a54397728e7ad5, type: 2}
-  - {fileID: 11400000, guid: cf81b892816ea4706b647a0694d1c26d, type: 2}
-  shopPanelsGO_Defenses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  shopPanels_Defenses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  myPurchaseBtns_Defenses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  shopItemsSO_Sheeps:
-  - {fileID: 11400000, guid: 15e003351bcee4193ad7a3f9a33f9ca7, type: 2}
-  shopPanelsGO_Sheeps:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  shopPanels_Sheeps:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  myPurchaseBtns_Sheeps:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &3228790476315503413
 GameObject:
   m_ObjectHideFlags: 0
@@ -14975,8 +14863,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1376285832447274945}
   m_HandleRect: {fileID: 8800075734782331976}
   m_Direction: 2
-  m_Value: 0.9999998
-  m_Size: 0.4844443
+  m_Value: -0.0000005998394
+  m_Size: 0.48444423
   m_NumberOfSteps: 1
   m_OnValueChanged:
     m_PersistentCalls:
@@ -17353,7 +17241,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3184406056006365986}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: SelectMenu
+        m_MethodName: OpenMenu_Handler
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19022,7 +18910,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3184406056006365986}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: CloseShop
+        m_MethodName: CloseShop_Handler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19048,7 +18936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -27.039295, y: -279.81924}
+  m_AnchoredPosition: {x: -27.039295, y: 279.8197}
   m_SizeDelta: {x: 95.3581, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8258226303499787011

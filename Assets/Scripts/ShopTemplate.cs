@@ -3,20 +3,23 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 
+[Serializable]
 public class ShopTemplate : MonoBehaviour
 {
-    public Type MenuType { get; set; }
-    public int PositionInMenu { get; set; }
-    public TMP_Text TitleText { get; set; }
-    public TMP_Text DescriptionText { get; set; }
-    public TMP_Text PriceText { get; set; }
-    public Button Button { get; set; }
-    public TMP_Text ButtonText { get; set; }
+    [field:SerializeField] public int PositionInMenu { get; set;}
+    [field:SerializeField] public TMP_Text TitleText { get; private set;}
+    [field:SerializeField] public TMP_Text DescriptionText { get;  private set;}
+    [field:SerializeField] public TMP_Text PriceText { get;  private set;}
+    [field:SerializeField] public Button Button { get;  private set;}
+    [field:SerializeField] public TMP_Text ButtonText { get;  private set;}
 
+    private void Start()
+    {
+        PositionInMenu = 0;
+    }
     public void PurchasedButton()
     {
         ButtonText.text = "Purchased";
         Button.interactable = false;
     }
-
 }

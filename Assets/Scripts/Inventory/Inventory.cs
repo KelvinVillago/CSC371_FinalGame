@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 //This will not be a monobehavior it is a simple class
 public class Inventory 
@@ -74,6 +75,25 @@ public class Inventory
         {
             OnInventoryChanged?.Invoke();
         }
+    }
+
+    public int getIndexByMatchItemSO(Item item)
+    {
+        int index = -1;
+        //Look for the item with matching itemSO
+        index = _items.FindIndex(data => data.itemSO == item.itemSO);
+        return index;
+    }
+
+    public Item getItemByMatchItemSO(Item item)
+    {
+        int index = getIndexByMatchItemSO(item);
+        if (index < 0)
+        {
+            Debug.Log($"No matching SO found: {item.itemSO}");
+            return null;
+        }
+        return _items[index];
     }
 
     public void UseItem(Item item)

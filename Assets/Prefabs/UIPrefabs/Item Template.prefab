@@ -119,11 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 420421cda478749aaa1a34b086a4d634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleText: {fileID: 3892136583013473368}
-  descriptionText: {fileID: 4544075508505379856}
-  priceText: {fileID: 3138412592103017088}
-  button: {fileID: 4791111829709488485}
-  buttonText: {fileID: 6375814338774536935}
+  <PositionInMenu>k__BackingField: 0
+  <TitleText>k__BackingField: {fileID: 3892136583013473368}
+  <DescriptionText>k__BackingField: {fileID: 4544075508505379856}
+  <PriceText>k__BackingField: {fileID: 3138412592103017088}
+  <Button>k__BackingField: {fileID: 4791111829709488485}
+  <ButtonText>k__BackingField: {fileID: 6375814338774536935}
 --- !u!1 &3004744754565729193
 GameObject:
   m_ObjectHideFlags: 0
