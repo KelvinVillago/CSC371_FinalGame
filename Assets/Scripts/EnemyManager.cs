@@ -1,22 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EnemyManager : MonoBehaviour
 {
-    public Transform spawn1;
-    public Transform spawn2;
-    public Transform spawn3;
-    public Transform spawn4;
-    public Transform spawn5;
-    public Transform spawn6;
-    public Transform spawn7;
-    public Transform spawn8;
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float spawnRate;
-    [SerializeField] private bool canSpawn = true;
+    [SerializeField] private bool canSpawn;
     public float timePassed = 0f;
-
+    [SerializeField] private float radius;
+    public Transform sheepLocation;
+    
     [SerializeField] private GameObject[] wave1;
     [SerializeField] private GameObject[] wave2;
     [SerializeField] private GameObject[] wave3;
@@ -25,23 +20,53 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject[] wave6;
     [SerializeField] private GameObject[] wave7;
     [SerializeField] private GameObject[] wave8;
-
-    // Start is called before the first frame update
+    private int waveNum = 1;
+    public TextMeshProUGUI waveText;
+    
     void Start()
     {
         // Using Coroutines
-        StartCoroutine(SpawnEnemyCoroutine());
+        //StartCoroutine(SpawnEnemyCoroutine());
+        canSpawn = true;
     }
     void Update()
     {
-        timePassed += Time.deltaTime;
-        if(timePassed >= 20)
+        GameObject[] currentWave;
+        switch(waveNum)
         {
-            spawnRate = 1;
+            case 1: 
+                currentWave = wave1;
+                break;
+            case 2: 
+                currentWave = wave2;
+                break;
+            case 3: 
+                currentWave = wave3;
+                break;
+            case 4: 
+                currentWave = wave4;
+                break;
+            case 5: 
+                currentWave = wave5;
+                break;
+            case 6: 
+                currentWave = wave6;
+                break;
+            case 7: 
+                currentWave = wave7;
+                break;
+            case 8: 
+                currentWave = wave8;
+                break;
+            default: 
+                currentWave = wave1;
+                break;
+
         }
-        if(timePassed >= 40)
+        if(canSpawn)
         {
-            spawnRate = 0.5f;
+            StopCoroutine(EnemyDefeat());
+            StartCoroutine(SpawnEnemyWave(currentWave));
         }
     }
 
@@ -49,53 +74,38 @@ public class EnemyManager : MonoBehaviour
     void SpawnEnemy()
     {
         GameObject gameObject;
-        int choice = Random.Range(0, 8);
         int rand = Random.Range(0, enemyPrefabs.Length);
         GameObject enemySpawned = enemyPrefabs[rand];
-        switch(choice)
-        {
-            case 0:
-                gameObject = Instantiate(enemySpawned, spawn1.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
 
-            case 1:
-                gameObject = Instantiate(enemySpawned, spawn2.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
+        //Spawning in radius around sheep
+        Vector3 spawnDir = Random.onUnitSphere;
+        spawnDir.y = 0;
+        spawnDir.Normalize();
+        Vector3 point = sheepLocation.position;
+        var spawnPosition = point + spawnDir * radius;
+        gameObject = Instantiate(enemySpawned, spawnPosition, Quaternion.identity);
 
-            case 2:
-                gameObject = Instantiate(enemySpawned, spawn3.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
+    }
 
-            case 3:
-                gameObject = Instantiate(enemySpawned, spawn4.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
-            
-            case 4:
-                gameObject = Instantiate(enemySpawned, spawn5.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
-            
-            case 5:
-                gameObject = Instantiate(enemySpawned, spawn6.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
-            
-            case 6:
-                gameObject = Instantiate(enemySpawned, spawn7.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
-            
-            case 7:
-                gameObject = Instantiate(enemySpawned, spawn8.position, Quaternion.identity);
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                break;
+    void SpawnEnemyPrefab(GameObject enemyPrefab)
+    {
+        GameObject gameObject;
+        int rand = Random.Range(0, enemyPrefabs.Length);
 
-        }
+        //Spawning in radius around sheep
+        Vector3 spawnDir = Random.onUnitSphere;
+        spawnDir.y = 0;
+        spawnDir.Normalize();
+        Vector3 point = sheepLocation.position;
+        var spawnPosition = point + spawnDir * radius;
+        gameObject = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(sheepLocation.position, radius);
     }
 
     // Using Coroutines
@@ -106,5 +116,47 @@ public class EnemyManager : MonoBehaviour
             yield return new WaitForSeconds(spawnRate);
             SpawnEnemy();
         }
+    }
+
+    IEnumerator SpawnEnemyWave(GameObject[] wave)
+    {
+        waveText.text = "Wave: " + waveNum.ToString() + "/8";
+        canSpawn = false;
+        for(int i = 0; i < wave.Length; i++){
+            yield return new WaitForSeconds(spawnRate);
+            SpawnEnemyPrefab(wave[i]);
+        }
+        waveNum++;
+        if(waveNum > 8){
+            waveNum = 1;
+        }
+        yield return StartCoroutine(EnemyDefeat());
+    }
+
+    IEnumerator EnemyDefeat()
+    {
+        while(canSpawn == false)
+        {
+            bool check1 = false;
+            bool check2 = false;
+            GameObject[] enemiesRemaining;
+            enemiesRemaining = GameObject.FindGameObjectsWithTag("Enemy");
+            if(enemiesRemaining.Length == 0){
+                check1 = true;
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+            enemiesRemaining = GameObject.FindGameObjectsWithTag("Enemy");
+            if(enemiesRemaining.Length == 0){
+                check2 = true;
+            }
+
+            if(check1 == true && check2 == true){
+                canSpawn = true;
+            }
+
+        }
+        
     }
 }

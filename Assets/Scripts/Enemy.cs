@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 
 public class Enemy : MonoBehaviour
 {
+    public int maxHealth = 2;
+    public int currentHealth;
+    [SerializeField] HealthBar healthBar;
+
     GameObject coin;
     //AudioSource audioPlayer;
     public AudioClip coinClip;
@@ -27,6 +31,8 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
       //audioPlayer = GetComponent<AudioSource>();
         lineRenderer.positionCount = 2;
     }
@@ -74,8 +80,11 @@ public class Enemy : MonoBehaviour
         {
             //audioPlayer.Play();
             AudioSource.PlayClipAtPoint(coinClip, transform.position);
-            Destroy(this.gameObject);
-            Instantiate(prefab, transform.position, Quaternion.identity);
+            TakeDamage(1);
+            if (currentHealth == 0) {
+                Destroy(this.gameObject);
+                Instantiate(prefab, transform.position, Quaternion.identity);
+            }
             // GameManager.Instance.AddKill();
         }
         // if(other.CompareTag("Sheep"))
@@ -98,5 +107,9 @@ public class Enemy : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
             transform.rotation = rotation;
         }
+    }
+    void TakeDamage(int damage) {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
     }
 }
