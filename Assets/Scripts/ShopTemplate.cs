@@ -13,9 +13,6 @@ public class ShopTemplate : MonoBehaviour
     [field:SerializeField] public Button Button { get;  private set;}
     [field:SerializeField] public TMP_Text ButtonText { get;  private set;}
 
-    private void Start()
-    {
-    }
     public void PurchasedButton()
     {
         ButtonText.text = "Purchased";

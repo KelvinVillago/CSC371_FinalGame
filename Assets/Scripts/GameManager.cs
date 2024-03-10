@@ -64,10 +64,10 @@ public class GameManager : MonoBehaviour
           
             return;
         }
+
         //Shop has closed.
         _selectionManager.IsBlocked = false;
         _uiHUD.SetActive(true);
-        //_uiInventory.gameObject.SetActive(true);
     }
 
     void Start()

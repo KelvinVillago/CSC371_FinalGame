@@ -11356,7 +11356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &406123447140624754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14388,15 +14388,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemsDB: {fileID: 11400000, guid: f9bbd6fa09771864c8d9d37a0234f7f6, type: 2}
   _playerInventory: {fileID: 1045424322}
+  _coinReference: {fileID: 542526966}
   _layoutHori_Weapons: {fileID: 8328537702265432537}
   _layoutHori_Defenses: {fileID: 4023985061051524493}
   _layoutHori_Animals: {fileID: 972702163327320322}
   _itemTemplatePrefab: {fileID: 2491238473863803752, guid: 83962405119ea4ecea5cb204b2fb67f4,
     type: 3}
-  selectionManager: {fileID: 848849779}
-  gameCanvas: {fileID: 794253615}
-  coinReference: {fileID: 542526966}
-  coins: 0
+  _gameCanvas: {fileID: 794253615}
 --- !u!1 &3228790476315503413
 GameObject:
   m_ObjectHideFlags: 0
@@ -14841,8 +14839,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1376285832447274945}
   m_HandleRect: {fileID: 8800075734782331976}
   m_Direction: 2
-  m_Value: -0.0000005998394
-  m_Size: 0.48444423
+  m_Value: 0.9999998
+  m_Size: 0.4844443
   m_NumberOfSteps: 1
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18804,7 +18802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -27.039295, y: 279.8197}
+  m_AnchoredPosition: {x: -27.039295, y: -279.81918}
   m_SizeDelta: {x: 95.3581, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8258226303499787011
@@ -19296,7 +19294,7 @@ RectTransform:
   m_Father: {fileID: 4310521704207974527}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.48444423}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
