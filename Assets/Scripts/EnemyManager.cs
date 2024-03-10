@@ -7,8 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float spawnRate;
-    private bool canSpawn;
-    private bool waveOver;
+    [SerializeField] private bool canSpawn;
     public float timePassed = 0f;
     [SerializeField] private float radius;
     public Transform sheepLocation;
@@ -23,15 +22,12 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject[] wave8;
     private int waveNum = 1;
     public TextMeshProUGUI waveText;
-    public GameObject startWave;
-    public Light dirLight;
     
     void Start()
     {
         // Using Coroutines
         //StartCoroutine(SpawnEnemyCoroutine());
         canSpawn = true;
-        waveOver = false;
     }
     void Update()
     {
@@ -112,13 +108,6 @@ public class EnemyManager : MonoBehaviour
         Gizmos.DrawWireSphere(sheepLocation.position, radius);
     }
 
-    public void StartWave()
-    {
-        dirLight.intensity = 0.2f;
-        startWave.SetActive(false);
-        canSpawn = true;
-    }
-
     // Using Coroutines
     IEnumerator SpawnEnemyCoroutine()
     {
@@ -131,8 +120,6 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator SpawnEnemyWave(GameObject[] wave)
     {
-        waveOver = false;
-        startWave.SetActive(false);
         waveText.text = "Wave: " + waveNum.ToString() + "/8";
         canSpawn = false;
         for(int i = 0; i < wave.Length; i++){
@@ -140,41 +127,36 @@ public class EnemyManager : MonoBehaviour
             SpawnEnemyPrefab(wave[i]);
         }
         waveNum++;
-        waveOver = true;
         if(waveNum > 8){
             waveNum = 1;
         }
-        yield return new WaitForSeconds(0.3f);
         yield return StartCoroutine(EnemyDefeat());
     }
 
     IEnumerator EnemyDefeat()
     {
-        bool check1 = false;
-        bool check2 = false;
         while(canSpawn == false)
         {
+            bool check1 = false;
+            bool check2 = false;
             GameObject[] enemiesRemaining;
             enemiesRemaining = GameObject.FindGameObjectsWithTag("Enemy");
             if(enemiesRemaining.Length == 0){
                 check1 = true;
             }
 
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(1.0f);
 
             enemiesRemaining = GameObject.FindGameObjectsWithTag("Enemy");
             if(enemiesRemaining.Length == 0){
                 check2 = true;
             }
 
-            if(check1 == true && check2 == true && waveOver == true){
-                yield return new WaitForSeconds(1.0f);
-                startWave.SetActive(true);
-                dirLight.intensity = 1;
+            if(check1 == true && check2 == true){
+                canSpawn = true;
             }
 
         }
+        
     }
-
-    
 }
