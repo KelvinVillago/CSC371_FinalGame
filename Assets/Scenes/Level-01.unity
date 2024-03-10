@@ -2230,6 +2230,7 @@ GameObject:
   - component: {fileID: 542526960}
   - component: {fileID: 542526962}
   - component: {fileID: 542526961}
+  - component: {fileID: 542526966}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -2457,6 +2458,8 @@ MonoBehaviour:
   timerText: {fileID: 430840406}
   killsText: {fileID: 1061828053}
   finalKills: {fileID: 2127247814}
+  _coinText_Shop: {fileID: 1450045742634862945}
+  _coinText_HUD: {fileID: 1482358178620312940}
   numOfLives: 1
   tryAgainButton: {fileID: 1815458107}
   gameOver: {fileID: 2127247812}
@@ -2469,6 +2472,7 @@ MonoBehaviour:
   _selectionManager: {fileID: 848849779}
   _uiInventory: {fileID: 5112005767824320867}
   _uiHUD: {fileID: 5499821744261179971}
+  _coinCounter: {fileID: 542526966}
   timePassed: 0.33
 --- !u!114 &542526964
 MonoBehaviour:
@@ -2519,6 +2523,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &542526966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542526959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec075c4b71f1fc84b8969853400f3478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &546686317
 GameObject:
   m_ObjectHideFlags: 0
@@ -7487,8 +7503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec075c4b71f1fc84b8969853400f3478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1257212487}
-  num: 0
 --- !u!114 &1257212487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12467,20 +12481,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1477558238956674831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4033353327701169702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec075c4b71f1fc84b8969853400f3478, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 1482358178620312940}
-  num: 0
 --- !u!114 &1482358178620312940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14395,9 +14395,8 @@ MonoBehaviour:
     type: 3}
   selectionManager: {fileID: 848849779}
   gameCanvas: {fileID: 794253615}
-  coinReference: {fileID: 1477558238956674831}
+  coinReference: {fileID: 542526966}
   coins: 0
-  coinUI: {fileID: 1450045742634862945}
 --- !u!1 &3228790476315503413
 GameObject:
   m_ObjectHideFlags: 0
@@ -15099,9 +15098,8 @@ GameObject:
   - component: {fileID: 2793537837659321111}
   - component: {fileID: 4471083735722483187}
   - component: {fileID: 1482358178620312940}
-  - component: {fileID: 1477558238956674831}
   m_Layer: 5
-  m_Name: Coins
+  m_Name: CoinsText
   m_TagString: CoinCounter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15195,7 +15193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +50 coins
+  m_text: + 100 coins
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19010,8 +19008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec075c4b71f1fc84b8969853400f3478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 746721949588754938}
-  num: 0
 --- !u!1 &8386764571763705553
 GameObject:
   m_ObjectHideFlags: 0
@@ -19591,12 +19587,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3184406056006365986}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: AddCoins
-        m_Mode: 1
+        m_MethodName: UpdateCoins
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 100
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

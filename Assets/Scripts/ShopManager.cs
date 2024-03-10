@@ -8,6 +8,7 @@ using UnityEngine.InputSystem.HID;
 using static UnityEditor.Progress;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEditor;
+using System.Reflection;
 
 public enum Menu_Enum {Weapon = 0, Defense = 1, Animal = 2}
 public class ShopManager : MonoBehaviour
@@ -35,10 +36,9 @@ public class ShopManager : MonoBehaviour
     public GameObject gameCanvas;
     //public Button openShopBtn;
     public CoinCounter coinReference;
-    
-    // Coin Variables
     public int coins;
-    public TMP_Text coinUI;
+
+    //public TMP_Text coinUI;
 
     // Weapon Shop Variables
     //public ShopItemSO[] shopItemsSO_Weapons;
@@ -73,6 +73,7 @@ public class ShopManager : MonoBehaviour
     int weaponIndex = -1;
     int animalIndex = -1;
     int defenseIndex = -1;
+
     private void Awake()
     {
         _inventory = _playerInventory.Inventory;
@@ -86,8 +87,8 @@ public class ShopManager : MonoBehaviour
         print("Starting Shop Manager");
 
         //Init the money
-        coins = coinReference.num;
-        coinUI.text = "Coins: " + coins.ToString();
+        coins = coinReference.Balance = 0;
+        //coinUI.text = "Coins: " + coins.ToString();
 
         //Init the shop data
         _weaponItems = new List<Item>();
@@ -113,6 +114,10 @@ public class ShopManager : MonoBehaviour
                 continue;
             }
         }
+
+        //Load the panel into the menu
+        SetButton_Purchasable();
+        
         initShop = false;
     }
 
@@ -202,6 +207,7 @@ public class ShopManager : MonoBehaviour
 
         //Save the location of this new object
         shopCard.PositionInMenu = layout.childCount - 1;
+       
         //Title Txt
         shopCard.TitleText.text = item.itemSO.Name;
         //shopCard.TitleText.text ="word";
@@ -216,19 +222,27 @@ public class ShopManager : MonoBehaviour
         if (layout == _layoutHori_Weapons)
         {
             shopCard.Button.onClick.AddListener(() => Weapon_BuyButttonHandler(shopCard, item));
+            print($"{shopCard.TitleText}{shopCard.PositionInMenu}{shopCard.PriceText}");
+            print($"list{layout.name}: item:{_weaponItems[shopCard.PositionInMenu].itemSO.Name}");
         }
         else if (layout == _layoutHori_Defenses)
         {
             shopCard.Button.onClick.AddListener(() => Defense_BuyButttonHandler(item));
+            print($"{shopCard.TitleText}{shopCard.PositionInMenu}{shopCard.PriceText}");
+            print($"list{layout.name}: item:{_weaponItems[shopCard.PositionInMenu].itemSO.Name}");
         }
         else
         {
             shopCard.Button.onClick.AddListener(() => Animal_BuyButttonHandler(item));
+            print($"{shopCard.TitleText}{shopCard.PositionInMenu}{shopCard.PriceText}");
+            print($"list{layout.name}: item:{_weaponItems[shopCard.PositionInMenu].itemSO.Name}");
         }
+        
     }
-
+   
     private void SetButton_Purchasable()
     {
+        print(MethodBase.GetCurrentMethod());
         Transform layout = null;
         List<Item> list = null;
 
@@ -242,14 +256,15 @@ public class ShopManager : MonoBehaviour
                 break;
             case Menu_Enum.Animal:
                 layout = _layoutHori_Animals;
-                list = _weaponItems;
+                list = _animalItems;
                 break;
             case Menu_Enum.Defense:
                 layout = _layoutHori_Defenses;
-                list = _weaponItems;
+                list = _defenseItems;
                 break;
         }
 
+        ;
         //Update the buttons for the active menu
         foreach (Transform child in layout)
         {
@@ -257,9 +272,13 @@ public class ShopManager : MonoBehaviour
             Item item = list[shopCard.PositionInMenu];
             ShopItemSO2 shopItem = item.GetItemSO<ShopItemSO2>();
 
+            print($"layout: {layout.name}, Child: {child.name},\n" +
+                    $"ShopCard: {shopCard.name}, Position: {shopCard.PositionInMenu}\n" +
+                    $"Item at Index {item} ItemsSO: {shopItem.Name} ItemPrice: {shopItem.BuyPrice}");
+
             if (menu == Menu_Enum.Weapon)
             {
-                if(shopCard.Button.interactable == false)
+                if(shopCard.ButtonText.text == "Purchased")
                 {
                     //Already purchased.
                     continue;
@@ -267,11 +286,12 @@ public class ShopManager : MonoBehaviour
             }
             if (coins >= shopItem.BuyPrice)
             {
+                print($"Coins: {coins}, BuyPrice: {shopItem.BuyPrice}");
                 shopCard.Button.interactable = true;
             }
             else
             {
-                shopCard.Button.interactable = true;
+                shopCard.Button.interactable = false;
             }
         }
     }
@@ -279,8 +299,10 @@ public class ShopManager : MonoBehaviour
     public void UpdateCoins(int amount)
     {
         //Update the coins
-        coins += amount;
-        coinUI.text = "Coins: " + coins.ToString();
+        //coins += amount;
+        //coinUI.text = "Coins: " + coins.ToString();
+        coins = coinReference.ChangeBalance(amount);
+        print($"UpdateCoins: Balance = {coins}");
         //Update the buttons
         SetButton_Purchasable();
     }

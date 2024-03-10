@@ -5,34 +5,32 @@ using System;
 
 public class CoinCounter : MonoBehaviour
 {
-    public TextMeshProUGUI text;
-    public int num = 0;
-    // Start is called before the first frame update
+    private int _balance;
+    public int Balance { get { return _balance; } set { SetBalance(value); } }
+    public string BalanceString { get => _balance.ToString();}
+    
+
     void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
-        text.text = "Coins: 0";
+        UpdateUI();
     }
 
-    public void increaseNum()
+    private void SetBalance(int balance)
     {
-        num += 50;
+        _balance = balance;
+        UpdateUI();
     }
 
-    public int Count
+    /*add or subtract from balance*/
+    public int ChangeBalance(int value)
     {
-        get
-        {
-            // return the count of coins
-            return num;
-        }
+        _balance += value;
+        UpdateUI();
+        return _balance;
     }
-
-
-    // Update is called once per frame
-    void Update()
+    
+    public void UpdateUI()
     {
-        text.text = num.ToString();
+        GameManager.Instance.CoinValueChange(BalanceString);
     }
-
 }

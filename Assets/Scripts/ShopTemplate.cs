@@ -6,7 +6,7 @@ using System;
 [Serializable]
 public class ShopTemplate : MonoBehaviour
 {
-    [field:SerializeField] public int PositionInMenu { get; set;}
+    [field: SerializeField] public int PositionInMenu { get; set; } = 0;
     [field:SerializeField] public TMP_Text TitleText { get; private set;}
     [field:SerializeField] public TMP_Text DescriptionText { get;  private set;}
     [field:SerializeField] public TMP_Text PriceText { get;  private set;}
@@ -15,7 +15,6 @@ public class ShopTemplate : MonoBehaviour
 
     private void Start()
     {
-        PositionInMenu = 0;
     }
     public void PurchasedButton()
     {

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI killsText;
     public TextMeshProUGUI finalKills;
+    [SerializeField] public TextMeshProUGUI _coinText_Shop;
+    [SerializeField] public TextMeshProUGUI _coinText_HUD;
 
     [SerializeField] private int numOfLives = 3;
     [SerializeField] private GameObject tryAgainButton;
@@ -30,6 +32,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SelectionManager _selectionManager;
     [SerializeField] private UI_Inventory _uiInventory;
     [SerializeField] private GameObject _uiHUD;
+    [SerializeField] private CoinCounter _coinCounter;
+
 
     [Header("READONLY - Values for debugging")]
     [SerializeReference] public float timePassed = 0;
@@ -109,5 +113,14 @@ public class GameManager : MonoBehaviour
         numOfLives += num;
         livesText.text = numOfLives.ToString();
         Debug.Log("You gained a life");
+    }
+
+    public void CoinValueChange(string value)
+    {
+        //Update the shop UI
+        _coinText_Shop.text = $"Coins: {value}";
+
+        //Update the HUD UI
+        _coinText_HUD.text = value;
     }
 }
