@@ -12,22 +12,24 @@ public class SelectionManager : MonoBehaviour
     [Tooltip("Which layer will the input detection of the mouse listens too")]
     [SerializeField] private LayerMask _placementLayerMask;
     [SerializeField] private GameObject _player;
-   
+
     //PlayerInventory Information
     private Vector3 _lastPosition;
     private PlayerControllerInputs _playerInputs;
-    private GameObject _inventoryPanel;
+    [SerializeField]private GameObject _inventoryPanel;
 
     //Properties for the placement system.
     [HideInInspector] public event Action OnClicked, OnExit, OnRotate;
     [HideInInspector] public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
 
+    public bool IsBlocked {get; set;} = false;
 
     private void Start()
     {
         _playerInputs = _player.GetComponent<PlayerControllerInputs>();
-        _inventoryPanel = GameObject.Find("UI/UI_Inventory");
-        _inventoryPanel.SetActive(false);
+        //_inventoryPanel = GameObject.Find("UI/UI_Inventory");
+        if(_inventoryPanel.activeInHierarchy)
+            _inventoryPanel.SetActive(false);
     }
 
     public void OpenHandler()
@@ -37,7 +39,7 @@ public class SelectionManager : MonoBehaviour
 
     private void Update()
     {
-        if (_playerInputs.OpenInventoryInput)
+        if (_playerInputs.OpenInventoryInput && IsBlocked == false)
         {
             //Activate grid map
             _playerInputs.ToggleActionMap(ActionMapName_Enum.Placement);

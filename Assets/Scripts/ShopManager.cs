@@ -16,7 +16,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private ItemsDatabaseSO _itemsDB;
     [SerializeField] private PlayerInventory _playerInventory;
     [Header("Shop UI Properties")]
-    [SerializeField] private GameObject _uiPanel;
+    //[SerializeField] private GameObject _InventoryPanel;
     [SerializeField] private Transform _layoutHori_Weapons;
     [SerializeField] private Transform _layoutHori_Defenses;
     [SerializeField] private Transform _layoutHori_Animals;
@@ -28,7 +28,9 @@ public class ShopManager : MonoBehaviour
     private List<Item> _defenseItems;
     private List<Item> _animalItems;
     private int _level = 1;
-   
+
+    public event Action<bool> IsShopOpen;
+
     // Game UI canvas variables
     public GameObject gameCanvas;
     //public Button openShopBtn;
@@ -397,6 +399,7 @@ public class ShopManager : MonoBehaviour
 
     public void OpenMenu_Handler(int menu)
     {
+        IsShopOpen?.Invoke(true);
         print("Open menu Handler");
         //Hide all the menus to prevent overlapping
         HideAllMenus();
@@ -433,10 +436,10 @@ public class ShopManager : MonoBehaviour
 
         //Turn off the inventory & Game panels if they are open
         //_uiPanel.SetActive(false);
-        print("deactavating: ui");
-        SetDeactive(_uiPanel);
-        print("deactavating: gameCanvas");
-        SetDeactive(gameCanvas);
+        //print("deactavating: ui");
+        //SetDeactive(_InventoryPanel);
+        //print("deactavating: gameCanvas");
+        //SetDeactive(gameCanvas);
 
         //Turn on the ShopUI
         //gameObject.SetActive(true);
@@ -465,16 +468,17 @@ public class ShopManager : MonoBehaviour
         print("Closing shop");
         HideAllMenus();
         //gameObject.SetActive(false);
-        print("deactavating: gameObject");
+        //print("deactavating: gameObject");
         SetDeactive(gameObject);
         //UnPause the game
         Time.timeScale = 1;
+        IsShopOpen?.Invoke(false);
         //Activate UI
-        print("activating: gameCanvas");
-        SetActive(gameCanvas);
+        //print("activating: gameCanvas");
+        //SetActive(gameCanvas);
         //gameCanvas.SetActive(true);
-        print("activating:  _uiPanel");
-        SetActive(_uiPanel);
+        //print("activating:  _uiPanel");
+        //SetActive(_InventoryPanel);
         //_uiPanel.SetActive(true);
         //if (gameCanvas != null) 
         //{

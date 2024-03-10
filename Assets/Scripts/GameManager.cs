@@ -1,25 +1,38 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
+    [Header("UI Text Properties")]
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI killsText;
     public TextMeshProUGUI finalKills;
+
     [SerializeField] private int numOfLives = 3;
-    public static GameManager Instance;
     [SerializeField] private GameObject tryAgainButton;
     [SerializeField] private GameObject gameOver;
     [SerializeField] private GameObject startScreen;
     [SerializeField] private GameObject deathParticle;
     [SerializeField] private int killCounter = 0;
+    
+    [Header("Audio Properties")]
     AudioSource audioSource1;
     AudioSource audiosource2;
     public AudioClip audio1;
     public AudioClip audio2;
-    public float timePassed = 0;
-    
+  
+    [Header("UI Properties")]
+    [SerializeField] private ShopManager _shopManager;
+    [SerializeField] private SelectionManager _selectionManager;
+    [SerializeField] private UI_Inventory _uiInventory;
+    [SerializeField] private GameObject _uiHUD;
+
+    [Header("READONLY - Values for debugging")]
+    [SerializeReference] public float timePassed = 0;
 
     private void Awake()
     {
@@ -28,6 +41,29 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         audioSource1 = GetComponent<AudioSource>();
+    }
+    private void OnEnable()
+    {
+        _shopManager.IsShopOpen += OnShopStatusChanged;
+    }
+
+    private void OnShopStatusChanged(bool obj)
+    {
+        if (obj)
+        {
+            //The shop is opened. 
+            _selectionManager.IsBlocked = true;
+            if (_uiInventory.gameObject.activeInHierarchy)
+                _uiInventory.gameObject.SetActive(false);
+            if (_uiHUD.activeInHierarchy)
+                _uiHUD.gameObject.SetActive(false);
+          
+            return;
+        }
+        //Shop has closed.
+        _selectionManager.IsBlocked = false;
+        _uiHUD.SetActive(true);
+        //_uiInventory.gameObject.SetActive(true);
     }
 
     void Start()

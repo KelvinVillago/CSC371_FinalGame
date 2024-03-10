@@ -38,14 +38,14 @@ public class UI_Inventory : MonoBehaviour
     private int _slotUsedCount = 0;
     //Get a refrence to the Start Placement function
     private Inventory _inventory;
-    private PlacementSystem _placementSystem;
+    [SerializeField] private PlacementSystem _placementSystem;
     private TextMeshProUGUI _amountText;
     private PlayerInventory _player;
 
     private void Awake()
     {
-        GameObject buildingManager = GameObject.Find("BuildingSystem");
-        _placementSystem = buildingManager.GetComponentInChildren<PlacementSystem>();
+        //GameObject buildingManager = GameObject.Find("BuildingSystem");
+        //_placementSystem = buildingManager.GetComponentInChildren<PlacementSystem>();
         _scrollScript = _scrollView.GetComponent<PreventClickDrag>();
     }
     private void Start()
