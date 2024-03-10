@@ -14,8 +14,7 @@ public class PlayerControllerInputs : MonoBehaviour
     public bool ExitInventoryInput { get; set; }
     public bool RotateInventoryInput { get; set; }
     
-    [Header("READ ONLY - Debugging values")]
-    [SerializeField] private string _currentMapName;
+    private string _currentMapName;
 
     //Actions to look for presses
     private InputAction selectInventoryAction; 
@@ -32,7 +31,6 @@ public class PlayerControllerInputs : MonoBehaviour
         _actions = _playerInput.actions;
         openInventoryAction = _actions["OpenInventory"];
         
-
         //GridTest
         selectInventoryAction = _actions["ItemSelect"];
         exitInventoryAction = _actions["ExitInventory"];

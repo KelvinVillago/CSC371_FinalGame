@@ -7,9 +7,6 @@ using UnityEngine.UI;
 public class ItemSO : ScriptableObject
 {
     [field: Header("Basic Item Properties")]
-    [field: Tooltip("The ID of the item, to keep things unique")]
-    [field: SerializeField] public int ID { get; private set; }
-
     [field: Tooltip("The name of the item")]
     [field: SerializeField] public string Name { get; private set; }
 

@@ -2109,6 +2109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
+    <SlotID>k__BackingField: 0
     itemSO: {fileID: 11400000, guid: 4cd0544c6f1d7d743ac9b706fa318079, type: 2}
     amount: 1
 --- !u!1 &522817513
@@ -3461,6 +3462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
+    <SlotID>k__BackingField: 0
     itemSO: {fileID: 11400000, guid: 4cd0544c6f1d7d743ac9b706fa318079, type: 2}
     amount: 10
 --- !u!1001 &760470963
@@ -6695,6 +6697,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8378971808000574896, guid: c0efc72675381a746a02cad7bbd8aef3,
         type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1045424318}
+    - target: {fileID: -8378971808000574896, guid: c0efc72675381a746a02cad7bbd8aef3,
+        type: 3}
       propertyPath: _gunSlot
       value: 
       objectReference: {fileID: 1656090931}
@@ -6713,6 +6720,11 @@ PrefabInstance:
       propertyPath: _playerBase
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: -8378971808000574896, guid: c0efc72675381a746a02cad7bbd8aef3,
+        type: 3}
+      propertyPath: _uiInventory
+      value: 
+      objectReference: {fileID: 5112005767824320867}
     - target: {fileID: 562804293900825486, guid: c0efc72675381a746a02cad7bbd8aef3,
         type: 3}
       propertyPath: m_DefaultActionMap
@@ -6951,7 +6963,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7122b908724274440b4ca8deb447ace7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentMapName: 
 --- !u!1 &1045424321 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8852879671318557619, guid: c0efc72675381a746a02cad7bbd8aef3,
@@ -7471,7 +7482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1257212485
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9193,6 +9204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
+    <SlotID>k__BackingField: 0
     itemSO: {fileID: 11400000, guid: 4cd0544c6f1d7d743ac9b706fa318079, type: 2}
     amount: 15
 --- !u!1 &1787703024
@@ -9642,6 +9654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
+    <SlotID>k__BackingField: 0
     itemSO: {fileID: 11400000, guid: 4cd0544c6f1d7d743ac9b706fa318079, type: 2}
     amount: 1
 --- !u!1 &1854124590
@@ -11356,7 +11369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &406123447140624754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17386,6 +17399,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7cddf57e795d24390232eac9773400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: 4337493210706616623}
+  <AmountText>k__BackingField: {fileID: 6252167816900791820}
+  <Button>k__BackingField: {fileID: 1518828664850890670}
 --- !u!114 &7033893560582899635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17449,6 +17465,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7cddf57e795d24390232eac9773400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: 554593689354437367}
+  <AmountText>k__BackingField: {fileID: 7874445665478340052}
+  <Button>k__BackingField: {fileID: 3355315322120641654}
 --- !u!114 &7081481845594470660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18104,6 +18123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7cddf57e795d24390232eac9773400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: 5432559132848760709}
+  <AmountText>k__BackingField: {fileID: 2418896059843954854}
+  <Button>k__BackingField: {fileID: 7081481845594470660}
 --- !u!224 &7639424032881416343
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18838,6 +18860,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7cddf57e795d24390232eac9773400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: 1674220277516515688}
+  <AmountText>k__BackingField: {fileID: 9064040577581373003}
+  <Button>k__BackingField: {fileID: 4476067853558654953}
 --- !u!1 &8270023959541573691
 GameObject:
   m_ObjectHideFlags: 0
@@ -19084,6 +19109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7cddf57e795d24390232eac9773400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: 7033893560582899635}
+  <AmountText>k__BackingField: {fileID: 822081153168435344}
+  <Button>k__BackingField: {fileID: 5241980417736415538}
 --- !u!224 &8495254421119720969
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19293,8 +19321,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4310521704207974527}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5155556}
+  m_AnchorMax: {x: 1, y: 0.9999999}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}

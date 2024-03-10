@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 //This will not be a monobehavior it is a simple class
 public class Inventory 
@@ -51,10 +50,10 @@ public class Inventory
     public void RemoveItem(Item removedItem)
     {
         bool removed = false;
-            // Check if its already in the inventory
+        // Check if its already in the inventory
         foreach (Item inventoryItem in _items)
         {
-            if (removedItem.itemSO == inventoryItem.itemSO)
+            if(removedItem.SlotID == inventoryItem.SlotID)
             {
                 //Debug.Log("RemoveItem: RemovedItem.Amount = " + removedItem.amount);
                 //Already exists.
@@ -65,6 +64,7 @@ public class Inventory
 
                     if (inventoryItem.amount == 0)
                     {
+                        //Item removeOne = new Item(removedItem.itemSO, 1);
                         _items.Remove(inventoryItem);
                     }
                     break;

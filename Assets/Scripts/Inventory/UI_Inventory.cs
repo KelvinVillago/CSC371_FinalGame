@@ -31,11 +31,11 @@ public class UI_Inventory : MonoBehaviour
 
     [Header("Testing Database")]
     [SerializeField] private ItemsDatabaseSO _itemDB;
+    private int _slotIndex;
 
 
 
     private PreventClickDrag _scrollScript;
-    private int _slotUsedCount = 0;
     //Get a refrence to the Start Placement function
     private Inventory _inventory;
     [SerializeField] private PlacementSystem _placementSystem;
@@ -44,8 +44,6 @@ public class UI_Inventory : MonoBehaviour
 
     private void Awake()
     {
-        //GameObject buildingManager = GameObject.Find("BuildingSystem");
-        //_placementSystem = buildingManager.GetComponentInChildren<PlacementSystem>();
         _scrollScript = _scrollView.GetComponent<PreventClickDrag>();
     }
     private void Start()
@@ -98,9 +96,11 @@ public class UI_Inventory : MonoBehaviour
 
     private void RefreshInventory()
     {
+        _slotIndex = 0;
         foreach (Item item in _inventory.GetItemsList())
         {
             CreateItemButton(item);
+            _slotIndex++;
         }
     }
 
@@ -110,44 +110,38 @@ public class UI_Inventory : MonoBehaviour
         Transform lastCol = null;
         Transform newItemSlot;
         int indexSlots;
-        
-        //Debugging inventory amount placement without the quickbar
+
         //Add weapon to weapon slots if avalible
         if (item.IsSameOrSubclass(typeof(WeaponItemSO)))
         {
-            //Check if there is an open slot on the quickbar
-            if (_slotUsedCount < _maxSlotCount)
+            for (indexSlots = 0; indexSlots < _maxSlotCount; indexSlots++)
             {
-                for (indexSlots = 0; indexSlots < _maxSlotCount; indexSlots++)
+                EquiptSlot slot = _hotKeySlots[indexSlots].GetComponent<EquiptSlot>();
+
+                if (slot.Item == item)
                 {
-                    if (_hotKeySlots[indexSlots].GetComponent<EquiptSlot>().Item == item)
-                    {
-                        //Item already in hot bar
-                        return;
-                    }
-                    if (_hotKeySlots[indexSlots].Find("Icon").GetComponent<Image>().sprite == null)
-                    {
-                        //Set a refrence for later.
-                        _hotKeySlots[indexSlots].GetComponent<EquiptSlot>().Item = item;
-                     
-                        //This slot is empty
-                        Transform newHotKey = CustomizeButton(_hotKeySlots[indexSlots], item);
+                    //Item already in hot bar
+                    return;
+                }
+
+                if (slot.Image.sprite == null)
+                {
+                    //This slot is empty
+                    Transform newHotKey = CustomizeButton(_hotKeySlots[indexSlots], item);
                         
-                        //Activate the hotkey if its the first one.
-                        if(indexSlots == 0)
-                        {
-                            _inventory.EquipItem(newHotKey);
-                        }
-                        
-                        //Increase used count
-                        _slotUsedCount++;
-              
-                        //stop creating
-                        return;
+                    //Activate the hotkey if its the first one.
+                    if(indexSlots == 0)
+                    {
+                        _inventory.EquipItem(newHotKey);
                     }
+
+                    //stop creating
+                    return;
                 }
             }
+            
         }
+       
         
         //Check whats in the verticle layout container
         indexVert = _layoutContainerVert.childCount - 1;
@@ -176,68 +170,76 @@ public class UI_Inventory : MonoBehaviour
 
     Transform CustomizeButton(Transform newItemSlot, Item item)
     {
+        EquiptSlot slot = newItemSlot.GetComponent<EquiptSlot>();
+        //Update the slot index.
+        slot.Item = item;
+        item.SlotID = _slotIndex;
 
         //Customize the new item slot.
         if (item.itemSO.IconSprite == null)
         {
-            newItemSlot.Find("Icon").GetComponent<Image>().sprite = _defaultMissingSprite;
+            //newItemSlot.Find("Icon").GetComponent<Image>().sprite = _defaultMissingSprite;
+            slot.Image.sprite = _defaultMissingSprite;
         }
         else
         {
-            newItemSlot.Find("Icon").GetComponent<Image>().sprite = item.itemSO.IconSprite;
+            //newItemSlot.Find("Icon").GetComponent<Image>().sprite = item.itemSO.IconSprite;
+            slot.Image.sprite = item.itemSO.IconSprite;
         }
         //newItemSlot.Find("Icon").GetComponent<Image>().color = Color.white;
 
         //Set the text
         if (item.amount > 1)
         {
-            newItemSlot.Find("AmountText").GetComponent<TextMeshProUGUI>().text = item.AmountSting();
+           // newItemSlot.Find("AmountText").GetComponent<TextMeshProUGUI>().text = item.AmountSting();
+            slot.AmountText.text = item.AmountSting();
         }
         //Create a new action to listen to the buttonclick.
         if (item.type == typeof(DefenseItemSO))
         {  
             //TODO: find out if I need to remove listener at some point is so find out how. 
-            newItemSlot.GetComponent<Button>().onClick.AddListener(delegate { _placementSystem.StartPlacement(item);});
+            //newItemSlot.GetComponent<Button>().onClick.AddListener(delegate { _placementSystem.StartPlacement(item);});
+            slot.Button.onClick.AddListener(delegate { _placementSystem.StartPlacement(item); });
         }
         else if(item.itemSO.Prefab.GetComponent<ItemWorld>() != null)
         {
             //This is a drop-able world item.
             //Call without using delegate. https://docs.unity3d.com/2018.3/Documentation/ScriptReference/UI.Button-onClick.html
-            newItemSlot.GetComponent<Button>().onClick.AddListener(()=>DropItemHandler(item));
+            //newItemSlot.GetComponent<Button>().onClick.AddListener(()=>DropItemHandler(item , newItemSlot));
+            slot.Button.onClick.AddListener(() => DropItemHandler(item));
         }
-        else if (item.type == typeof(ProjectileWeaponSO))
+        else if (item.IsSameOrSubclass(typeof(WeaponItemSO)))
         {
             //SWORDS do not live here?
-            newItemSlot.GetComponent<Button>().onClick.AddListener(()=> _inventory.EquipItem(newItemSlot));
+            //newItemSlot.GetComponent<Button>().onClick.AddListener(()=> _inventory.EquipItem(newItemSlot));
+            slot.Button.onClick.AddListener(() => _inventory.EquipItem(newItemSlot));
         }
         else
         {
             //button calls useitem from inventory. When inventory useItem is called the player is listening.
-            newItemSlot.GetComponent<Button>().onClick.AddListener(() => _inventory.UseItem(item));
+            //newItemSlot.GetComponent<Button>().onClick.AddListener(() => _inventory.UseItem(item));
+            slot.Button.onClick.AddListener(() => _inventory.UseItem(item));
         }
+
         return newItemSlot;
     }
     
     private void EquipItemHandler(Transform slot)
-    { 
+    {
         //Update the UI for the Hotkey slots
         foreach (Transform hotKeySlot in _hotKeySlots)
         {
             //Remove color from other slots
-            Image activeSlot = hotKeySlot.GetComponent<Image>();
-            activeSlot.color = Color.white;
-            if (slot == hotKeySlot)
-            {
-                activeSlot.color = Color.yellow;
-            }
+            hotKeySlot.GetComponent<Image>().color = Color.white;
         }
+        slot.gameObject.GetComponent<Image>().color = Color.yellow;
     }
 
     public ItemWorld DropItemHandler(Item item)
     {
-        Item removeOne = new Item(item.itemSO, 1);
-        _inventory.RemoveItem(removeOne);
-        return ItemWorld.DropItem(removeOne, _player.GetPos());
+        //Item removeOne = new Item(item.itemSO, 1 ,item.SlotID);
+        _inventory.RemoveItem(item);
+        return ItemWorld.DropItem(item, _player.GetPos());
     }
 
     private void OnDestroy()

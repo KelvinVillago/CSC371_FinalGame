@@ -129,7 +129,7 @@ MonoBehaviour:
   magazineSize: 15
   bulletsPerTap: 1
   allowButtonHold: 0
-  recoil: 100
+  recoil: 10000000
   attackPoint: {fileID: 5983349607107236301}
   muzzleFlash: {fileID: 0}
   ammunitionDisplay: {fileID: 0}

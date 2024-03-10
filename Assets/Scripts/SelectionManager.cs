@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 /*Use player input to trigger the placement manager*/
-
 public class SelectionManager : MonoBehaviour
 {
     [Header("Grid Selection properties")]
@@ -27,7 +26,6 @@ public class SelectionManager : MonoBehaviour
     private void Start()
     {
         _playerInputs = _player.GetComponent<PlayerControllerInputs>();
-        //_inventoryPanel = GameObject.Find("UI/UI_Inventory");
         if(_inventoryPanel.activeInHierarchy)
             _inventoryPanel.SetActive(false);
     }
@@ -49,24 +47,19 @@ public class SelectionManager : MonoBehaviour
             {
                 //Reseting the value;
                 _playerInputs.SelectInventoryInput = false;
-                //Debug.Log("Shop select activated");
                 OnClicked?.Invoke();
             }
             if (_playerInputs.RotateInventoryInput)
             {
                 //Reseting the value;
                 _playerInputs.RotateInventoryInput = false;
-                //Debug.Log("Shop select activated");
                 OnRotate?.Invoke();
             }
             if (_playerInputs.ExitInventoryInput)
             {
+                //Reseting the value;
                 _playerInputs.ExitInventoryInput = false;
-                //Only turn time back on if the shop is closed
-                //if (!_shopPanel.activeInHierarchy)
-                //Time.timeScale = 1;
-                //Debug.Log("ExitValue is true");
-                //Close the inventory
+                //Close everything
                 _playerInputs.OpenInventoryInput = false;
                 _inventoryPanel.SetActive(false);
                 _playerInputs.ToggleActionMap(ActionMapName_Enum.Main);

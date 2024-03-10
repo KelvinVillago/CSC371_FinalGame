@@ -4,17 +4,17 @@ using UnityEngine;
 /***
  *  PlayerInventory: Sets the players inventory, Handles how player interacts with inventory items.
  */
+[Serializable]
 public class PlayerInventory : MonoBehaviour
 {
     [Tooltip("The UI_Inventory panel the player will use to display their inventory")]
-    [SerializeField] private GameObject _playerUI;
-    private UI_Inventory _uiInventory;
-    private Inventory _inventory;
+    [SerializeField] private UI_Inventory _uiInventory;
     private Transform _gunSlot;
+    [field:Header("READONLY: For Debugging")]
+    [SerializeField] private Inventory _inventory;
     public Inventory Inventory {  get { return _inventory; } }
     private void Awake()
     {
-        _uiInventory = _playerUI.GetComponentInChildren<UI_Inventory>();
         _gunSlot = transform.Find("GunSlot");
         _uiInventory.SetPlayer(this);
     }
@@ -39,7 +39,7 @@ public class PlayerInventory : MonoBehaviour
         //Currently no weapons equipt
         if (_gunSlot.childCount < 1)
         {
-             newGun = Instantiate(item.itemSO.Prefab, _gunSlot);
+            newGun = Instantiate(item.itemSO.Prefab, _gunSlot);
             newGun.name = item.itemSO.Name;
             return;
         }
@@ -48,19 +48,25 @@ public class PlayerInventory : MonoBehaviour
         Transform currentGun = _gunSlot.GetChild(0);
         
         //Check if trying to equipt the same item
-        print($"Current child: {currentGun.name}");
         if (currentGun.name == item.itemSO.Name)
         {
-            print($"{currentGun.name} Already created");
             //Already Equipt dont remake.
             return;
         }
 
         //Remove the current weapon.
         Destroy(_gunSlot.GetChild(0).gameObject);
+
         //Equipt the new Weapon
         newGun = Instantiate(item.itemSO.Prefab, _gunSlot);
         newGun.name = item.itemSO.Name;
+        
+        if(newGun.name == "Sniper Rifle")
+        {
+            //Turn the camera back on.
+            gameObject.GetComponent<SimplePlayerController>().sniperRifle = newGun;
+
+        }
     }
 
     private void UseItem(Item item)
@@ -75,7 +81,7 @@ public class PlayerInventory : MonoBehaviour
         }
        
         //Remove it 
-        Item removeOne = new Item(item.itemSO, 1);
+        //Item removeOne = new Item(item.itemSO, 1);
         Inventory.RemoveItem(item);
     }
 
@@ -90,11 +96,6 @@ public class PlayerInventory : MonoBehaviour
             //Distroy it from the world
             itemWorld.DestroySelf();
         }
-    }
-
-    public GameObject GetInventoryPanel()
-    {
-        return _uiInventory.gameObject;
     }
 
     public Vector3 GetPos()

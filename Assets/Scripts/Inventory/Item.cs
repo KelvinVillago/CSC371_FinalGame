@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class Item 
 {
+    [field:SerializeField] public int SlotID { get; set; } = 0;
     public ItemSO itemSO;
     public Type type;
     public int amount;
@@ -22,6 +23,14 @@ public class Item
         type = item.GetType();
         itemSO = item;
         this.amount = amount;
+    }
+
+    public Item(ItemSO item, int amount, int slotID)
+    {
+        type = item.GetType();
+        itemSO = item;
+        this.amount = amount;
+        SlotID = slotID; 
     }
 
     public bool IsSameOrSubclass(Type potentialBase)

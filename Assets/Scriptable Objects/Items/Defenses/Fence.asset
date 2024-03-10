@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed35d83a6f9657d468555bbb8466011d, type: 3}
   m_Name: Fence
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 20
+  <ID>k__BackingField: 0
   <Name>k__BackingField: Fence
   <Description>k__BackingField: 'A small fence '
   <IconSprite>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 1965356168201470377, guid: 89ff494be055dc44cb1a4a2fba148fdf,
     type: 3}
-  <StackAmount>k__BackingField: 50
+  <StackAmount>k__BackingField: 10
   <BuyPrice>k__BackingField: 100
   <SellBackPrice>k__BackingField: 10
   <ShopQuantity>k__BackingField: 100

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7259912837513952415}
   - component: {fileID: 3235781312107401967}
   - component: {fileID: 1198449720653537440}
+  - component: {fileID: 5364050228475979203}
   m_Layer: 5
   m_Name: InvItemSlotTemp
   m_TagString: Untagged
@@ -122,6 +123,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5364050228475979203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952963866228056630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7cddf57e795d24390232eac9773400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: 4144321199653027361}
+  <AmountText>k__BackingField: {fileID: 6014100684803543298}
+  <Button>k__BackingField: {fileID: 1198449720653537440}
+  <ButtonText>k__BackingField: {fileID: 0}
 --- !u!1 &4358595954699256143
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +284,7 @@ GameObject:
   - component: {fileID: 4032199750415411572}
   - component: {fileID: 8941280299156331990}
   - component: {fileID: 4144321199653027361}
+  - component: {fileID: 7454578191586928517}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -331,3 +349,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7454578191586928517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8685147048995961202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7cddf57e795d24390232eac9773400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: 0}
+  <AmountText>k__BackingField: {fileID: 0}
+  <Button>k__BackingField: {fileID: 0}
+  <ButtonText>k__BackingField: {fileID: 0}

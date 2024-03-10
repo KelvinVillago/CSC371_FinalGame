@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using Unity.AI.Navigation;
 
 /**
@@ -19,13 +15,11 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private SelectionManager _selectionManager;
     [SerializeField] private GameObject _cellIndicator;
     [SerializeField] private Grid _grid;
-    //[Tooltip("Database refrence")]
-    //[SerializeField] private ObjectsDatabaseSO _database;
+
     [Tooltip("Toggle to turn off the grid")]
     [SerializeField] private GameObject _gridVisualization;
-
     [SerializeField] private float _rotationAngle = 0;
-    //[SerializeField] private ItemsDatabaseSO _invDB;
+
     private Inventory _inventory;
     private Item _item;
     private int _selectedObjIndex = -1;
@@ -97,8 +91,8 @@ public class PlacementSystem : MonoBehaviour
         _rotationAngle = 0;
 
         // Decrement the count based on the selected object (Defense objects should have a decrement of 1)
-        Item removeItem = new Item(_item.itemSO, 1);
-        _inventory.RemoveItem(removeItem);
+        //Item removeItem = new Item(_item.itemSO, 1, _item.SlotID);
+        _inventory.RemoveItem(_item);
 
         // Close the grid visualization
         StopPlacement();

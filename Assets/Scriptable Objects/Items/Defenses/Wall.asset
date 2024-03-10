@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed35d83a6f9657d468555bbb8466011d, type: 3}
   m_Name: Wall
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 23
+  <ID>k__BackingField: 0
   <Name>k__BackingField: Wall
   <Description>k__BackingField: 'A strong wall '
   <IconSprite>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 1057573506917579428, guid: efb411d9e4014411bb9ecf49ddeddef7,
     type: 3}
-  <StackAmount>k__BackingField: 1
+  <StackAmount>k__BackingField: 10
   <BuyPrice>k__BackingField: 250
   <SellBackPrice>k__BackingField: 0
   <ShopQuantity>k__BackingField: 10
