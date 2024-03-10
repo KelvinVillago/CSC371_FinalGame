@@ -1721,6 +1721,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522817513}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &536153525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2588840335081078233, guid: ddcb59b3709abab4a804e2b06caeac59,
+    type: 3}
+  m_PrefabInstance: {fileID: 1035995475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &542526960 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 474112100533398678, guid: 0e98436a24632c449b92e6eac17b5cb7,
@@ -4747,6 +4753,12 @@ Transform:
   - {fileID: 1356164645}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1670464330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6883473581994174182, guid: ddcb59b3709abab4a804e2b06caeac59,
+    type: 3}
+  m_PrefabInstance: {fileID: 1035995475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1787703024
 GameObject:
   m_ObjectHideFlags: 0
@@ -6245,6 +6257,11 @@ PrefabInstance:
       objectReference: {fileID: 1298357886}
     - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
         type: 3}
+      propertyPath: shopBtn
+      value: 
+      objectReference: {fileID: 536153525}
+    - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
       propertyPath: dirLight
       value: 
       objectReference: {fileID: 546686318}
@@ -6263,6 +6280,11 @@ PrefabInstance:
       propertyPath: startWave
       value: 
       objectReference: {fileID: 1831923592}
+    - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
+      propertyPath: inventoryBtn
+      value: 
+      objectReference: {fileID: 1670464330}
     - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
         type: 3}
       propertyPath: sheepLocation

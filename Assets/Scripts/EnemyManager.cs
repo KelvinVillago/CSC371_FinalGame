@@ -24,6 +24,8 @@ public class EnemyManager : MonoBehaviour
     private int waveNum = 1;
     public TextMeshProUGUI waveText;
     public GameObject startWave;
+    public GameObject inventoryBtn;
+    public GameObject shopBtn;
     public Light dirLight;
     
     void Start()
@@ -116,6 +118,8 @@ public class EnemyManager : MonoBehaviour
     {
         dirLight.intensity = 0.2f;
         startWave.SetActive(false);
+        shopBtn.SetActive(false);
+        inventoryBtn.SetActive(false);
         canSpawn = true;
     }
 
@@ -133,6 +137,8 @@ public class EnemyManager : MonoBehaviour
     {
         waveOver = false;
         startWave.SetActive(false);
+        shopBtn.SetActive(false);
+        inventoryBtn.SetActive(false);
         waveText.text = "Wave: " + waveNum.ToString() + "/8";
         canSpawn = false;
         for(int i = 0; i < wave.Length; i++){
@@ -170,6 +176,8 @@ public class EnemyManager : MonoBehaviour
             if(check1 == true && check2 == true && waveOver == true){
                 yield return new WaitForSeconds(1.0f);
                 startWave.SetActive(true);
+                shopBtn.SetActive(true);
+                inventoryBtn.SetActive(true);
                 dirLight.intensity = 1;
             }
 
