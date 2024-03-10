@@ -35,7 +35,8 @@ public class ChickenController : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
-            a.increaseNum();
+            //Add the value of a collected coin... change this to add a value to the coin
+            a.ChangeBalance(50);
             coins.Remove(other.gameObject); // Remove collected coin from the list
             Destroy(other.gameObject); // Collect the coin
             // Optionally, you can play a sound, increase score, etc.

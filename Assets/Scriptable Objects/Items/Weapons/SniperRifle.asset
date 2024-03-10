@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d8cf8628f164e459ef4f0bce7acc6b, type: 3}
+  m_Name: SniperRifle
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: 14
+  <Name>k__BackingField: Sniper Rifle
+  <Description>k__BackingField: Long Ranged Heavy Damage Weapon
+  <IconSprite>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 3080278288564830100, guid: e1a6b28ff2e5e0946aff323271d303dd,
+    type: 3}
+  <StackAmount>k__BackingField: 1
+  <BuyPrice>k__BackingField: 400
+  <SellBackPrice>k__BackingField: 0
+  <ShopQuantity>k__BackingField: 1
+  <AvailableLevel>k__BackingField: 1
+  <WeaponUpgradeDB>k__BackingField: []
+  <bulletUpgradeDB>k__BackingField: []

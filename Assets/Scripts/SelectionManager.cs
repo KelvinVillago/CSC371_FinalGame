@@ -2,79 +2,72 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using TMPro;
 
+/*Use player input to trigger the placement manager*/
 public class SelectionManager : MonoBehaviour
 {
+    [Header("Grid Selection properties")]
     [SerializeField] private Camera _sceneCamera;
-    private Vector3 _lastPosition;
     [Tooltip("Which layer will the input detection of the mouse listens too")]
-    [SerializeField] LayerMask _placementLayerMask;
-    [SerializeField] GameObject _inventoryCanvas;
-    public event Action OnClicked, OnExit, OnRotate;
-    private PlayerControllerInputs _inputs;
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject _shopPanel;
-  
-    //Will return true or false if we are above the UI
-    //This is a labda to set true or false. 
-    public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
+    [SerializeField] private LayerMask _placementLayerMask;
+    [SerializeField] private GameObject _player;
 
-    // Buttons and Text
-    public Button[] invBtns;
-    public TextMeshProUGUI[] invBtnTxts;
-    public int fenceCount = 0;
-    public int smallTurretCount = 0;
-    public int largeTurretCount = 0;
+    //PlayerInventory Information
+    private Vector3 _lastPosition;
+    private PlayerControllerInputs _playerInputs;
+    [SerializeField]private GameObject _inventoryPanel;
+
+    //Properties for the placement system.
+    [HideInInspector] public event Action OnClicked, OnExit, OnRotate;
+    [HideInInspector] public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
+
+    public bool IsBlocked {get; set;} = false;
+
     private void Start()
     {
-        //Clear the screen
-        _inputs = player.GetComponent<PlayerControllerInputs>();
-        _inventoryCanvas.SetActive(false);
+        _playerInputs = _player.GetComponent<PlayerControllerInputs>();
+        if(_inventoryPanel.activeInHierarchy)
+            _inventoryPanel.SetActive(false);
+    }
+
+    public void OpenHandler()
+    {
+        _playerInputs.OpenInventoryInput = true;
     }
 
     private void Update()
     {
-        
-        if (_inputs.openInventoryInput) {
-            Time.timeScale = 0;
+        if (_playerInputs.OpenInventoryInput && IsBlocked == false)
+        {
+            //Activate grid map
+            _playerInputs.ToggleActionMap(ActionMapName_Enum.Placement);
+            _inventoryPanel.SetActive(true);
 
-            UpdateInventoryUI();
-
-            _inputs.ToggleActionMap(_inputs.itemMap); //Activate grid map
-            _inventoryCanvas.SetActive(true);
-
-            if(_inputs.shopSelectInput)
+            if (_playerInputs.SelectInventoryInput)
             {
                 //Reseting the value;
-                _inputs.shopSelectInput = false;
-                //Debug.Log("Shop select activated");
+                _playerInputs.SelectInventoryInput = false;
                 OnClicked?.Invoke();
             }
-            if (_inputs.rotateInventoryInput)
+            if (_playerInputs.RotateInventoryInput)
             {
                 //Reseting the value;
-                _inputs.rotateInventoryInput = false;
-                //Debug.Log("Shop select activated");
+                _playerInputs.RotateInventoryInput = false;
                 OnRotate?.Invoke();
             }
-            if (_inputs.exitShopInput)
+            if (_playerInputs.ExitInventoryInput)
             {
-                _inputs.exitShopInput = false;
-                //Only turn time back on if the shop is closed
-                if (!_shopPanel.activeInHierarchy)
-                    Time.timeScale = 1;
-                //Debug.Log("ExitValue is true");
-                //Close the inventory
-                _inputs.openInventoryInput = false;
-                _inventoryCanvas.SetActive(false);
-                _inputs.ToggleActionMap(_inputs.mainMap);
+                //Reseting the value;
+                _playerInputs.ExitInventoryInput = false;
+                //Close everything
+                _playerInputs.OpenInventoryInput = false;
+                _inventoryPanel.SetActive(false);
+                _playerInputs.ToggleActionMap(ActionMapName_Enum.Main);
                 OnExit?.Invoke();
             }
         }
     }
-
+   
     public Vector3 GetSelectedMapPosition()
     {
         Vector3 mousePos = Mouse.current.position.ReadValue();
@@ -89,37 +82,5 @@ public class SelectionManager : MonoBehaviour
             _lastPosition = hit.point;
         }
         return _lastPosition;
-    }
-
-    public void UpdateInventoryUI()
-    {
-        invBtnTxts[0].text = "Fences: " + fenceCount.ToString();
-        invBtnTxts[1].text = "Small Turrets: " + smallTurretCount.ToString();
-        invBtnTxts[2].text = "Large Turrets: " + largeTurretCount.ToString();
-
-        if (fenceCount == 0)
-        {
-            invBtns[0].interactable = false;
-        }
-        else
-        {
-            invBtns[0].interactable = true;
-        }
-        if (smallTurretCount == 0)
-        {
-            invBtns[1].interactable = false;
-        }
-        else
-        {
-            invBtns[1].interactable = true;
-        }
-        if (largeTurretCount == 0)
-        {
-            invBtns[2].interactable = false;
-        }
-        else
-        {
-            invBtns[2].interactable = true;
-        }
     }
 }

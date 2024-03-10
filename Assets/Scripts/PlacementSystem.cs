@@ -1,49 +1,69 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using Unity.AI.Navigation;
 
-
+/**
+ * PlacementSyste: Turns on the grid and placeses Defence items. 
+ * 
+ * Note:
+ * On the Grid Object the cell size is 1,1,1.
+ * If you want two cells per unity unit (box size), change the cell size to (0.5, 0.50, 0.50)
+ * Then change the  Grid shader Material (called shader Graph) size value to (2,2)
+ */
 public class PlacementSystem : MonoBehaviour
 {
     [SerializeField] private GameObject _mouseIndicator;
     [SerializeField] private SelectionManager _selectionManager;
     [SerializeField] private GameObject _cellIndicator;
     [SerializeField] private Grid _grid;
-    [Tooltip("Database refrence")]
-    [SerializeField] private ObjectsDatabaseSO _database;
-    private int _selectedObjIndex = -1;
+
     [Tooltip("Toggle to turn off the grid")]
     [SerializeField] private GameObject _gridVisualization;
-    [SerializeField]private float _rotationAngle = 0;
+    [SerializeField] private float _rotationAngle = 0;
+
+    private Inventory _inventory;
+    private Item _item;
+    private int _selectedObjIndex = -1;
+
+    Vector3Int _gridPosition;
+    Vector3 mousePosition;
+
     public NavMeshSurface surface;
 
     private void Start()
     {
         StopPlacement();
     }
-    public void StartPlacement(int ID)
+
+    public void SetInventory(Inventory inventory){
+
+        _inventory = inventory;
+    }
+
+    public void StartPlacement(Item item)
     {
+        _item = item;
+        DefenseItemSO defenseItem = item.GetItemSO<DefenseItemSO>();
+
         //Set the start rotation of the cursor indicator.
         _rotationAngle = 0;
         _cellIndicator.transform.rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
         //Prevent a bug where we automatically start placing the item. 
         StopPlacement();
         //The index of the data is returned if the findIndex data matches with the ID param.
-        _selectedObjIndex = _database.objectsData.FindIndex(data => data.ID == ID);
+        _selectedObjIndex = _inventory.GetItemsList().FindIndex(data => data.itemSO == defenseItem);
         if(_selectedObjIndex < 0)
         {
-            Debug.LogError($"No ID found {ID}");
+            Debug.LogError($"No matching SO found: {defenseItem}");
             return;
         }
-        ObjectData objectData = _database.objectsData[_selectedObjIndex];
+
         //if the item is in the database turn on the grid and allow placement.
         _gridVisualization.SetActive(true);
         _cellIndicator.SetActive(true);
+
         //Update the cell indicator to be the size of the selected item.
-        _cellIndicator.transform.localScale = new Vector3 (objectData.Size.x, 1, objectData.Size.y);
+        _cellIndicator.transform.localScale = new Vector3 (defenseItem.Size.x, 1, defenseItem.Size.y);
+
         //Call the placeStructure method
         _selectionManager.OnClicked += PlaceStructure;
         _selectionManager.OnExit += StopPlacement;
@@ -61,37 +81,18 @@ public class PlacementSystem : MonoBehaviour
         {
             return;
         }
-        Vector3 mousePosition = _selectionManager.GetSelectedMapPosition();
-        Vector3Int _gridPosition = _grid.WorldToCell(mousePosition);
+
         //Create the game object 
-        GameObject newObj = Instantiate(_database.objectsData[_selectedObjIndex].Prefab);
-        newObj.transform.position = _grid.CellToWorld(_gridPosition);
-        //Change the rotation
-        if (_rotationAngle != 0)
-            newObj.transform.rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
+        Vector3 pos = _grid.CellToWorld(_gridPosition);
+        Quaternion rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
+        GameObject newObj = Instantiate(_item.itemSO.Prefab, pos ,rotation);
+
         //Done using the rotation so reset it
         _rotationAngle = 0;
 
-        // Decrement the count based on the selected object
-        if (_selectedObjIndex >= 0)
-        {
-            Debug.Log("Selected ID: " + _database.objectsData[_selectedObjIndex].ID);
-            int selectedID = _database.objectsData[_selectedObjIndex].ID;
-            if (selectedID == 0) // Fence ID
-            {
-                _selectionManager.fenceCount--;
-            }
-            else if (selectedID == 1) // Small Turret ID
-            {
-                _selectionManager.smallTurretCount--;
-            }
-            else if (selectedID == 2) // Large Turret ID
-            {
-                _selectionManager.largeTurretCount--;
-            }
-        }
-        // Update the inventory UI
-        _selectionManager.UpdateInventoryUI();
+        // Decrement the count based on the selected object (Defense objects should have a decrement of 1)
+        //Item removeItem = new Item(_item.itemSO, 1, _item.SlotID);
+        _inventory.RemoveItem(_item);
 
         // Close the grid visualization
         StopPlacement();
@@ -118,16 +119,40 @@ public class PlacementSystem : MonoBehaviour
         //If we are not in the placement mode, dont do anything!
         if (_selectedObjIndex < 0)
             return;
-        Vector3 mousePosition = _selectionManager.GetSelectedMapPosition();
-        Vector3Int _gridPosition = _grid.WorldToCell(mousePosition);
+         mousePosition = _selectionManager.GetSelectedMapPosition();
+         _gridPosition = _grid.WorldToCell(mousePosition);
         _mouseIndicator.transform.position = mousePosition;
-        //Debug.Log("Mouse Position" + mousePosition);
         _cellIndicator.transform.position = _grid.CellToWorld(_gridPosition);
     }
+
+    private void PlaceWorldItem()
+    {
+        Vector3 mousePosition = _selectionManager.GetSelectedMapPosition();
+        Vector3Int _gridPosition = _grid.WorldToCell(mousePosition);
+        //Create the game object 
+        //GameObject newObj = Instantiate(_item.itemSO.Prefab);
+
+        //Create the new item in the world and attach a refrence to its data to it.
+        ItemWorld newItemWorld = ItemWorld.SpawnItemWorld(_item, _grid.CellToWorld(_gridPosition));
+        //Update the position of the object 
+        GameObject newObj = newItemWorld.gameObject;
+        newObj.transform.position = _grid.CellToWorld(_gridPosition);
+        //Change the rotation
+        if (_rotationAngle != 0)
+            newObj.transform.rotation = Quaternion.Euler(0f, _rotationAngle, 0f);
+
+        //Done using the rotation so reset it
+        _rotationAngle = 0;
+
+        // Decrement the count based on the selected object
+        _inventory.RemoveItem(_item);
+
+        // Update the inventory UI
+        //_selectionManager.UpdateInventoryUI();
+
+        // Close the grid visualization
+    }
+
+
+
 }
-/**
- * Note:
- * On the Grid Object the cell size is 1,1,1.
- * If you want two cells per unity unit (box size), change the cell size to (0.5, 0.50, 0.50)
- * Then change the  Grid shader Material (called shader Graph) size value to (2,2)
- */
