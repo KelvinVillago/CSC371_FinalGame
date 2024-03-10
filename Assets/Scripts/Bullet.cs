@@ -2,7 +2,7 @@
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float bulletSpeed = 2f;
+    public float bulletSpeed = 2f;
     [SerializeField] ParticleSystem hitPrefab;
 
     float _bulletLifetimeInSeconds = 4f;

@@ -1,11 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using System;
 
+[Serializable]
 public class ShopTemplate : MonoBehaviour
 {
-    public TMP_Text titleText;
-    public TMP_Text descriptionText;
-    public TMP_Text priceText;
+    [field: SerializeField] public int PositionInMenu { get; set; } = 0;
+    [field:SerializeField] public TMP_Text TitleText { get; private set;}
+    [field:SerializeField] public TMP_Text DescriptionText { get;  private set;}
+    [field:SerializeField] public TMP_Text PriceText { get;  private set;}
+    [field:SerializeField] public Button Button { get;  private set;}
+    [field:SerializeField] public TMP_Text ButtonText { get;  private set;}
+
+    public void PurchasedButton()
+    {
+        ButtonText.text = "Purchased";
+        Button.interactable = false;
+    }
 }

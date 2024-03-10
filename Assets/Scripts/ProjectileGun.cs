@@ -40,7 +40,8 @@ public class ProjectileGun : MonoBehaviour
     Rigidbody _playerRB;
 
     //Ammo Bar
-    public Slider ammoSlider;
+    public GameObject ammoBar;
+    private Slider ammoSlider;
 
     //Inputs 
     private InputAction _reloadAction;
@@ -49,8 +50,9 @@ public class ProjectileGun : MonoBehaviour
 
     void Awake()
     {
-        //get parent
-        _player = transform.parent.gameObject;
+        //Transform _gunSlot = transform.parent;
+        //_player = _gunSlot.parent.gameObject;
+        _player = GameObject.Find("Player");
         _playerRB = _player.GetComponent<Rigidbody>();
 
         // input
@@ -62,7 +64,10 @@ public class ProjectileGun : MonoBehaviour
         _bulletsLeft = magazineSize;
         _readyToShoot = true;
 
+
         //ammo
+        ammoBar = GameObject.Find("AmmoBar");
+        ammoSlider = ammoBar.GetComponent<Slider>();
         ammoSlider.maxValue = magazineSize;
     }
 
@@ -74,6 +79,7 @@ public class ProjectileGun : MonoBehaviour
         if (ammunitionDisplay != null)
         {
             ammunitionDisplay.SetText(_bulletsLeft / bulletsPerTap + " / " + magazineSize / bulletsPerTap);
+            //ammunitionDisplay.text = _bulletsLeft.ToString();
         }
     }
 
