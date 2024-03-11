@@ -5,7 +5,7 @@ using System;
 public enum Menu_Enum {Weapon, Defense, Animal}
 public class ShopManager : MonoBehaviour
 {
-    //Events for other scripts to listen to 
+    //Events for other scripts to listen to
     [HideInInspector] public event Action<bool> IsShopOpen;
 
     [Header("Shop Data Properties")]
@@ -19,7 +19,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Transform _layoutHori_Animals;
     [SerializeField] private Transform _itemTemplatePrefab;
     [SerializeField] private GameObject _gameCanvas;
-    
+
     //Data
     private Inventory _inventory;
     //Weapon vars
@@ -38,17 +38,17 @@ public class ShopManager : MonoBehaviour
     private bool _initShop = true;
     private int _level = 1;
     private int _coins;
-   
+
     private void Awake()
     {
         _inventory = _playerInventory.Inventory;
     }
-    
+
     private void InitShopData()
     {
         //Init the money
         _coins = _coinReference.Balance = 0;
- 
+
         //Init the shop data
         _weaponItems = new List<Item>();
         _defenseItems = new List<Item>();
@@ -75,7 +75,7 @@ public class ShopManager : MonoBehaviour
 
         //Load the panel into the menu
         SetButton_Purchasable();
-        
+
         _initShop = false;
     }
 
@@ -143,7 +143,7 @@ public class ShopManager : MonoBehaviour
 
         //Get the fields to customize
         ShopTemplate shopCard = shopCardUI.GetComponent<ShopTemplate>();
-   
+
         //Save the location of this new object
         shopCard.PositionInMenu = layout.childCount - 1;
         //Title Txt
@@ -168,7 +168,7 @@ public class ShopManager : MonoBehaviour
             shopCard.Button.onClick.AddListener(() => Animal_BuyButttonHandler(item));
         }
     }
-   
+
     private void SetButton_Purchasable()
     {
         Transform layout = null;
@@ -330,10 +330,10 @@ public class ShopManager : MonoBehaviour
     public void OpenMenu_Handler(int menu)
     {
         IsShopOpen?.Invoke(true);
-        
+
         //Hide all the menus to prevent overlapping
         HideAllMenus();
-        
+
         //Set the layout
         switch (menu)
         {
@@ -360,7 +360,7 @@ public class ShopManager : MonoBehaviour
         //Pause the game
         Time.timeScale = 0;
 
-        //Activate Shop window 
+        //Activate Shop window
         SetActive(gameObject);
 
         //Init the data if needed
@@ -382,7 +382,7 @@ public class ShopManager : MonoBehaviour
 
         //UnPause the game
         Time.timeScale = 1;
-        
+
         //Sends an alert, if a script is listening it can do stuff.
         IsShopOpen?.Invoke(false);
     }

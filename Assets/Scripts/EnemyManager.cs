@@ -7,8 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float spawnRate;
-    private bool canSpawn;
-    private bool waveOver;
+    [SerializeField] private bool canSpawn;
     public float timePassed = 0f;
     [SerializeField] private float radius;
     public Transform sheepLocation;
@@ -33,7 +32,6 @@ public class EnemyManager : MonoBehaviour
         // Using Coroutines
         //StartCoroutine(SpawnEnemyCoroutine());
         canSpawn = true;
-        waveOver = false;
     }
     void Update()
     {
@@ -146,27 +144,25 @@ public class EnemyManager : MonoBehaviour
             SpawnEnemyPrefab(wave[i]);
         }
         waveNum++;
-        waveOver = true;
         if(waveNum > 8){
             waveNum = 1;
         }
-        yield return new WaitForSeconds(0.3f);
         yield return StartCoroutine(EnemyDefeat());
     }
 
     IEnumerator EnemyDefeat()
     {
-        bool check1 = false;
-        bool check2 = false;
         while(canSpawn == false)
         {
+            bool check1 = false;
+            bool check2 = false;
             GameObject[] enemiesRemaining;
             enemiesRemaining = GameObject.FindGameObjectsWithTag("Enemy");
             if(enemiesRemaining.Length == 0){
                 check1 = true;
             }
 
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(1.0f);
 
             enemiesRemaining = GameObject.FindGameObjectsWithTag("Enemy");
             if(enemiesRemaining.Length == 0){
@@ -182,7 +178,6 @@ public class EnemyManager : MonoBehaviour
             }
 
         }
+        
     }
-
-    
 }
