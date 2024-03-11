@@ -22,6 +22,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject[] wave8;
     private int waveNum = 1;
     public TextMeshProUGUI waveText;
+    public GameObject startWave;
+    public GameObject inventoryBtn;
+    public GameObject shopBtn;
+    public Light dirLight;
     
     void Start()
     {
@@ -108,6 +112,15 @@ public class EnemyManager : MonoBehaviour
         Gizmos.DrawWireSphere(sheepLocation.position, radius);
     }
 
+    public void StartWave()
+    {
+        dirLight.intensity = 0.2f;
+        startWave.SetActive(false);
+        shopBtn.SetActive(false);
+        inventoryBtn.SetActive(false);
+        canSpawn = true;
+    }
+
     // Using Coroutines
     IEnumerator SpawnEnemyCoroutine()
     {
@@ -120,6 +133,10 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator SpawnEnemyWave(GameObject[] wave)
     {
+        waveOver = false;
+        startWave.SetActive(false);
+        shopBtn.SetActive(false);
+        inventoryBtn.SetActive(false);
         waveText.text = "Wave: " + waveNum.ToString() + "/8";
         canSpawn = false;
         for(int i = 0; i < wave.Length; i++){
@@ -152,8 +169,12 @@ public class EnemyManager : MonoBehaviour
                 check2 = true;
             }
 
-            if(check1 == true && check2 == true){
-                canSpawn = true;
+            if(check1 == true && check2 == true && waveOver == true){
+                yield return new WaitForSeconds(1.0f);
+                startWave.SetActive(true);
+                shopBtn.SetActive(true);
+                inventoryBtn.SetActive(true);
+                dirLight.intensity = 1;
             }
 
         }
