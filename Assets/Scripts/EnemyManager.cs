@@ -7,7 +7,8 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float spawnRate;
-    [SerializeField] private bool canSpawn;
+    private bool canSpawn;
+    private bool waveOver;
     public float timePassed = 0f;
     [SerializeField] private float radius;
     public Transform sheepLocation;
@@ -144,6 +145,7 @@ public class EnemyManager : MonoBehaviour
             SpawnEnemyPrefab(wave[i]);
         }
         waveNum++;
+        waveOver = true;
         if(waveNum > 8){
             waveNum = 1;
         }
