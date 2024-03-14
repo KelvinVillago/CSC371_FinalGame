@@ -89,6 +89,17 @@ public class Enemy : MonoBehaviour
             }
             // GameManager.Instance.AddKill();
         }
+        if(other.CompareTag("BulletSG"))
+        {
+            //audioPlayer.Play();
+            AudioSource.PlayClipAtPoint(coinClip, transform.position);
+            TakeDamage(4);
+            if (currentHealth <= 0) {
+                Destroy(this.gameObject);
+                Instantiate(prefab, transform.position, Quaternion.identity);
+            }
+            // GameManager.Instance.AddKill();
+        }
         if(other.CompareTag("BulletSR"))
         {
             //audioPlayer.Play();
