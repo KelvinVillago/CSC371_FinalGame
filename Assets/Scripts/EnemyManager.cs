@@ -9,8 +9,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float spawnRate;
     private bool canSpawn;
     private bool waveOver;
+    private bool isDay;
     public float timePassed = 0f;
     [SerializeField] private float radius;
+    [SerializeField] private float timeToChange;
     public Transform sheepLocation;
     
     [SerializeField] private GameObject[] wave1;
@@ -33,7 +35,9 @@ public class EnemyManager : MonoBehaviour
         // Using Coroutines
         //StartCoroutine(SpawnEnemyCoroutine());
         canSpawn = true;
+        isDay = false;
     }
+
     void Update()
     {
         GameObject[] currentWave;
@@ -68,9 +72,25 @@ public class EnemyManager : MonoBehaviour
                 break;
 
         }
+
+        if(isDay)
+        {
+            startWave.SetActive(true);
+            shopBtn.SetActive(true);
+            inventoryBtn.SetActive(true);
+            StartCoroutine(ChangeTime(0.2f, 1.0f));
+        }
+        else
+        {
+            startWave.SetActive(false);
+            shopBtn.SetActive(false);
+            inventoryBtn.SetActive(false);
+            StartCoroutine(ChangeTime(1.0f, 0.2f));
+        }
+
         if(canSpawn)
         {
-            StopCoroutine(EnemyDefeat());
+            canSpawn = false;
             StartCoroutine(SpawnEnemyWave(currentWave));
         }
     }
@@ -115,10 +135,8 @@ public class EnemyManager : MonoBehaviour
 
     public void StartWave()
     {
-        dirLight.intensity = 0.2f;
-        startWave.SetActive(false);
-        shopBtn.SetActive(false);
-        inventoryBtn.SetActive(false);
+        StopCoroutine(EnemyDefeat());
+        isDay = false;
         canSpawn = true;
     }
 
@@ -134,12 +152,10 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator SpawnEnemyWave(GameObject[] wave)
     {
-        waveOver = false;
-        startWave.SetActive(false);
-        shopBtn.SetActive(false);
-        inventoryBtn.SetActive(false);
-        waveText.text = "Wave: " + waveNum.ToString() + "/8";
         canSpawn = false;
+        isDay = false;
+        waveOver = false;
+        waveText.text = "Wave: " + waveNum.ToString() + "/8";
         for(int i = 0; i < wave.Length; i++){
             yield return new WaitForSeconds(spawnRate);
             SpawnEnemyPrefab(wave[i]);
@@ -149,6 +165,8 @@ public class EnemyManager : MonoBehaviour
         if(waveNum > 8){
             waveNum = 1;
         }
+
+        yield return new WaitForSeconds(1.0f);
         yield return StartCoroutine(EnemyDefeat());
     }
 
@@ -173,13 +191,25 @@ public class EnemyManager : MonoBehaviour
 
             if(check1 == true && check2 == true && waveOver == true){
                 yield return new WaitForSeconds(1.0f);
-                startWave.SetActive(true);
-                shopBtn.SetActive(true);
-                inventoryBtn.SetActive(true);
-                dirLight.intensity = 1;
+                isDay = true;
+                break;
             }
-
         }
-        
     }
+
+    IEnumerator ChangeTime(float start, float end)
+    {
+        float timeElapsed = 0.0f;
+
+        while(timeElapsed < timeToChange)
+        {
+            dirLight.intensity = Mathf.Lerp(start, end, timeElapsed / timeToChange);
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
+        dirLight.intensity = end;
+    }
+
+    
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3779,7 +3779,7 @@ PrefabInstance:
     - target: {fileID: 8807176331215000773, guid: ddcb59b3709abab4a804e2b06caeac59,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -9.999939
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 8884226053093097441, guid: ddcb59b3709abab4a804e2b06caeac59,
         type: 3}
@@ -6775,6 +6775,11 @@ PrefabInstance:
       propertyPath: inventoryBtn
       value: 
       objectReference: {fileID: 1670464330}
+    - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
+      propertyPath: timeToChange
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
         type: 3}
       propertyPath: sheepLocation
