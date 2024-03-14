@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
             //audioPlayer.Play();
             AudioSource.PlayClipAtPoint(coinClip, transform.position);
             TakeDamage(1);
-            if (currentHealth == 0) {
+            if (currentHealth <= 0) {
                 Destroy(this.gameObject);
                 Instantiate(prefab, transform.position, Quaternion.identity);
             }
@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
             //audioPlayer.Play();
             AudioSource.PlayClipAtPoint(coinClip, transform.position);
             TakeDamage(4);
-            if (currentHealth == 0) {
+            if (currentHealth <= 0) {
                 Destroy(this.gameObject);
                 Instantiate(prefab, transform.position, Quaternion.identity);
             }
@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
             //audioPlayer.Play();
             AudioSource.PlayClipAtPoint(coinClip, transform.position);
             TakeDamage(2);
-            if (currentHealth == 0) {
+            if (currentHealth <= 0) {
                 Destroy(this.gameObject);
                 Instantiate(prefab, transform.position, Quaternion.identity);
             }
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
             //audioPlayer.Play();
             AudioSource.PlayClipAtPoint(coinClip, transform.position);
             TakeDamage(10);
-            if (currentHealth == 0) {
+            if (currentHealth <= 0) {
                 Destroy(this.gameObject);
                 Instantiate(prefab, transform.position, Quaternion.identity);
             }
