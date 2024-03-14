@@ -929,15 +929,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d836f9406af06e747b3c974db3d8c09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 8
   currentHealth: 0
   healthBar: {fileID: 9173960004389369402}
   coinClip: {fileID: 8300000, guid: af2435b78ba5d44beab25e91ad49efb7, type: 3}
   _speed: 4
-  _rightBoundary: -60
-  _leftBoundary: 60
-  _topBoundary: 60
-  _downBoundary: -60
   prefab: {fileID: 5325539156456263811, guid: a1dacb03fc05b4c4d8a9f11c8ddeec27, type: 3}
   target: {fileID: 0}
   spawnPoint: {fileID: 414582}
