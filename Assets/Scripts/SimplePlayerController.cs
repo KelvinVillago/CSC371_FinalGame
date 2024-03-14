@@ -9,7 +9,9 @@ public class SimplePlayerController : MonoBehaviour
     InputAction _inputAction;
 
     public GameObject sniperRifle;
+    public GameObject shotGun;
     public Camera sniperCamera;
+    public Camera sgCamera;
 
     Vector3 _movement;
 
@@ -28,11 +30,18 @@ public class SimplePlayerController : MonoBehaviour
         RotateTowardsMouse();
         
         if(sniperRifle != null && sniperRifle.activeInHierarchy){
-            sniperCamera.enabled = true;
             _mainCamera.enabled = false;
+            sgCamera.enabled = false;
+            sniperCamera.enabled = true;
+        }
+        if(shotGun != null && shotGun.activeInHierarchy){
+            sniperCamera.enabled = false;
+            _mainCamera.enabled = false;
+            sgCamera.enabled = true;
         }
         else{
             sniperCamera.enabled = false;
+            sgCamera.enabled = false;
             _mainCamera.enabled = true;
         }
     }
