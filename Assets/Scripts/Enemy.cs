@@ -67,6 +67,39 @@ public class Enemy : MonoBehaviour
             }
             // GameManager.Instance.AddKill();
         }
+        if(other.CompareTag("BulletAR"))
+        {
+            //audioPlayer.Play();
+            AudioSource.PlayClipAtPoint(coinClip, transform.position);
+            TakeDamage(4);
+            if (currentHealth == 0) {
+                Destroy(this.gameObject);
+                Instantiate(prefab, transform.position, Quaternion.identity);
+            }
+            // GameManager.Instance.AddKill();
+        }
+        if(other.CompareTag("BulletSMG"))
+        {
+            //audioPlayer.Play();
+            AudioSource.PlayClipAtPoint(coinClip, transform.position);
+            TakeDamage(2);
+            if (currentHealth == 0) {
+                Destroy(this.gameObject);
+                Instantiate(prefab, transform.position, Quaternion.identity);
+            }
+            // GameManager.Instance.AddKill();
+        }
+        if(other.CompareTag("BulletSR"))
+        {
+            //audioPlayer.Play();
+            AudioSource.PlayClipAtPoint(coinClip, transform.position);
+            TakeDamage(10);
+            if (currentHealth == 0) {
+                Destroy(this.gameObject);
+                Instantiate(prefab, transform.position, Quaternion.identity);
+            }
+            // GameManager.Instance.AddKill();
+        }
         // if(other.CompareTag("Sheep"))
         // {
         //     Destroy(other.gameObject);

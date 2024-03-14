@@ -12,6 +12,9 @@ TagManager:
   - AudioSource
   - Coin
   - Sniper Camera
+  - BulletSR
+  - BulletSMG
+  - BulletAR
   layers:
   - Default
   - TransparentFX

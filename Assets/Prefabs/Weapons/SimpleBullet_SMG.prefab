@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 7994294415663572089}
   - component: {fileID: 8037865777563459293}
   m_Layer: 0
-  m_Name: SimpleBullet
-  m_TagString: Bullet
+  m_Name: SimpleBullet_SMG
+  m_TagString: BulletSMG
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317e8bd9b7d28914eade78cb4b98beb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletLifetime: 4
+  bulletLifetime: 3
   hitExplosionPrefab: {fileID: 198602994958770764, guid: ec1383a81f8b26e41bd5795fba065567,
     type: 3}
