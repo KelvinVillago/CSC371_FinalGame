@@ -67,6 +67,9 @@ public class PlayerInventory : MonoBehaviour
             gameObject.GetComponent<SimplePlayerController>().sniperRifle = newGun;
 
         }
+        if(newGun.name == "Shot Gun"){
+            gameObject.GetComponent<SimplePlayerController>().shotGun = newGun;
+        }
     }
 
     private void UseItem(Item item)

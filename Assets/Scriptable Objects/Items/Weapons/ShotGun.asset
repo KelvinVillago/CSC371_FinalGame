@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d8cf8628f164e459ef4f0bce7acc6b, type: 3}
   m_Name: ShotGun
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 12
   <Name>k__BackingField: Shot Gun
   <Description>k__BackingField: Short Range Heavy Damage Weapon
   <IconSprite>k__BackingField: {fileID: 0}
-  <Prefab>k__BackingField: {fileID: 4358499782167587322, guid: aaba5f2c3120d664b850de06860d32a5,
+  <Prefab>k__BackingField: {fileID: 4115037691850077048, guid: 0409879bc88fc8942b5af6344b6b28af,
     type: 3}
   <StackAmount>k__BackingField: 1
   <BuyPrice>k__BackingField: 300
