@@ -8,15 +8,26 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject _pauseScreen;
     [SerializeField] GameObject _controls;
+    [SerializeField] GameObject _credits;
+    public AudioClip clickSound;
+    private AudioSource _audioSource;
 
     bool _isPaused = false;
+
+    void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     public void QuitGame()
     {
+        _audioSource.PlayOneShot(clickSound);
         Application.Quit();
     }
 
     public void Play()
     {
+        _audioSource.PlayOneShot(clickSound);
         Time.timeScale = 1f;
         _isPaused = false;
         SceneManager.LoadScene("Level-01");
@@ -24,16 +35,31 @@ public class UIManager : MonoBehaviour
 
     public void Menu()
     {
+        _audioSource.PlayOneShot(clickSound);
         SceneManager.LoadScene("StartMenu");
     }
 
     public void Credits()
     {
-        SceneManager.LoadScene("Credits");
+        _audioSource.PlayOneShot(clickSound);
+        if(_credits != null)
+        {
+            _credits.SetActive(true);
+        }
+    }
+
+    public void CloseCredits()
+    {
+        _audioSource.PlayOneShot(clickSound);
+        if(_credits != null)
+        {
+            _credits.SetActive(false);
+        }
     }
 
     public void Controls()
     {
+        _audioSource.PlayOneShot(clickSound);
         if(_controls != null)
         {
             _controls.SetActive(true);
@@ -42,6 +68,7 @@ public class UIManager : MonoBehaviour
 
     public void CloseControls()
     {
+        _audioSource.PlayOneShot(clickSound);
         if(_controls != null)
         {
             _controls.SetActive(false);

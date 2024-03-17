@@ -9,8 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/SimpleShooting.unity
     guid: e15bdd1ac8ecec2418750900652fcd0d
   - enabled: 1
+    path: Assets/Scenes/StartMenu.unity
+    guid: f3fb2127920f4c5498e9a7c5bd95341e
+  - enabled: 1
     path: Assets/Scenes/Level-01.unity
     guid: f16bfcc040b742e488015a3206baaefe
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: a7067655069cc564cab4bdb8f1e1e352
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 861da9756744187429a7f1d486193874
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a0b442f15c8b9b945b9877b700cc7e7a,
       type: 2}

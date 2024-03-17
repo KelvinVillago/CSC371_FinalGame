@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5921,7 +5921,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe56b7910efa4b27b9b639986be661d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kachingAudioSource: {fileID: 1255247233}
 --- !u!1 &1266708148
 GameObject:
   m_ObjectHideFlags: 0
@@ -9453,6 +9452,11 @@ PrefabInstance:
       objectReference: {fileID: 536153525}
     - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
         type: 3}
+      propertyPath: waveEnd
+      value: 
+      objectReference: {fileID: 8300000, guid: cb0ae0446f4258442bf91100dc5e6250, type: 3}
+    - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
       propertyPath: dirLight
       value: 
       objectReference: {fileID: 546686318}
@@ -9471,6 +9475,11 @@ PrefabInstance:
       propertyPath: startWave
       value: 
       objectReference: {fileID: 1831923592}
+    - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
+      propertyPath: waveStart
+      value: 
+      objectReference: {fileID: 8300000, guid: 085c054a1b751754d96ab42a8fbffa80, type: 3}
     - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
         type: 3}
       propertyPath: inventoryBtn

@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -99,9 +100,10 @@ public class GameManager : MonoBehaviour
         if(numOfLives <= 0f)
         {
             Time.timeScale = 0;
-            tryAgainButton.SetActive(true);
-            finalKills.text = "Kill Count: " + killCounter;
-            gameOver.SetActive(true);
+            SceneManager.LoadScene("GameOver");
+            // tryAgainButton.SetActive(true);
+            // finalKills.text = "Kill Count: " + killCounter;
+            //gameOver.SetActive(true);
             // audioSource1.clip = audio1;
             // audioSource1.PlayOneShot(audioSource1.clip);
             // audiosource2.clip = audio2;
