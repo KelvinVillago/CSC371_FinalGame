@@ -9495,6 +9495,11 @@ PrefabInstance:
       propertyPath: sheepLocation
       value: 
       objectReference: {fileID: 790717329}
+    - target: {fileID: 3778804200435520928, guid: 0e98436a24632c449b92e6eac17b5cb7,
+        type: 3}
+      propertyPath: wave7.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5340569263556484019, guid: 0e98436a24632c449b92e6eac17b5cb7,
         type: 3}
       propertyPath: m_LocalPosition.x
