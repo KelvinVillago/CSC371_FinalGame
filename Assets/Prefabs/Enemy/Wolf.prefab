@@ -843,7 +843,7 @@ Animator:
   m_GameObject: {fileID: 175852}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d1b2a85e71b56e548bda97f53cb9ff45, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4207a14823e50e6438f37b401c727159, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4a5b2d13bd7f4c045b7aa7d5aef592c5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -929,7 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d836f9406af06e747b3c974db3d8c09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 8
+  maxHealth: 2
   currentHealth: 0
   healthBar: {fileID: 9173960004389369402}
   coinClip: {fileID: 8300000, guid: af2435b78ba5d44beab25e91ad49efb7, type: 3}
