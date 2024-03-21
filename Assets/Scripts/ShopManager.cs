@@ -206,7 +206,8 @@ public class ShopManager : MonoBehaviour
                     continue;
                 }
             }
-
+            
+            print("Coins: " + _coins.ToString());
             //Check the ShopItem Buy price for the item at the index
             if (_coins >= list[shopCard.PositionInMenu].GetItemSO<ShopItemSO2>().BuyPrice)
             {
@@ -330,6 +331,7 @@ public class ShopManager : MonoBehaviour
 
     public void OpenMenu_Handler(int menu)
     {
+        _coins = _coinReference.GetBalance();
         IsShopOpen?.Invoke(true);
 
         //Hide all the menus to prevent overlapping

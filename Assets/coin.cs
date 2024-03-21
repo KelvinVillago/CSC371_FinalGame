@@ -5,11 +5,12 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     private ChickenController chickenController; // Reference to the ChickenController script
+    [SerializeField] private float despawnTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(this.gameObject, 10f);
+        Destroy(this.gameObject, despawnTime);
 
         // Find the ChickenController script in the scene
         chickenController = FindObjectOfType<ChickenController>();
