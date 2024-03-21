@@ -24,6 +24,8 @@ public class ChickenController : MonoBehaviour
             direction.y = 0; // Ensure the chicken moves only in the horizontal plane
             direction.Normalize();
             rb.velocity = direction * moveSpeed;
+            Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = rotation;
         }
         else
         {
