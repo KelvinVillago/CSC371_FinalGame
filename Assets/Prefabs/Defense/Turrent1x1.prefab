@@ -159,7 +159,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 6494269271361795759}
   partToRotate: {fileID: 6709892619890439059}
   spawnPoint: {fileID: 6070437787886996576}
-  fireRate: 1
+  fireRate: 2
   bullet: {fileID: 352991004103839530, guid: 83f23e85c6597d44588c3b2fefe275b0, type: 3}
   muzzleFlash: {fileID: 0}
   shootForce: 100

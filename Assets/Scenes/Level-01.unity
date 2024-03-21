@@ -1216,30 +1216,12 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!1 &187144378 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3344797552917926168, guid: da1203547328fdb41974e0b5334e799a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1541365420}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &187144379 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2675361429882964898, guid: da1203547328fdb41974e0b5334e799a,
     type: 3}
   m_PrefabInstance: {fileID: 1541365420}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &187144381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187144378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d834b98474f8fcc48ab17132d6c103fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &209414179
 GameObject:
   m_ObjectHideFlags: 0
@@ -5771,7 +5753,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1255247234}
   - component: {fileID: 1255247233}
-  - component: {fileID: 1255247235}
   m_Layer: 0
   m_Name: Purchase sound clip
   m_TagString: Untagged
@@ -5890,18 +5871,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 102406088}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1255247235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255247232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efe56b7910efa4b27b9b639986be661d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1266708148
 GameObject:
   m_ObjectHideFlags: 0
@@ -7465,11 +7434,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3344797552917926168, guid: da1203547328fdb41974e0b5334e799a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 187144381}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da1203547328fdb41974e0b5334e799a, type: 3}
 --- !u!114 &1575595595 stripped
 MonoBehaviour:

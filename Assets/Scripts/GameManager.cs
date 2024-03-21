@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOver;
     [SerializeField] private GameObject startScreen;
     [SerializeField] private GameObject deathParticle;
-    [SerializeField] private int killCounter = 0;
+    // [SerializeField] private int killCounter = 0;
     
     [Header("Audio Properties")]
     AudioSource audioSource1;
