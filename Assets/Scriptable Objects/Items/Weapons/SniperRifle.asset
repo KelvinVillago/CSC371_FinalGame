@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d8cf8628f164e459ef4f0bce7acc6b, type: 3}
   m_Name: SniperRifle
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 14
   <Name>k__BackingField: Sniper Rifle
   <Description>k__BackingField: Long Ranged Heavy Damage Weapon
-  <IconSprite>k__BackingField: {fileID: 0}
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: f795e6dfa48964d4a921aa7ff5a8782d,
+    type: 3}
   <Prefab>k__BackingField: {fileID: 3080278288564830100, guid: e1a6b28ff2e5e0946aff323271d303dd,
     type: 3}
   <StackAmount>k__BackingField: 1

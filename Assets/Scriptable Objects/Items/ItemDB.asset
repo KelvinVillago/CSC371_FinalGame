@@ -18,7 +18,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da016b49345238e4aa2047e9fa3fa31e, type: 2}
   - {fileID: 11400000, guid: 1440ee595c365e942b51ac3f96d54829, type: 2}
   - {fileID: 11400000, guid: 88ca801623633e04aabf7cd32e36c416, type: 2}
-  - {fileID: 11400000, guid: e5cb8de939bd6cf4caa303f4e1a14e45, type: 2}
   DefenseDB:
   - {fileID: 11400000, guid: f5c7daeb353c2444485e83c0adc667ab, type: 2}
   - {fileID: 11400000, guid: eeabc5f8ef76e264a8e2694b69d1b310, type: 2}

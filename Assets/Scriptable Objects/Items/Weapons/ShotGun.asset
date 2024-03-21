@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Shot Gun
   <Description>k__BackingField: Short Range Heavy Damage Weapon
-  <IconSprite>k__BackingField: {fileID: 0}
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: 83588daa30c57bd42883c0a893be1467,
+    type: 3}
   <Prefab>k__BackingField: {fileID: 4115037691850077048, guid: 0409879bc88fc8942b5af6344b6b28af,
     type: 3}
   <StackAmount>k__BackingField: 1
