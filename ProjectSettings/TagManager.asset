@@ -16,6 +16,7 @@ TagManager:
   - BulletSMG
   - BulletAR
   - SGCamera
+  - BulletSG
   layers:
   - Default
   - TransparentFX
