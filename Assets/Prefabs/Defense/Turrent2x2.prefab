@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 25
-  rotateSpeed: 10
+  rotateSpeed: 5
   lineRenderer: {fileID: 6494269271361795759}
   partToRotate: {fileID: 6709892619890439059}
   spawnPoint: {fileID: 6070437787886996576}
