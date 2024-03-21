@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -735,7 +735,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'WASD - movement
 
-    Right Click to shoot
+    Right Click - fire weapon
+
+    i - open inventory
+
+    esc
+    - close inventory
+
 
 '
   m_isRightToLeft: 0
@@ -2824,7 +2830,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'Lowpoly Environment
+
+    Handpainted Grass & Ground
+
+    RPG Poly Pack
+
+    Animals
+    FREE'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 62f50c3a2929c854bb400105c3d8b873, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: d667824b0e680944fa1332bf4bca88f0, type: 2}
