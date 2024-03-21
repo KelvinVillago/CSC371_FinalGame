@@ -13,7 +13,7 @@ public class ChickenController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         coins = new List<GameObject>();
-        a = GameObject.FindGameObjectWithTag("CoinCounter").GetComponent<CoinCounter>();
+        a = GameObject.Find("Manager").GetComponent<CoinCounter>();
     }
 
     void Update()

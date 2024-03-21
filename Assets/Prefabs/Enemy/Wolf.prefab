@@ -929,7 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d836f9406af06e747b3c974db3d8c09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 8
+  maxHealth: 5
   currentHealth: 0
   healthBar: {fileID: 9173960004389369402}
   coinClip: {fileID: 8300000, guid: af2435b78ba5d44beab25e91ad49efb7, type: 3}
@@ -1822,7 +1822,12 @@ PrefabInstance:
     - target: {fileID: 3243591768144198747, guid: d640743cd83f2e749a1d7404da850b09,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3243591768144198747, guid: d640743cd83f2e749a1d7404da850b09,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4671831009145276370, guid: d640743cd83f2e749a1d7404da850b09,
         type: 3}

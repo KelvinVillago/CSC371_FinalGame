@@ -47,7 +47,8 @@ public class ShopManager : MonoBehaviour
     private void InitShopData()
     {
         //Init the money
-        _coins = _coinReference.Balance = 0;
+        _coins = _coinReference.GetBalance();
+        print("Coins: " + _coins.ToString());
 
         //Init the shop data
         _weaponItems = new List<Item>();

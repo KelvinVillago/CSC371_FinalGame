@@ -22,8 +22,15 @@ public class CoinCounter : MonoBehaviour
     /*add or subtract from balance*/
     public int ChangeBalance(int value)
     {
+        print("Balance: " + _balance.ToString());
         _balance += value;
+        print("Balance after: " + _balance.ToString());
         UpdateUI();
+        return _balance;
+    }
+
+    public int GetBalance()
+    {
         return _balance;
     }
     
