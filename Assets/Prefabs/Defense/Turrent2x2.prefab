@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d949bea5f7d49479cfacada8fdd9da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 50
+  range: 25
   rotateSpeed: 10
   lineRenderer: {fileID: 6494269271361795759}
   partToRotate: {fileID: 6709892619890439059}

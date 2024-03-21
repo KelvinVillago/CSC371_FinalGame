@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7852693880767018263, guid: 2205fccddc5054e4ebcfcdd657c8ae3b,
+        type: 3}
+      propertyPath: m_Speed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 193153492552894111, guid: 2205fccddc5054e4ebcfcdd657c8ae3b,
         type: 3}
       propertyPath: _speed
@@ -16,7 +21,7 @@ PrefabInstance:
     - target: {fileID: 193153492552894111, guid: 2205fccddc5054e4ebcfcdd657c8ae3b,
         type: 3}
       propertyPath: maxHealth
-      value: 4
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1374273164248430135, guid: 2205fccddc5054e4ebcfcdd657c8ae3b,
         type: 3}

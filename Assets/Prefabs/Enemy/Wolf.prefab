@@ -929,7 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d836f9406af06e747b3c974db3d8c09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 8
   currentHealth: 0
   healthBar: {fileID: 9173960004389369402}
   coinClip: {fileID: 8300000, guid: af2435b78ba5d44beab25e91ad49efb7, type: 3}
@@ -1044,7 +1044,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
