@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d8cf8628f164e459ef4f0bce7acc6b, type: 3}
   m_Name: SMG
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 13
   <Name>k__BackingField: SMG
   <Description>k__BackingField: A strong rapid-fire weapon
-  <IconSprite>k__BackingField: {fileID: 0}
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: 2a7998dcdf4f9404e9f0d11448bd52a7,
+    type: 3}
   <Prefab>k__BackingField: {fileID: 6028168682699394278, guid: ca757bef6a38e684f9994bd4ae96482e,
     type: 3}
   <StackAmount>k__BackingField: 1

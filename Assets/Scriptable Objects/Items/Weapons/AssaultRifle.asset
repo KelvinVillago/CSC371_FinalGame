@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d8cf8628f164e459ef4f0bce7acc6b, type: 3}
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 11
   <Name>k__BackingField: Assault Rifle
   <Description>k__BackingField: An strong and extremely rapid automatic-fire weapon
-  <IconSprite>k__BackingField: {fileID: 0}
+  <IconSprite>k__BackingField: {fileID: 21300000, guid: ffb2a57c161827d46bbe5437f2070968,
+    type: 3}
   <Prefab>k__BackingField: {fileID: 4915672642496585712, guid: 4e4ffb45b66bf0c44b8633876d2a4e94,
     type: 3}
   <StackAmount>k__BackingField: 1
