@@ -43,12 +43,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            _animator.SetBool("Shooting", true);
+            //_animator.SetBool("Shooting", true);
             _pullingTrigger = true;
         }
         else if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
-            _animator.SetBool("Shooting", false);
+            //_animator.SetBool("Shooting", false);
             _pullingTrigger = false;
         }
 
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_pullingTrigger)
             {
-                _animator.SetBool("Shooting", true);
+                //_animator.SetBool("Shooting", true);
                 if (useRaycast)
                 {
                     ShootRaycast(direction); // Should put all physics operations in FixedUpdate()

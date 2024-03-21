@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7070315234631741966}
-  - component: {fileID: 8404025248377116191}
   - component: {fileID: 5230328993930122780}
   - component: {fileID: 5890586988251818977}
   - component: {fileID: 2260254537311747335}
@@ -44,14 +43,6 @@ Transform:
   - {fileID: 5214895188002114617}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8404025248377116191
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158621734107053955}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &5230328993930122780
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -325,7 +316,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   sniperRifle: {fileID: 0}
+  shotGun: {fileID: 0}
   sniperCamera: {fileID: 0}
+  sgCamera: {fileID: 0}
 --- !u!114 &2202524030881552180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boundX: 60
   _boundZ: 60
+  _direction: {x: 0, y: 0, z: 0}
 --- !u!114 &7099172173105665265
 MonoBehaviour:
   m_ObjectHideFlags: 0
